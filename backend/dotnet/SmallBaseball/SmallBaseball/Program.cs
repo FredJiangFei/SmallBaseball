@@ -1,6 +1,34 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using MediatR;
+using MediatR.Extensions.Autofac.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using SmallBaseball.Application.Behaviors;
+using SmallBaseball.Application.Queries.User;
+using SmallBaseball.Domain.Interfaces.Repository;
+using SmallBaseball.Infrastructure.Repository.EF;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterMediatR(typeof(GetUsersQuery).Assembly);
+    builder.RegisterGeneric(typeof(ValidationBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency();
+});
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
+// Add services to the container.
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
