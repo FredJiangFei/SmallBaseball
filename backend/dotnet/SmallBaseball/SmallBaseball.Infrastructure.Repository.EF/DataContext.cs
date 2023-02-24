@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmallBaseball.Domain.Models.Aggregates.UserAggregate;
-using SmallBaseball.Domain.Models.Aggregates.UserAggregate;
 
 namespace SmallBaseball.Infrastructure.Repository.EF
 {

@@ -11,8 +11,8 @@ using SmallBaseball.Infrastructure.Repository.EF;
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230119230038_Init")]
-    partial class Init
+    [Migration("20230224005504_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
