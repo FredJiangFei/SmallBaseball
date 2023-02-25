@@ -5,7 +5,11 @@ const Stack = createNativeStackNavigator();
 
 export default function EventsNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Events" component={EventsScreen} />
     </Stack.Navigator>
   );

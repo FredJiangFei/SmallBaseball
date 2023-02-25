@@ -1,4 +1,4 @@
-import { Box, Button, FlatList, Text, useColorMode, View } from 'native-base';
+import { AddIcon, Divider, Fab, FlatList, Icon, View } from 'native-base';
 import React from 'react';
 import { Event } from '../../models/Event';
 import EventCard from './components/EventCard';
@@ -23,14 +23,14 @@ const events: Event[] = [
 ];
 
 export default function EventsScreen() {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   return (
     <View px={2}>
       <FlatList
         data={events}
+        ItemSeparatorComponent={() => <Divider my={1} />}
         renderItem={({ item }) => <EventCard event={item} />}
       />
+      <Fab renderInPortal={false} shadow={2} size="sm" icon={<AddIcon />} />
       {/* <Box
         p="2"
         m="2"

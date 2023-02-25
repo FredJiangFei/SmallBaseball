@@ -5,7 +5,11 @@ const Stack = createNativeStackNavigator();
 
 export default function MineNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Mine" component={MineScreen} />
     </Stack.Navigator>
   );

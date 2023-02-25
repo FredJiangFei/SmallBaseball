@@ -4,8 +4,8 @@ const componentsTheme = {
   Box: {
     baseStyle: ({ colorMode }) => {
       return {
-        rounded: 'lg',
-        bg: colorMode === 'dark' ? 'red.300' : 'blue.300',
+        // rounded: 'lg',
+        // bg: colorMode === 'dark' ? 'red.300' : 'blue.300',
       };
     },
 

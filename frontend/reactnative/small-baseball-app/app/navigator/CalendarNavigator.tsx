@@ -5,7 +5,11 @@ const Stack = createNativeStackNavigator();
 
 export default function CalendarNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Calendar" component={CalendarScreen} />
     </Stack.Navigator>
   );
