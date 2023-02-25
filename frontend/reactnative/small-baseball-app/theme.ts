@@ -1,29 +1,37 @@
-import { extendTheme } from 'native-base';
+import { extendTheme, Button } from 'native-base';
 
 const componentsTheme = {
-  Box: {
+  // Box: {
+  //   variants: {
+  //     linear: {
+  //       bg: {
+  //         linearGradient: {
+  //           colors: ['lightBlue.300', 'violet.800'],
+  //           start: [0, 0],
+  //           end: [1, 0],
+  //         },
+  //       },
+  //     },
+  //   },
+  // },
+  Button: {
     baseStyle: ({ colorMode }) => {
       return {
-        // rounded: 'lg',
+        rounded: 'lg',
+        bgColor: 'amber.400',
         // bg: colorMode === 'dark' ? 'red.300' : 'blue.300',
       };
-    },
-
-    variants: {
-      linear: {
-        bg: {
-          linearGradient: {
-            colors: ['lightBlue.300', 'violet.800'],
-            start: [0, 0],
-            end: [1, 0],
-          },
-        },
-      },
     },
   },
   Heading: {
     defaultProps: {
       size: 'md',
+    },
+    variants: {
+      title: {
+        textAlign: 'center',
+        my: 4,
+      },
     },
   },
   Text: {
