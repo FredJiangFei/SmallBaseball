@@ -7,7 +7,7 @@ namespace SmallBaseball.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services)
         {
-            services.AddIdentity<User, IdentityRole>(config =>
+            services.AddIdentity<AppUser, IdentityRole>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = false;
                 config.User.RequireUniqueEmail = true;

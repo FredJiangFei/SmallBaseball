@@ -2,7 +2,7 @@
 
 namespace SmallBaseball.Infrastructure.Repository.EF
 {
-    public class User : IdentityUser
+    public class AppUser : IdentityUser
     {
         
     }

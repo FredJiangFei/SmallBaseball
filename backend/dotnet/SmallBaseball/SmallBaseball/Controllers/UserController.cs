@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SmallBaseball.Application.Commands.UpdateUser;
 using SmallBaseball.Application.Queries.User;
 using SmallBaseball.Application.Models;
+using SmallBaseball.Application.Commands;
 
 namespace SmallBaseball.Controllers
 {
@@ -17,12 +17,35 @@ namespace SmallBaseball.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<bool> Create()
+        [HttpPost("register")]
+        public async Task<bool> Register()
         {
-            var command = new CreateUserCommand
+            var command = new RegisterCommand
             {
-                Username = "Fred",
+                Email = "329126523@qq.com",
+                Password = "123456789",
+            };
+            var result = await _mediator.Send(command);
+            return result;
+        }
+
+        [HttpPut("login")]
+        public async Task<bool> Login()
+        {
+            var command = new LoginCommand
+            {
+                Email = "329126523@qq.com",
+                Password = "123456789",
+            };
+            var result = await _mediator.Send(command);
+            return result;
+        }
+
+        [HttpPut("login/admin")]
+        public async Task<bool> LoginAdmin()
+        {
+            var command = new LoginCommand
+            {
                 Email = "329126523@qq.com",
                 Password = "123456789",
             };
