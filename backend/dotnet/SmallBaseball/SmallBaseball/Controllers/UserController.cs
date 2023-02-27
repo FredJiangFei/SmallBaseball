@@ -30,7 +30,7 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPut("login")]
-        public async Task<bool> Login()
+        public async Task<IActionResult> Login()
         {
             var command = new LoginCommand
             {
@@ -38,13 +38,16 @@ namespace SmallBaseball.Controllers
                 Password = "123456789",
             };
             var result = await _mediator.Send(command);
-            return result;
+            if(result == "")
+                return Unauthorized();
+
+            return Ok(new { Token = result });
         }
 
         [HttpPut("login/admin")]
         public async Task<bool> LoginAdmin()
         {
-            var command = new LoginCommand
+            var command = new LoginAdminCommand
             {
                 Email = "329126523@qq.com",
                 Password = "123456789",

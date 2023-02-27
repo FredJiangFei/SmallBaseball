@@ -47,15 +47,15 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d197e8db-8a09-4e94-ba05-5c010779ad69",
-                            ConcurrencyStamp = "4b6b9305-df76-420a-87a4-7b276dc840cc",
+                            Id = "6bad1250-19fa-4768-a0d8-4307ac98c548",
+                            ConcurrencyStamp = "f322a4ca-fb4f-4925-8ada-47e9cd98322a",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = "9dc1299a-cb07-43d0-868b-6f6f8eb7ebcc",
-                            ConcurrencyStamp = "cda6a874-401e-4b93-bd1b-5d342c467140",
+                            Id = "7d82dea9-0f9a-41d7-ae7a-b3d96d4de331",
+                            ConcurrencyStamp = "751085b2-9916-4f79-87e7-9d9754b49871",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });

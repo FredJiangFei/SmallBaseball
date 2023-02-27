@@ -18,6 +18,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId });
             builder.ApplyConfiguration(new RoleConfiguration());
         }
     }

@@ -23,10 +23,11 @@ namespace SmallBaseball.Application.Commands
                 Email = request.Email,
                 UserName = request.Email
             };
+          
+            var result = await _userManager.CreateAsync(user, request.Password);
             await _userManager.AddToRoleAsync(user, UserRoles.User);
             await _userManager.AddToRoleAsync(user, UserRoles.Admin);
 
-            var result = await _userManager.CreateAsync(user, request.Password);
             return true;
         }
     }

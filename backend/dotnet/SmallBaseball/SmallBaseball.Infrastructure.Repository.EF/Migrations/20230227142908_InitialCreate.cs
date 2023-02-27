@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     /// <inheritdoc />
@@ -195,6 +197,15 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "6bad1250-19fa-4768-a0d8-4307ac98c548", "f322a4ca-fb4f-4925-8ada-47e9cd98322a", "User", "User" },
+                    { "7d82dea9-0f9a-41d7-ae7a-b3d96d4de331", "751085b2-9916-4f79-87e7-9d9754b49871", "Admin", "Admin" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
