@@ -1,12 +1,5 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { Avatar, Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import SignInComponent from "../../components/auth/SignIn";
-const BigAvatar = styled(Avatar)`
-  width: 92px;
-  height: 92px;
-  text-align: center;
-`;
 
 function SignIn() {
   return (
@@ -17,10 +10,6 @@ function SignIn() {
             justifyContent: 'center', 
             alignItems: 'center'
         }}>
-        <BigAvatar alt="Lucy" src="/static/img/avatars/mario.png" />
-        <Typography component="h1" variant="h4" align="center" gutterBottom>
-            Sign in to your account to continue
-        </Typography>
         <SignInComponent />
       </Container>
   );
