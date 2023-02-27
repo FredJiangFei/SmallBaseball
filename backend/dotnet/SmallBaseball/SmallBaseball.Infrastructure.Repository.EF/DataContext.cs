@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmallBaseball.Domain.Models.Aggregates.UserAggregate;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmallBaseball.Infrastructure.Repository.EF
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User, IdentityRole, string>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
@@ -11,7 +12,5 @@ namespace SmallBaseball.Infrastructure.Repository.EF
         {
             base.OnConfiguring(options);
         }
-
-        public DbSet<User> Users { get; set; }
     }
 }

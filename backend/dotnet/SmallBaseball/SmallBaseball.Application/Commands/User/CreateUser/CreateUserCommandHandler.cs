@@ -1,23 +1,30 @@
-﻿using SmallBaseball.Domain.Interfaces.Repository;
-using SmallBaseball.Domain.Models.Aggregates.UserAggregate;
+﻿using Microsoft.AspNetCore.Identity;
+using SmallBaseball.Infrastructure.Repository.EF;
 
 namespace SmallBaseball.Application.Commands.UpdateUser
 {
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, bool>
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly UserManager<User> _userManager;
 
-        public CreateUserCommandHandler(IRepository<User> userRepository)
+        public CreateUserCommandHandler(UserManager<User> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = User.Create(request.FirstName, request.LastName);
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user != null)
+                throw new Exception("User exist");
 
-            await _userRepository.CreateAsync(user);
-
+            user = new User
+            {
+                Email = request.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = request.Username
+            };
+            var result = await _userManager.CreateAsync(user, request.Password);
             return true;
         }
     }

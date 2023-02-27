@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SmallBaseball.Application.Commands.UpdateUser;
 using SmallBaseball.Application.Queries.User;
 using SmallBaseball.Application.Models;
-using SmallBaseball.Application.Commands.UpdateUser;
 
 namespace SmallBaseball.Controllers
 {
@@ -23,8 +22,9 @@ namespace SmallBaseball.Controllers
         {
             var command = new CreateUserCommand
             {
-                FirstName = "Fred",
-                LastName = "Jiang"
+                Username = "Fred",
+                Email = "329126523@qq.com",
+                Password = "123456789",
             };
             var result = await _mediator.Send(command);
             return result;
