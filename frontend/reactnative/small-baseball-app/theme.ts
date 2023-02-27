@@ -24,12 +24,15 @@ const componentsTheme = {
     },
   },
   Heading: {
+    baseStyle: {
+      textAlign: 'center',
+      my: 4,
+    },
     defaultProps: {
       size: 'md',
     },
     variants: {
       title: {
-        textAlign: 'center',
         my: 4,
       },
     },

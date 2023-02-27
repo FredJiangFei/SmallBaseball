@@ -1,7 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, StatusBar } from 'native-base';
+import { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import DrawerNavigator from './app/navigator/DrawerNavigator';
+import { AuthContext } from './app/auth/context';
+import AppNavigator from './app/navigator/AppNavigator';
 import theme from './theme';
 
 const config = {
@@ -11,13 +13,17 @@ const config = {
 };
 
 export default function App() {
+  const [user, setUser] = useState();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" />
       <NativeBaseProvider theme={theme} config={config}>
-        <NavigationContainer>
-          <DrawerNavigator></DrawerNavigator>
-        </NavigationContainer>
+        <AuthContext.Provider value={{ user, setUser }}>
+          <NavigationContainer>
+            <AppNavigator></AppNavigator>
+          </NavigationContainer>
+        </AuthContext.Provider>
       </NativeBaseProvider>
     </SafeAreaView>
   );

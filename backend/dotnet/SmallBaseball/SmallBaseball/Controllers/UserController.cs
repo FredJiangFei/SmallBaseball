@@ -7,7 +7,7 @@ using SmallBaseball.Application.Commands;
 namespace SmallBaseball.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : BaseController
     {
         private readonly IMediator _mediator;
@@ -18,25 +18,15 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<bool> Register()
+        public async Task<bool> Register([FromBody] RegisterCommand command)
         {
-            var command = new RegisterCommand
-            {
-                Email = "329126523@qq.com",
-                Password = "123456789",
-            };
             var result = await _mediator.Send(command);
             return result;
         }
 
         [HttpPut("login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
-            var command = new LoginCommand
-            {
-                Email = "329126523@qq.com",
-                Password = "123456789",
-            };
             var result = await _mediator.Send(command);
             if(result == "")
                 return Unauthorized();
