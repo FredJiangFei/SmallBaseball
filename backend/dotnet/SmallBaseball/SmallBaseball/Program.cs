@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SmallBaseball.Application.Behaviors;
 using SmallBaseball.Application.Queries.User;
 using SmallBaseball.Domain.Interfaces.Repository;
+using SmallBaseball.Extensions;
 using SmallBaseball.Infrastructure.Repository.EF;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,5 +50,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMigration();
 
 app.Run();
