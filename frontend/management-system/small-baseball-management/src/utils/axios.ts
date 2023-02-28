@@ -12,4 +12,10 @@ axiosInstance.interceptors.response.use(
     )
 );
 
+axiosInstance.interceptors.request.use(async (cfg: any) => {
+  const token = window.localStorage.getItem('accessToken');
+  cfg.headers['Authorization'] = 'Bearer ' + token;
+  return cfg;
+});
+
 export default axiosInstance;

@@ -11,8 +11,8 @@ const pagesSection = [
         title: 'Default',
       },
       {
-        href: '/products',
-        title: 'Products',
+        href: '/managers',
+        title: 'Managers',
       },
     ],
   },

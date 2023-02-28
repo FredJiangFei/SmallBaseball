@@ -3,12 +3,12 @@ import DashboardLayout from './layouts/Dashboard';
 import AuthLayout from './layouts/Auth';
 
 import Default from './pages/dashboards';
-import Products from './pages/dashboards/Products';
 import Page404 from './pages/auth/Page404';
 
 import SignIn from './pages/auth/SignIn';
 import AuthGuard from './components/guards/AuthGuard';
 import Profile from './pages/settings/Profile';
+import Managers from './pages/dashboards/Managers';
 
 const routes = [
   {
@@ -24,8 +24,8 @@ const routes = [
         element: <Default />,
       },
       {
-        path: 'products',
-        element: <Products />,
+        path: 'managers',
+        element: <Managers />,
       },
       {
         path: 'profile',

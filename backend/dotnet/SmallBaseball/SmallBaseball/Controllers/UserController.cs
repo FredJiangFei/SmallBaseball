@@ -42,10 +42,10 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPut("login/admin")]
-        public async Task<bool> LoginAdmin([FromBody] LoginAdminCommand command)
+        public async Task<IActionResult> LoginAdmin([FromBody] LoginAdminCommand command)
         {
             var result = await _mediator.Send(command);
-            return result;
+            return Ok(new { Token = result });
         }
 
         [HttpGet]

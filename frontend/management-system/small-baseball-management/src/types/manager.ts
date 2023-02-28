@@ -1,4 +1,4 @@
-export type Product = {
+export type Manager = {
   _id: string;
   title: string;
   date: Date;
