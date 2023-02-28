@@ -6,7 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { SidebarItemsType } from '../../types/sidebar';
 import SidebarNavSection from './SidebarNavSection';
-import '../../vendor/perfect-scrollbar.css';
 
 const baseScrollbar = css`
   background-color: ${(props) => props.theme.sidebar.background};

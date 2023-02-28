@@ -3,7 +3,6 @@ import variants from "./variants";
 import typography from "./typography";
 import breakpoints from "./breakpoints";
 import components from "./components";
-import shadows from "./shadows";
 
 const createTheme = (name: string) => {
   let themeConfig = variants.find((variant) => variant.name === name);
@@ -20,7 +19,6 @@ const createTheme = (name: string) => {
       // @ts-ignore
       components: components,
       typography: typography,
-      shadows: shadows,
       palette: themeConfig.palette,
     },
     {
