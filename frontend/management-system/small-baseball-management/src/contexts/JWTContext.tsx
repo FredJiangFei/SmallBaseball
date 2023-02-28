@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
+import adminService from '../services/adminService';
 import { JWTContextType, AuthState } from '../types/auth';
 import axios from '../utils/axios';
 import { isValidToken, setSession } from '../utils/jwt';
@@ -44,7 +45,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const res = await axios.post('/auth', {
+    const res = await adminService.login({
       email,
       password,
     });

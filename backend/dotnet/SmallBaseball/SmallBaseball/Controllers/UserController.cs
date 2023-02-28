@@ -34,14 +34,16 @@ namespace SmallBaseball.Controllers
             return Ok(new { Token = result });
         }
 
-        [HttpPut("login/admin")]
-        public async Task<bool> LoginAdmin()
+        [HttpPost("register/admin")]
+        public async Task<bool> RegisterAdmin([FromBody] RegisterAdminCommand command)
         {
-            var command = new LoginAdminCommand
-            {
-                Email = "329126523@qq.com",
-                Password = "123456789",
-            };
+            var result = await _mediator.Send(command);
+            return result;
+        }
+
+        [HttpPut("login/admin")]
+        public async Task<bool> LoginAdmin([FromBody] LoginAdminCommand command)
+        {
             var result = await _mediator.Send(command);
             return result;
         }

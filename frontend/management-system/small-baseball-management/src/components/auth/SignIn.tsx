@@ -30,13 +30,12 @@ function SignIn() {
   const navigate = useNavigate();
   const { signIn } = useAuth();
 
-  const { handleBlur, values, handleChange, errors, touched } = useFormik({
+  const { handleSubmit, handleBlur, values, handleChange, errors, touched } = useFormik({
     initialValues: {
-      email: 'fred@123.com',
-      password: '123123',
+      email: 'admin@qq.com',
+      password: '123456789',
       submit: false,
     },
-    validationSchema: schema,
     onSubmit: (values) => handleLogin(values),
   });
 
@@ -46,7 +45,7 @@ function SignIn() {
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       {errors.submit && (
         <Alert mt={2} mb={3} severity="warning">
           {errors.submit}
@@ -77,10 +76,10 @@ function SignIn() {
         my={2}
       />
 
-      <Button type="submit" fullWidth variant="contained" color="primary">
+      <Button type='submit' fullWidth variant="contained" color="primary">
         Sign in
       </Button>
-    </>
+    </form>
   );
 }
 

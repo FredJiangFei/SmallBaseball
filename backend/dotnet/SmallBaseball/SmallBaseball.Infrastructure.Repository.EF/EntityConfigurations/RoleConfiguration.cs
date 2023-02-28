@@ -16,6 +16,11 @@ namespace SmallBaseball.Infrastructure.Repository.EF.EntityConfigurations
             },
             new IdentityRole
             {
+                Name = UserRoles.Manager,
+                NormalizedName = UserRoles.Manager
+            },
+            new IdentityRole
+            {
                 Name = UserRoles.Admin,
                 NormalizedName = UserRoles.Admin
             });

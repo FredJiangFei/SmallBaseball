@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -203,8 +203,9 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6bad1250-19fa-4768-a0d8-4307ac98c548", "f322a4ca-fb4f-4925-8ada-47e9cd98322a", "User", "User" },
-                    { "7d82dea9-0f9a-41d7-ae7a-b3d96d4de331", "751085b2-9916-4f79-87e7-9d9754b49871", "Admin", "Admin" }
+                    { "336e5b0b-3ec6-41f0-82fb-38ce830ac511", "ca860668-53c1-423e-b439-99d6f7ea5074", "User", "User" },
+                    { "ab81073b-929f-4f16-bb84-d708a35f4e7e", "4ff346c4-5153-4de3-b047-074f55b94367", "Admin", "Admin" },
+                    { "f277b9f8-a250-4568-9537-d346f58e01fd", "42213473-2ee1-40c8-b424-52e8cd90a58c", "Manager", "Manager" }
                 });
 
             migrationBuilder.CreateIndex(
