@@ -24,8 +24,7 @@ namespace SmallBaseball.Application.Commands.UpdateUser
 
                 
             }
-
-            return true;
+            throw new Exception("Wrong");
         }
     }
 }
