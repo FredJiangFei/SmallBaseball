@@ -10,6 +10,7 @@ namespace SmallBaseball.Application.Queries.User
             {
                 new ManagerModel
                 {
+                    Id = Guid.NewGuid(),
                     FirstName = "Fred",
                     LastName= "Jiang"
                 }
