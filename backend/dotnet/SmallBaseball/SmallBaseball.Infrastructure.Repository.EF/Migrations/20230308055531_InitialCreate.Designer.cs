@@ -11,8 +11,8 @@ using SmallBaseball.Infrastructure.Repository.EF;
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230228130533_Init")]
-    partial class Init
+    [Migration("20230308055531_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,22 +50,22 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "336e5b0b-3ec6-41f0-82fb-38ce830ac511",
-                            ConcurrencyStamp = "ca860668-53c1-423e-b439-99d6f7ea5074",
+                            Id = "7D9B7113-A8F8-4035-99A7-A20DD400F6A3",
+                            ConcurrencyStamp = "f0174684-b5ab-48ca-8867-0f1b4c7547d8",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = "f277b9f8-a250-4568-9537-d346f58e01fd",
-                            ConcurrencyStamp = "42213473-2ee1-40c8-b424-52e8cd90a58c",
+                            Id = "78A7570F-3CE5-48BA-9461-80283ED1D94D",
+                            ConcurrencyStamp = "c8b6bdd3-e18f-4e89-be99-fdb2869e1b7a",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
-                            Id = "ab81073b-929f-4f16-bb84-d708a35f4e7e",
-                            ConcurrencyStamp = "4ff346c4-5153-4de3-b047-074f55b94367",
+                            Id = "2301D884-221A-4E7D-B509-0113DCC043E1",
+                            ConcurrencyStamp = "fa36cf78-48bb-41c8-afd2-292b0223fbd7",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -152,6 +152,13 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
+                            RoleId = "2301D884-221A-4E7D-B509-0113DCC043E1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -235,6 +242,25 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "992d70c4-898b-4695-83bb-c2b535bf4031",
+                            Email = "Admin@sbb.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@SBB.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDKvY6mcSBf7ZlGe01LNpA4DbZyeBhPa9gak6F3KrzN5Q11pZ9r+gMJ8I4UYDGUZ3g==",
+                            PhoneNumber = "17792387996",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "00000000-0000-0000-0000-000000000000",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

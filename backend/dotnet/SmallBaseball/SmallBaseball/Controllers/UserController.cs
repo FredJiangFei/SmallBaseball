@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmallBaseball.Application.Queries.User;
 using SmallBaseball.Application.Models;
 using SmallBaseball.Application.Commands;
+using SmallBaseball.Api.Models;
 
 namespace SmallBaseball.Controllers
 {
@@ -25,27 +26,10 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPut("login")]
-        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        public async Task<ResponseResult<LoginResult>> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
-            if(result == "")
-                return Unauthorized();
-
-            return Ok(new { Token = result });
-        }
-
-        [HttpPost("register/admin")]
-        public async Task<bool> RegisterAdmin([FromBody] RegisterAdminCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return result;
-        }
-
-        [HttpPut("login/admin")]
-        public async Task<IActionResult> LoginAdmin([FromBody] LoginAdminCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(new { Token = result });
+            return ResponseResult.FromValue(result);
         }
 
         [HttpGet]

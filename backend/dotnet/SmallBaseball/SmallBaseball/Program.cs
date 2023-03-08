@@ -63,9 +63,9 @@ builder.Services.AddAuthentication(opt =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "Test.com",
-        ValidAudience = "Test.com",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+        ValidIssuer = "sbb.com",
+        ValidAudience = "sbb.com",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5B33FFD3-BE79-4549-9A64-7EBA439E68BC"))
     };
 });
 

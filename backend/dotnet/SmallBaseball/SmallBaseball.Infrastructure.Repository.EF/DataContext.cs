@@ -12,14 +12,14 @@ namespace SmallBaseball.Infrastructure.Repository.EF
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             base.OnConfiguring(options);
-            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId });
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UsersWithRolesConfig());
         }
     }
 }

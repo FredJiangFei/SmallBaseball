@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -203,10 +203,20 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "336e5b0b-3ec6-41f0-82fb-38ce830ac511", "ca860668-53c1-423e-b439-99d6f7ea5074", "User", "User" },
-                    { "ab81073b-929f-4f16-bb84-d708a35f4e7e", "4ff346c4-5153-4de3-b047-074f55b94367", "Admin", "Admin" },
-                    { "f277b9f8-a250-4568-9537-d346f58e01fd", "42213473-2ee1-40c8-b424-52e8cd90a58c", "Manager", "Manager" }
+                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "fa36cf78-48bb-41c8-afd2-292b0223fbd7", "Admin", "Admin" },
+                    { "78A7570F-3CE5-48BA-9461-80283ED1D94D", "c8b6bdd3-e18f-4e89-be99-fdb2869e1b7a", "Manager", "Manager" },
+                    { "7D9B7113-A8F8-4035-99A7-A20DD400F6A3", "f0174684-b5ab-48ca-8867-0f1b4c7547d8", "User", "User" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 0, "992d70c4-898b-4695-83bb-c2b535bf4031", "Admin@sbb.com", true, false, null, "ADMIN@SBB.COM", "ADMIN", "AQAAAAEAACcQAAAAEDKvY6mcSBf7ZlGe01LNpA4DbZyeBhPa9gak6F3KrzN5Q11pZ9r+gMJ8I4UYDGUZ3g==", "17792387996", true, "00000000-0000-0000-0000-000000000000", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2301D884-221A-4E7D-B509-0113DCC043E1", "B22698B8-42A2-4115-9631-1C2D1E2AC5F7" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
