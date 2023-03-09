@@ -47,6 +47,15 @@ function Managers() {
     setRows(res);
   };
 
+  const create = async () => {
+    await managerService.create({
+      firstName: 'tony',
+      lastName: 'tony',
+      email: 'tony@qq.com',
+    });
+    getAll();
+  };
+
   const columns: GridColDef[] = [
     {
       field: 'firstName',
@@ -68,6 +77,7 @@ function Managers() {
   return (
     <>
       <React.Fragment>
+        <Button onClick={create}>Create</Button>
         <Typography variant="h3" gutterBottom display="inline">
           Managers
         </Typography>

@@ -32,8 +32,8 @@ function SignIn() {
 
   const { handleSubmit, handleBlur, values, handleChange, errors, touched } = useFormik({
     initialValues: {
-      email: 'admin@qq.com',
-      password: '123456789',
+      email: 'Admin@sbb.com',
+      password: 'sbb123456',
       submit: false,
     },
     onSubmit: (values) => handleLogin(values),

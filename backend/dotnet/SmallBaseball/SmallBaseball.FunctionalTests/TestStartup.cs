@@ -3,7 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BearSprayKiosk.FunctionalTests
+namespace SmallBaseball.FunctionalTests
 {
     public class TestStartup
     {

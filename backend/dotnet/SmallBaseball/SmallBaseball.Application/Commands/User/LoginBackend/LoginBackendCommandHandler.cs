@@ -6,16 +6,16 @@ using System.Security.Claims;
 
 namespace SmallBaseball.Application.Commands.UpdateUser
 {
-    public class LoginCommandHandler : ICommandHandler<LoginCommand, LoginResult>
+    public class LoginBackendCommandHandler : ICommandHandler<LoginBackendCommand, LoginResult>
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public LoginCommandHandler(UserManager<AppUser> userManager)
+        public LoginBackendCommandHandler(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
 
-        public async Task<LoginResult> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginResult> Handle(LoginBackendCommand request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
@@ -24,11 +24,21 @@ namespace SmallBaseball.Application.Commands.UpdateUser
             if (!await _userManager.CheckPasswordAsync(user, request.Password))
                 throw new Exception("Password invalid");
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if(userRoles.IndexOf(UserRoles.Admin) == -1 && userRoles.IndexOf(UserRoles.Manager) == -1)
+                throw new Exception("No permission");
+
             var claims = new List<Claim>
-            {
+            {    
                 new Claim(ClaimTypes.Hash, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
+
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             var tokenString = JwtHelper.GenerateJSONWebToken(claims);
             return new LoginResult
             {
@@ -36,5 +46,7 @@ namespace SmallBaseball.Application.Commands.UpdateUser
                 Token = tokenString
             };
         }
+
+       
     }
 }

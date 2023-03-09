@@ -49,8 +49,8 @@ function AuthProvider({ children }: { children: ReactNode }) {
       email,
       password,
     });
-    const { token, user } = res.data;
-    setSession(token);
+    const user = res.data.value;
+    setSession(user.token);
     dispatch({
       type: SIGN_IN,
       payload: {

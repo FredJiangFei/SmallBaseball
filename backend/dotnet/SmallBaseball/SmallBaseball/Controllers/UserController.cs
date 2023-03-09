@@ -32,6 +32,14 @@ namespace SmallBaseball.Controllers
             return ResponseResult.FromValue(result);
         }
 
+
+        [HttpPut("login/backend")]
+        public async Task<ResponseResult<LoginResult>> LoginBackend([FromBody] LoginBackendCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return ResponseResult.FromValue(result);
+        }
+
         [HttpGet]
         public async Task<IEnumerable<UserModel>> Get()
         {

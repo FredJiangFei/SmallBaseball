@@ -20,14 +20,13 @@ namespace SmallBaseball.Application.Commands
 
             user = new AppUser
             {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.Email
             };
           
-            var result = await _userManager.CreateAsync(user, request.Password);
-            await _userManager.AddToRoleAsync(user, UserRoles.User);
-            await _userManager.AddToRoleAsync(user, UserRoles.Admin);
-
+            await _userManager.CreateAsync(user, request.Password);
             return true;
         }
     }
