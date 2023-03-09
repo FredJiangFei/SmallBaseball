@@ -27,10 +27,14 @@ namespace SmallBaseball.Application.Commands.UpdateUser
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var claims = new[]
-                {
+                {    
                     new Claim(ClaimTypes.Hash, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Email, user.Email)
                 };
+                foreach (var role in userRoles)
+                {
+                    claims.Prepend(new Claim(ClaimTypes.Role, role));
+                }
 
                 var tokenString = GenerateJSONWebToken(claims);
                 return new LoginResult

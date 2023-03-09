@@ -42,6 +42,10 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    FirstName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -203,15 +207,15 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "fa36cf78-48bb-41c8-afd2-292b0223fbd7", "Admin", "Admin" },
-                    { "78A7570F-3CE5-48BA-9461-80283ED1D94D", "c8b6bdd3-e18f-4e89-be99-fdb2869e1b7a", "Manager", "Manager" },
-                    { "7D9B7113-A8F8-4035-99A7-A20DD400F6A3", "f0174684-b5ab-48ca-8867-0f1b4c7547d8", "User", "User" }
+                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "c3d82a62-7c7f-4ba2-8136-7a27c7849112", "Admin", "Admin" },
+                    { "78A7570F-3CE5-48BA-9461-80283ED1D94D", "2f80bacb-a9fa-4bf2-ad14-82ac7d35b705", "Manager", "Manager" },
+                    { "7D9B7113-A8F8-4035-99A7-A20DD400F6A3", "f5b476bd-d301-4f39-9256-67d780c4801c", "User", "User" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 0, "992d70c4-898b-4695-83bb-c2b535bf4031", "Admin@sbb.com", true, false, null, "ADMIN@SBB.COM", "ADMIN", "AQAAAAEAACcQAAAAEDKvY6mcSBf7ZlGe01LNpA4DbZyeBhPa9gak6F3KrzN5Q11pZ9r+gMJ8I4UYDGUZ3g==", "17792387996", true, "00000000-0000-0000-0000-000000000000", false, "admin" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 0, "780012fc-1544-4d2f-9329-d78ad906d5d1", "Admin@sbb.com", true, "Admin", "Admin", false, null, "ADMIN@SBB.COM", "ADMIN", "AQAAAAEAACcQAAAAEIzfdp56H4Y0FyYOL/licBS0d71FHy0ZOFRrkfdJhkRiM2RimUv3/IjcgCn4mkxXqA==", "17792387996", true, "00000000-0000-0000-0000-000000000000", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

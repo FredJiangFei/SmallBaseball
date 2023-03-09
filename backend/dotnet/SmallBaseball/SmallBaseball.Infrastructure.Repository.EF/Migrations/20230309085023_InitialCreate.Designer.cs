@@ -11,7 +11,7 @@ using SmallBaseball.Infrastructure.Repository.EF;
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230308055531_InitialCreate")]
+    [Migration("20230309085023_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -51,21 +51,21 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         new
                         {
                             Id = "7D9B7113-A8F8-4035-99A7-A20DD400F6A3",
-                            ConcurrencyStamp = "f0174684-b5ab-48ca-8867-0f1b4c7547d8",
+                            ConcurrencyStamp = "f5b476bd-d301-4f39-9256-67d780c4801c",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "78A7570F-3CE5-48BA-9461-80283ED1D94D",
-                            ConcurrencyStamp = "c8b6bdd3-e18f-4e89-be99-fdb2869e1b7a",
+                            ConcurrencyStamp = "2f80bacb-a9fa-4bf2-ad14-82ac7d35b705",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
                             Id = "2301D884-221A-4E7D-B509-0113DCC043E1",
-                            ConcurrencyStamp = "fa36cf78-48bb-41c8-afd2-292b0223fbd7",
+                            ConcurrencyStamp = "c3d82a62-7c7f-4ba2-8136-7a27c7849112",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -199,6 +199,14 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -248,13 +256,15 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         {
                             Id = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "992d70c4-898b-4695-83bb-c2b535bf4031",
+                            ConcurrencyStamp = "780012fc-1544-4d2f-9329-d78ad906d5d1",
                             Email = "Admin@sbb.com",
                             EmailConfirmed = true,
+                            FirstName = "Admin",
+                            LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SBB.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDKvY6mcSBf7ZlGe01LNpA4DbZyeBhPa9gak6F3KrzN5Q11pZ9r+gMJ8I4UYDGUZ3g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIzfdp56H4Y0FyYOL/licBS0d71FHy0ZOFRrkfdJhkRiM2RimUv3/IjcgCn4mkxXqA==",
                             PhoneNumber = "17792387996",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "00000000-0000-0000-0000-000000000000",
