@@ -1,4 +1,4 @@
-﻿namespace Elyte.Application.Queries
+﻿namespace SmallBaseball.Application.Queries
 {
     public class QuerySettings
     {

@@ -1,6 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Elyte.Application.Queries;
+using SmallBaseball.Application.Queries;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
