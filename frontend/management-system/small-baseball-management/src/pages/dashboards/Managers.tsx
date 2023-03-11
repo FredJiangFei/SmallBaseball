@@ -44,7 +44,7 @@ function Managers() {
 
   const getAll = async () => {
     const res: any = await managerService.getAll();
-    setRows(res);
+    setRows(res.data);
   };
 
   const create = async () => {

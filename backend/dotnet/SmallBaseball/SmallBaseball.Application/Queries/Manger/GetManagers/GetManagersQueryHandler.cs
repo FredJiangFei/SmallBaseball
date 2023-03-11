@@ -1,20 +1,24 @@
 ﻿using SmallBaseball.Application.Models;
+using Dapper;
+using Elyte.Application.Queries;
 
 namespace SmallBaseball.Application.Queries.User
 {
-    public class GetManagersQueryHandler : IQueryHandler<GetManagersQuery, IEnumerable<ManagerModel>>
+    public class GetManagersQueryHandler : QueryBase, IQueryHandler<GetManagersQuery, IEnumerable<ManagerModel>>
     {
+        public GetManagersQueryHandler(QuerySettings settings) : base(settings)
+        {
+        }
+
         public async Task<IEnumerable<ManagerModel>> Handle(GetManagersQuery request, CancellationToken cancellationToken)
         {
-            return new List<ManagerModel>
-            {
-                new ManagerModel
-                {
-                    Id = Guid.NewGuid(),
-                    FirstName = "Fred",
-                    LastName= "Jiang"
-                }
-            };
+            var sql = @"SELECT 
+                            Id,
+                            FirstName,
+                            LastName
+                        FROM AspnetUsers";
+            var users = await ExecuteAsync(conn => conn.QueryAsync<ManagerModel>(sql));
+            return users;
         }
     }
 }

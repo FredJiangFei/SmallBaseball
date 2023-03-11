@@ -1,4 +1,5 @@
-﻿using SmallBaseball.Application.Models;
+﻿using MediatR;
+using SmallBaseball.Application.Models;
 
 namespace SmallBaseball.Application.Queries.User
 {

@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Elyte.Application.Queries;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,11 +34,12 @@ builder.Services.AddCors(options =>
     });
 });
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddSingleton(provider => new QuerySettings(connectionString));
 
 // Add services to the container.
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
