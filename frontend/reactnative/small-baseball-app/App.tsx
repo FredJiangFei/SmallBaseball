@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { AuthContext } from './app/auth/context';
 import AppNavigator from './app/navigator/AppNavigator';
-import theme from './theme';
+import theme from './app/theme/theme';
 
 const config = {
   dependencies: {

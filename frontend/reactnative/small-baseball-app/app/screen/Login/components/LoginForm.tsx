@@ -1,7 +1,8 @@
 import React from 'react';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Input } from 'native-base';
+import { useFormik } from 'formik';
+import { SbForm, SbInput } from '../../../components';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().label('Email'),
@@ -14,24 +15,19 @@ const initValue = {
 };
 
 export default function LoginForm({ onSubmit }) {
+  const { handleSubmit, handleChange, isSubmitting } = useFormik({
+    initialValues: initValue,
+    validationSchema: validationSchema,
+    onSubmit: (values) => onSubmit(values),
+  });
+
   return (
-    <Formik
-      initialValues={initValue}
-      validationSchema={validationSchema}
-      onSubmit={(values) => onSubmit(values)}
-    >
-      {({ handleChange, handleSubmit, isSubmitting }) => (
-        <>
-          <Input placeholder="Email" onChangeText={handleChange('email')} />
-          <Input
-            placeholder="Password"
-            onChangeText={handleChange('password')}
-          />
-          <Button onPress={(e: any) => handleSubmit(e)} disabled={isSubmitting}>
-            Sign In
-          </Button>
-        </>
-      )}
-    </Formik>
+    <SbForm>
+      <SbInput placeholder="Email" onChangeText={handleChange('email')} />
+      <SbInput placeholder="Password" onChangeText={handleChange('password')} />
+      <Button onPress={(e: any) => handleSubmit(e)} disabled={isSubmitting}>
+        Sign In
+      </Button>
+    </SbForm>
   );
 }
