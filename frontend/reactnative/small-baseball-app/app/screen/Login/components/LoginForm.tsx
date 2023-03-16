@@ -25,7 +25,11 @@ export default function LoginForm({ onSubmit }) {
     <SbForm>
       <SbInput placeholder="Email" onChangeText={handleChange('email')} />
       <SbInput placeholder="Password" onChangeText={handleChange('password')} />
-      <Button onPress={(e: any) => handleSubmit(e)} disabled={isSubmitting}>
+      <Button
+        isDisabled={isSubmitting}
+        onPress={(e: any) => handleSubmit(e)}
+        disabled={isSubmitting}
+      >
         Sign In
       </Button>
     </SbForm>

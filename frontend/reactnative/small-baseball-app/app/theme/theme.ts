@@ -44,11 +44,11 @@ const newTheme = extendTheme({
     // 1: 8,
     // 2: 16,
   },
-  fonts: {
-    heading: 'Roboto',
-    body: 'Open Sans',
-    mono: 'Roboto Mono',
-  },
+  // fonts: {
+  //   heading: 'Roboto',
+  //   body: 'Open Sans',
+  //   mono: 'Roboto Mono',
+  // },
   components: components,
 });
 

@@ -10,7 +10,7 @@ const events: Event[] = [
     text: `People often say that motivation doesn’t last. Well, neither does bathing. That’s why we recommend it daily.`,
     time: ' 6 mins ago',
     image:
-      'https://fastly.picsum.photos/id/10/2500/1667.jpg?hmac=J04WWC_ebchx3WwzbM-Z4_KC_LeLBWr5LZMaAkWkF68',
+      'https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg',
   },
   {
     title: 'The Garden City',
@@ -37,23 +37,6 @@ export default function EventsScreen({ navigation }) {
         size="sm"
         icon={<AddIcon />}
       />
-      {/* <Box
-        p="2"
-        m="2"
-        _text={{ fontSize: 'md', fontWeight: 'bold', color: 'white' }}
-      >
-        Events
-      </Box>
-      <Box
-        variant="linear"
-        p="2"
-        m="2"
-        _text={{ fontSize: 'md', fontWeight: 'bold', color: 'white' }}
-      >
-        Events
-      </Box>
-      <Text>Color: {colorMode}</Text>
-      <Button onPress={toggleColorMode}>Toggle Color Mode</Button> */}
     </View>
   );
 }

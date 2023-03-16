@@ -2,20 +2,46 @@ import React from 'react';
 import {
   AspectRatio,
   Box,
+  Button,
   Center,
   Heading,
   Image,
   Row,
   Stack,
   Text,
+  useDisclose,
 } from 'native-base';
 import { Event } from '../../../models/Event';
+import SbMenu from '../../../components/SbMenu';
+import { Action } from '../../../models/Action';
+import { SbConfirm } from '../../../components';
 
 type PropType = {
   event: Event;
 };
 
 const EventCard: React.FC<PropType> = ({ event }) => {
+  const { isOpen, onOpen, onClose } = useDisclose();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclose();
+
+  const actions: Action[] = [
+    {
+      label: 'Delete',
+      onPress: () => {
+        onDeleteOpen();
+        onClose();
+      },
+    },
+    {
+      label: 'Share',
+      disabled: true,
+    },
+  ];
+
   return (
     <Box alignItems="center">
       <Box
@@ -41,6 +67,16 @@ const EventCard: React.FC<PropType> = ({ event }) => {
               alt="image"
             />
           </AspectRatio>
+          <Button onPress={onOpen} position="absolute" right={1} top={1}>
+            Menu
+          </Button>
+          <SbMenu isOpen={isOpen} onClose={onClose} actions={actions} />
+          <SbConfirm
+            isOpen={isDeleteOpen}
+            onClose={onDeleteClose}
+            title="Delete Event"
+            content="Are you sure to delete this event?"
+          />
           <Center
             bg="violet.500"
             _dark={{

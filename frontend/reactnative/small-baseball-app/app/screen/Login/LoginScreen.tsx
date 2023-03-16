@@ -19,7 +19,14 @@ export default function LoginScreen({}) {
     <View px={2}>
       <Heading>Sign In</Heading>
       <LoginForm onSubmit={handleLogin} />
-      <Text onPress={() => navigation.navigate(routes.Register)}>Register</Text>
+      <Text
+        mt={1}
+        textAlign="center"
+        variant="link"
+        onPress={() => navigation.navigate(routes.Register)}
+      >
+        Register
+      </Text>
     </View>
   );
 }

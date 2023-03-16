@@ -1,3 +1,5 @@
+import colors from '../config/colors';
+
 const components = {
   // Box: {
   //   variants: {
@@ -15,39 +17,23 @@ const components = {
   Button: {
     baseStyle: ({ colorMode }) => {
       return {
-        borderRadius: 'md',
-        rounded: 'lg',
-        bgColor: 'amber.400',
-        // bg: colorMode === 'dark' ? 'red.300' : 'blue.300',
+        _disabled: {
+          bg: 'gray.500',
+        }
       };
     },
     defaultProps: {
       colorScheme: 'primary',
     },
-    sizes: {
-      md: {
-        px: 6,
-        py: 3,
-      },
-      lg: {
-        px: 8,
-        py: 4,
-      },
-    },
     variants: {
-      solid: {
-        bg: 'primary.500',
-        _hover: {
-          bg: 'primary.600',
-        },
-      },
       outline: {
         border: '2px solid',
         borderColor: 'primary.500',
         bg: 'white',
-        _hover: {
-          bg: 'primary.500',
-          color: 'white',
+        _pressed: {
+          border: '2px solid',
+          borderColor: 'secondary.500',
+          bg: 'secondary.300',
         },
       },
     },
@@ -62,9 +48,6 @@ const components = {
     },
   },
   Text: {
-    baseStyle: {
-      color: 'emerald.400',
-    },
     defaultProps: {
       size: 'sm',
     },
@@ -79,7 +62,12 @@ const components = {
         fontSize: '16px',
       },
       sm: {
-        fontSize: '12px',
+        fontSize: '14px',
+      },
+    },
+    variants: {
+      link: {
+        color: colors.secondary,
       },
     },
   },
@@ -98,6 +86,7 @@ const components = {
         },
         _focus: {
           boxShadow: 'outline',
+          borderColor: 'secondary.400',
         },
         _disabled: {
           opacity: 0.4,

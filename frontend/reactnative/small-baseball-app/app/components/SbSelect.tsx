@@ -1,27 +1,35 @@
 import { StyleSheet } from 'react-native';
 import React from 'react';
 import { CheckIcon, Select } from 'native-base';
+import { Option } from '../models/Option';
+import colors from '../config/colors';
 
-export default function SbSelect() {
+type PropType = {
+  placeholder: string;
+  options: Option[];
+};
+
+const SbSelect: React.FC<PropType> = (props) => {
+  const { placeholder, options } = props;
   const [value, setValue] = React.useState('');
 
   return (
     <Select
       selectedValue={value}
-      placeholder="Choose Event Type"
+      placeholder={placeholder}
       _selectedItem={{
         endIcon: (
-          <CheckIcon color="#17C476" style={styles.checkIcon} size="5" />
+          <CheckIcon color={colors.secondary} style={styles.checkIcon} size="5" />
         ),
       }}
       onValueChange={setValue}
     >
-      <Select.Item label="Tournaments" value="Tournaments" />
-      <Select.Item label="Games" value="Games" />
-      <Select.Item label="Pratices" value="Pratices" />
+      {options?.map((item) => (
+        <Select.Item key={item.value} label={item.label} value={item.value} />
+      ))}
     </Select>
   );
-}
+};
 
 const styles = StyleSheet.create({
   checkIcon: {
@@ -29,3 +37,4 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
+export default SbSelect;
