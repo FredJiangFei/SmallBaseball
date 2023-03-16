@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { Button, Input } from 'native-base';
+import { Button } from 'native-base';
 import { useFormik } from 'formik';
 import { SbForm, SbInput } from '../../../components';
 
