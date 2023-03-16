@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const config = {
   dependencies: {
     'linear-gradient': require('expo-linear-gradient').LinearGradient,
-  },
+  }
 };
 
 export default function App() {
@@ -19,11 +19,11 @@ export default function App() {
 
   const colorModeManager: StorageManager = {
     get: async () => {
-      let val = await AsyncStorage.getItem('@my-app-color-mode');
+      let val = await AsyncStorage.getItem('@color-mode');
       return val === 'dark' ? 'dark' : 'light';
     },
     set: async (value: ColorMode) => {
-      await AsyncStorage.setItem('@my-app-color-mode', value ?? 'light');
+      await AsyncStorage.setItem('@color-mode', value ?? 'light');
     },
   };
 

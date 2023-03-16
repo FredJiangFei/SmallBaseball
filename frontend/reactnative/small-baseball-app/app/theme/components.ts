@@ -19,7 +19,9 @@ const components = {
       return {
         _disabled: {
           bg: 'gray.500',
-        }
+        },
+        _light: { bg: 'red.300' },
+        _dark: { bg: 'blue.300' },
       };
     },
     defaultProps: {
@@ -41,7 +43,9 @@ const components = {
   Heading: {
     baseStyle: {
       textAlign: 'center',
-      my: 4,
+      my: 4,  
+      _light: { color: 'red.300' },
+      _dark: { color: 'blue.300' },
     },
     defaultProps: {
       size: 'md',
