@@ -8,14 +8,15 @@ const useAuth = () => {
 
     const logout = () => {
         setUser(null);
-        authStorage.removeToken();
+        // authStorage.removeToken();
     };
 
     const login = async (authToken, isRegister = false) => {
-        const user: any = jwtDecode(authToken);
-        user.isRegister = isRegister;
-        setUser(user);
-        await authStorage.storeToken(authToken);
+        setUser({});
+        // const user: any = jwtDecode(authToken);
+        // user.isRegister = isRegister;
+        // setUser(user);
+        // await authStorage.storeToken(authToken);
     };
 
     return { user, logout, login, setUser };

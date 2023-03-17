@@ -15,7 +15,7 @@ const SbMenu: React.FC<PropType> = (props) => {
     <Actionsheet isOpen={isOpen} onClose={onClose}>
       <Actionsheet.Content>
         {actions?.map((item) => (
-          <Actionsheet.Item isDisabled={item.disabled} onPress={item.onPress}>
+          <Actionsheet.Item key={item.label} isDisabled={item.disabled} onPress={item.onPress}>
             {item.label}
           </Actionsheet.Item>
         ))}
