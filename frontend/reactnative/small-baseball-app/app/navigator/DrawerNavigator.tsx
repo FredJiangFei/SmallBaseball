@@ -1,31 +1,28 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import BottomTabNavigator from './BottomTabNavigator';
-import SettingsScreen from '../screen/SettingsScreen';
-import { MoonIcon, Pressable, SunIcon, useColorMode } from 'native-base';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import MineNavigator from './MineNavigator';
 
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   return (
     <Drawer.Navigator
+      drawerContent={props => <MyDrawer {...props} />}
       screenOptions={{
         drawerType: 'front',
-        headerRight: () => (
-          <Pressable onPress={toggleColorMode}>
-            {colorMode === 'light' ? (
-              <SunIcon size={8} mr={2} />
-            ) : (
-              <MoonIcon size={8} mr={2} />
-            )}
-          </Pressable>
-        ),
+        headerShown: false
       }}
     >
-      <Drawer.Screen name="Home" component={BottomTabNavigator} />
-      <Drawer.Screen name="Settings" component={SettingsScreen} />
+      <Drawer.Screen name="MineNavigator" component={MineNavigator} />
     </Drawer.Navigator>
+  );
+};
+
+const MyDrawer = ({ navigation }) => {
+  return (
+      <DrawerContentScrollView>
+          <DrawerItem label="Settings" onPress={() => navigation.navigate("Settings")} />
+          <DrawerItem label="History" onPress={() => navigation.navigate("History")} />
+      </DrawerContentScrollView>
   );
 };
 

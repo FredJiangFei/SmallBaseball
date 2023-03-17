@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import EventsNavigator from './EventsNavigator';
 import CalendarNavigator from './CalendarNavigator';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import MineNavigator from './MineNavigator';
+import DrawerNavigator from './DrawerNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name="MineTab"
-        component={MineNavigator}
+        component={DrawerNavigator}
         options={{
           tabBarIcon: ({ color, size }) =>
             tabIcon('file-document', size, color),

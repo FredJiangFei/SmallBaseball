@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../hooks';
-import DrawerNavigator from './DrawerNavigator';
 import AuthNavigator from './AuthNavigator';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +13,7 @@ const AppNavigator = () => {
     <>
       {user && (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+          <Stack.Screen name="Home" component={BottomTabNavigator} />
         </Stack.Navigator>
       )}
       {!user && <AuthNavigator />}

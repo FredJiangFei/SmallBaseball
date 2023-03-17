@@ -7,7 +7,7 @@ export default function CalendarNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerTitle: '',
       }}
     >
       <Stack.Screen name="Calendar" component={CalendarScreen} />

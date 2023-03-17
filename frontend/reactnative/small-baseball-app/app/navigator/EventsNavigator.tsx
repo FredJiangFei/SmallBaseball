@@ -8,7 +8,7 @@ export default function EventsNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerTitle: ''
       }}
     >
       <Stack.Screen name="Events" component={EventsScreen} />

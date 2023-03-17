@@ -31,7 +31,7 @@ const menuItems = [
   },
 ];
 
-export default function MineScreen() {
+export default function MineScreen({ navigation }) {
   const { logout } = useAuth();
 
   return (
@@ -57,7 +57,7 @@ export default function MineScreen() {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
-              onPress={() => alert(item.title)}
+              onPress={() => navigation.navigate(item.title)}
             />
           )}
         />
