@@ -26,7 +26,7 @@ namespace SmallBaseball.Application.Commands.Users
                 UserName = request.Email
             };
 
-            await _userManager.CreateAsync(user, "aa123456");
+            await _userManager.CreateAsync(user, "sbb123456");
             await _userManager.AddToRoleAsync(user, UserRoles.Manager);
             return true;
         }

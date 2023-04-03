@@ -56,6 +56,19 @@ function Managers() {
     getAll();
   };
 
+  const handleRenderActionCell = (params: GridRenderCellParams) => {
+    return (
+      <CellButton variant="text" onClick={() => handleDeleteClick(params)}>
+        Delete
+      </CellButton>
+    );
+  };
+
+  const handleDeleteClick = async (params: GridRenderCellParams) => {
+    await managerService.deleteManager(params.id);
+    getAll();
+  };
+
   const columns: GridColDef[] = [
     {
       field: 'firstName',
@@ -71,6 +84,23 @@ function Managers() {
       width: 200,
       headerAlign: 'center',
       align: 'center',
+    },
+    {
+      field: 'role',
+      headerName: 'Role',
+      width: 200,
+      headerAlign: 'center',
+      align: 'center',
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      width: 130,
+      disableColumnMenu: true,
+      sortable: false,
+      hideSortIcons: true,
+      headerAlign: 'center',
+      renderCell: handleRenderActionCell,
     },
   ];
 

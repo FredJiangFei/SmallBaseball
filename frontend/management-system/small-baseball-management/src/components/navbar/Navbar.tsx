@@ -5,6 +5,7 @@ import {
   AppBar,
   Toolbar,
   IconButton as MuiIconButton,
+  Button,
 } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 import { Menu as MenuIcon } from '@mui/icons-material';
@@ -22,7 +23,7 @@ type NavbarProps = {
 };
 
 const Navbar: React.FC<NavbarProps> = ({ onDrawerToggle }) => {
-  const { user } = useAuth();
+  const { signOut } = useAuth();
 
   return (
     <>
@@ -39,7 +40,9 @@ const Navbar: React.FC<NavbarProps> = ({ onDrawerToggle }) => {
                 <MenuIcon />
               </IconButton>
             </Grid>
-            <Grid item xs />
+            <Grid item>
+              <Button color="inherit" variant="outlined" onClick={signOut}>Logout</Button>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

@@ -29,6 +29,18 @@ namespace SmallBaseball.Controllers
             return result;
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ResponseResult<bool>> Delete([FromRoute]string id)
+        {
+            var command = new DeleteManagerCommand
+            {
+                Id = id
+            };
+            var result = await _mediator.Send(command);
+            return ResponseResult.FromValue(result);
+        }
+
         [HttpPost()]
         [Authorize(Roles = "Admin")]
         public async Task<ResponseResult<bool>> Create([FromBody] ManagerCreateRequest request)

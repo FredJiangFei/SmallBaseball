@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using SmallBaseball.Application.Queries;
 using System.Data;
 
 namespace Elyte.Application.Queries

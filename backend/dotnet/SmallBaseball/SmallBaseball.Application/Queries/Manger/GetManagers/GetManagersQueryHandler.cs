@@ -13,10 +13,13 @@ namespace SmallBaseball.Application.Queries.User
         public async Task<IEnumerable<ManagerModel>> Handle(GetManagersQuery request, CancellationToken cancellationToken)
         {
             var sql = @"SELECT 
-                            Id,
-                            FirstName,
-                            LastName
-                        FROM AspnetUsers";
+                            AspnetUsers.Id,
+                            AspnetUsers.FirstName,
+                            AspnetUsers.LastName,
+                            AspnetRoles.Name Role
+                        FROM AspnetUsers
+                        INNER JOIN AspnetUserRoles ON AspnetUserRoles.UserId = AspnetUsers.Id
+                        INNER JOIN AspnetRoles ON AspnetRoles.Id = AspnetUserRoles.RoleId";
             var users = await ExecuteAsync(conn => conn.QueryAsync<ManagerModel>(sql));
             return users;
         }

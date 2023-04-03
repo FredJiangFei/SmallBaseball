@@ -1,14 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
 import {
   Alert as MuiAlert,
-  Checkbox,
-  FormControlLabel,
   Button,
   TextField as MuiTextField,
 } from '@mui/material';
@@ -30,14 +27,15 @@ function SignIn() {
   const navigate = useNavigate();
   const { signIn } = useAuth();
 
-  const { handleSubmit, handleBlur, values, handleChange, errors, touched } = useFormik({
-    initialValues: {
-      email: 'Admin@sbb.com',
-      password: 'sbb123456',
-      submit: false,
-    },
-    onSubmit: (values) => handleLogin(values),
-  });
+  const { handleSubmit, handleBlur, values, handleChange, errors, touched } =
+    useFormik({
+      initialValues: {
+        email: 'Admin@sbb.com',
+        password: 'sbb123456',
+        submit: false,
+      },
+      onSubmit: (values) => handleLogin(values),
+    });
 
   const handleLogin = async (values: any) => {
     await signIn(values.email, values.password);
@@ -76,7 +74,7 @@ function SignIn() {
         my={2}
       />
 
-      <Button type='submit' fullWidth variant="contained" color="primary">
+      <Button type="submit" fullWidth variant="contained" color="primary">
         Sign in
       </Button>
     </form>
