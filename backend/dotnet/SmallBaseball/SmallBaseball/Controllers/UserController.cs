@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SmallBaseball.Application.Queries.User;
 using SmallBaseball.Application.Models;
 using SmallBaseball.Application.Commands;
 using SmallBaseball.Api.Models;
@@ -38,14 +37,6 @@ namespace SmallBaseball.Controllers
         {
             var result = await _mediator.Send(command);
             return ResponseResult.FromValue(result);
-        }
-
-        [HttpGet]
-        public async Task<IEnumerable<UserModel>> Get()
-        {
-            var query = new GetUsersQuery();
-            var result = await _mediator.Send(query);
-            return result;
         }
     }
 }
