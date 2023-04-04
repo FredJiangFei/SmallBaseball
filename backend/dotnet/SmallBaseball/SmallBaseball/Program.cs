@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
-    builder.RegisterMediatR(typeof(GetUsersQuery).Assembly);
+    builder.RegisterMediatR(typeof(GetManagersQuery).Assembly);
     builder.RegisterGeneric(typeof(ValidationBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency();
 });
 

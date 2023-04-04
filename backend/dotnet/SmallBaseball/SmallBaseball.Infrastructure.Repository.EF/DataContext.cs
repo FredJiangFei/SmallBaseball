@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SmallBaseball.Infrastructure.Repository.EF.EntityConfigurations;
+using SmallBaseball.Infrastructure.Repository.EF.EntityConfigurations.TeamEntities;
 
 namespace SmallBaseball.Infrastructure.Repository.EF
 {
@@ -20,6 +21,8 @@ namespace SmallBaseball.Infrastructure.Repository.EF
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UsersWithRolesConfig());
+            builder.ApplyConfiguration(new TeamEntityConfiguration());
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using SmallBaseball.Application.Models;
 using Dapper;
-using Elyte.Application.Queries;
+using SmallBaseball.Application.Queries;
 
 namespace SmallBaseball.Application.Queries.User
 {

@@ -12,7 +12,7 @@ namespace SmallBaseball.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin, Manager")]
-    public class ManagersController : ControllerBase
+    public class ManagersController : BaseController
     {
         private readonly IMediator _mediator;
 

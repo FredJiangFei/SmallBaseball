@@ -2,7 +2,7 @@
 using SmallBaseball.Application.Queries;
 using System.Data;
 
-namespace Elyte.Application.Queries
+namespace SmallBaseball.Application.Queries
 {
     public abstract class QueryBase<T> where T : QuerySettings
     {
