@@ -13,6 +13,7 @@ namespace SmallBaseball.FunctionalTests
     public class ScenarioBase
     {
         protected TestServer Server => TestHost.Server;
+
         protected TestData<DataContext> Data { get; set; }
 
         protected ScenarioBase()

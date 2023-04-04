@@ -10,4 +10,5 @@ require("./startup/routes")(app);
 require("./startup/db")();
 
 const port = config.get("port");
+console.log(`Listening on port ${port}`);
 app.listen(port, ()=> `Listening on port ${port}`);

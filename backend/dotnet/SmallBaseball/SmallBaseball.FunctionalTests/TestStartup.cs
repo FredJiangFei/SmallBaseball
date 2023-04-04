@@ -10,6 +10,8 @@ using System.Text;
 using SmallBaseball.Extensions;
 using Microsoft.EntityFrameworkCore;
 using SmallBaseball.Infrastructure.Repository.EF;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Microsoft.AspNetCore.Hosting;
 
 namespace SmallBaseball.FunctionalTests
 {
@@ -24,7 +26,8 @@ namespace SmallBaseball.FunctionalTests
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddApplicationPart(typeof(Program).Assembly);
+
 
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DataContext>(options =>
@@ -50,6 +53,9 @@ namespace SmallBaseball.FunctionalTests
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5B33FFD3-BE79-4549-9A64-7EBA439E68BC"))
                 };
             });
+
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
 
             var builder = new ContainerBuilder();
 
