@@ -1,13 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmallBaseball.Api.Models;
 using SmallBaseball.Application.Commands.Teams;
 
 namespace SmallBaseball.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/teams")]
     public class TeamsController : BaseController
     {
         private readonly IMediator _mediator;
@@ -17,7 +15,7 @@ namespace SmallBaseball.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<ResponseResult<bool>> Create([FromBody] CreateTeamCommand command)
         {
             var result = await _mediator.Send(command);

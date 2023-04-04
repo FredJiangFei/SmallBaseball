@@ -6,8 +6,6 @@ using SmallBaseball.Api.Models;
 
 namespace SmallBaseball.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class UserController : BaseController
     {
         private readonly IMediator _mediator;

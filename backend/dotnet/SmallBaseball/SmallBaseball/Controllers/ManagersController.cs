@@ -9,8 +9,6 @@ using SmallBaseball.Application.Queries.User;
 
 namespace SmallBaseball.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     [Authorize(Roles = "Admin, Manager")]
     public class ManagersController : BaseController
     {
