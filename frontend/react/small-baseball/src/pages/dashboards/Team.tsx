@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import teamService from '../../services/teamService';
+import { useForm } from 'react-hook-form';
 
 function Team() {
   const [teams, setTeams] = useState([]);
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     getTeams();
@@ -13,11 +15,9 @@ function Team() {
     setTeams(res.data);
   };
 
-  const handleCreate = async () => {
-    await teamService.create({
-      name: 'Team 2',
-      description: 'Team 2 description',
-    });
+  const handleCreate = async (data: any) => {
+    console.log(data);
+    await teamService.create(data);
     getTeams();
   };
 
@@ -38,7 +38,13 @@ function Team() {
           </div>
         ))}
 
-      <button onClick={handleCreate}>Create</button>
+      <form autoComplete="off" onSubmit={handleSubmit(handleCreate)}>
+        <label htmlFor="name">Name</label>
+        <input type="text" {...register('name')} />
+        <label htmlFor="description">Description</label>
+        <input type="text" {...register('description')} />
+        <button>Create</button>
+      </form>
     </>
   );
 }
