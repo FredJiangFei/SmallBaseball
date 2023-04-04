@@ -9,9 +9,9 @@ interface AuthGuardType {
 function AuthGuard({ children }: AuthGuardType) {
   const { isAuthenticated, isInitialized } = useAuth();
 
-  // if (isInitialized && !isAuthenticated) {
-  //   return <Navigate to="/auth/sign-in" />;
-  // }
+  if (isInitialized && !isAuthenticated) {
+    return <Navigate to="/auth/sign-in" />;
+  }
 
   return <>{children}</>;
 }

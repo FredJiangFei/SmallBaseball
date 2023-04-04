@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 
 type NavbarProps = {};
 
 const Navbar: React.FC<NavbarProps> = () => {
   return (
     <>
-      <a href="/">Home</a> | <a href="/products">Products</a>
+      <NavLink to="/">Home</NavLink> | <NavLink to="/teams">Teams</NavLink>
     </>
   );
 };

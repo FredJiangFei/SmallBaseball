@@ -6,7 +6,7 @@ import Page404 from './pages/auth/Page404';
 
 import SignIn from './pages/auth/SignIn';
 import AuthGuard from './components/guards/AuthGuard';
-import Product from './pages/dashboards/Product';
+import Team from './pages/dashboards/Team';
 
 const routes = [
   {
@@ -22,8 +22,8 @@ const routes = [
         element: <Default />,
       },
       {
-        path: 'products',
-        element: <Product />,
+        path: 'teams',
+        element: <Team />,
       },
     ],
   },

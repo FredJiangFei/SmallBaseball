@@ -8,7 +8,7 @@ const Dashboard: React.FC = ({ children }: any) => {
       <Navbar />
       {children}
       <Outlet />
-      <p>Dashboard Header</p>
+      <p>Dashboard Footer</p>
     </>
   );
 };
