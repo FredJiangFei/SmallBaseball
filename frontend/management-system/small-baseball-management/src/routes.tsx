@@ -9,6 +9,7 @@ import SignIn from './pages/auth/SignIn';
 import AuthGuard from './components/guards/AuthGuard';
 import Profile from './pages/settings/Profile';
 import Managers from './pages/dashboards/Managers';
+import CreateManager from './pages/dashboards/CreateManager';
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
       {
         path: 'managers',
         element: <Managers />,
+      },
+      {
+        path: 'managers/create',
+        element: <CreateManager />,
       },
       {
         path: 'profile',

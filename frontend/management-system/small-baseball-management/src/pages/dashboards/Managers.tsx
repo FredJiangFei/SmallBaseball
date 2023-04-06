@@ -5,6 +5,7 @@ import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import styled from 'styled-components/macro';
 import { spacing } from '@mui/system';
 import { Manager } from '../../types/manager';
+import { NavLink } from 'react-router-dom';
 
 const MuiCard = styled(Card)(spacing);
 const MuiCardContent = styled(CardContent)(spacing);
@@ -27,15 +28,6 @@ function Managers() {
     })
 
     setRows(res.data);
-  };
-
-  const create = async () => {
-    await managerService.create({
-      firstName: 'tony',
-      lastName: 'tony',
-      email: 'tony@qq.com',
-    });
-    getAll();
   };
 
   const handleRenderActionCell = (params: GridRenderCellParams) => {
@@ -68,6 +60,13 @@ function Managers() {
       align: 'center',
     },
     {
+      field: 'email',
+      headerName: 'Email',
+      width: 200,
+      headerAlign: 'center',
+      align: 'center',
+    },
+    {
       field: 'role',
       headerName: 'Role',
       width: 200,
@@ -89,10 +88,10 @@ function Managers() {
   return (
     <>
       <React.Fragment>
-        <Button onClick={create}>Create</Button>
-        <Typography variant="h3" gutterBottom display="inline">
+        <Typography variant="h3" gutterBottom display="inline" mr={2}>
           Managers
         </Typography>
+        <NavLink to="/managers/create">Create</NavLink>
         <MuiCard mb={6} mt={2} sx={{ width: '100%', height: '100%' }}>
           <MuiCardContent sx={{ width: '100%', height: 'calc(100% - 50px)' }}>
             <DataGrid rows={rows} columns={columns} />
