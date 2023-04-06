@@ -1,5 +1,6 @@
 import { extendTheme } from 'native-base';
 import components from './components';
+import { fontConfig, fonts } from './font';
 
 const newTheme = extendTheme({
   colors: {
@@ -44,11 +45,9 @@ const newTheme = extendTheme({
     // 1: 8,
     // 2: 16,
   },
-  // fonts: {
-  //   heading: 'Roboto',
-  //   body: 'Open Sans',
-  //   mono: 'Roboto Mono',
-  // },
+
+  fontConfig: fontConfig,
+  fonts: fonts,
   components: components,
 });
 
