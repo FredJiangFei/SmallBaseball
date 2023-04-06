@@ -2,29 +2,23 @@ const { User } = require('../models/user');
 const express = require('express');
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/login/backend', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send('User already registered.');
+  if (!user) return res.status(400).send('Invalid email or password.');
 
-  user = await User.add(req.body);
+  const validPassword = await user.comparePassword(req.body.password);
+  if (!validPassword) return res.status(400).send('Invalid email or password.');
 
+  const token = user.generateAuthToken();
   res.send({
-    name: user.name,
-    email: user.email
+    value: {
+      token,
+      email: user.email,
+      role: user.role,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    },
   });
 });
-
-router.get('/', async (req, res) => {
-    const page = parseInt(req.query.page);
-    const pageSize = parseInt(req.query.pageSize);
-    const totalCount = await User.count();
-    const users = await User.find({})
-      .skip(pageSize * page - pageSize)
-      .limit(pageSize);
-    res.send({
-      data: users,
-      totalCount: totalCount,
-    });
-  });
 
 module.exports = router;

@@ -1,22 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import managerService from '../../services/managerService';
-import {
-  Typography,
-  Card,
-  CardContent,
-  Stack,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@mui/material';
-import {
-  DataGrid,
-  GridColDef,
-  GridRenderCellParams,
-  gridClasses,
-} from '@mui/x-data-grid';
+import { Typography, Card, CardContent, Button } from '@mui/material';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import styled from 'styled-components/macro';
 import { spacing } from '@mui/system';
 import { Manager } from '../../types/manager';
@@ -29,14 +14,7 @@ const CellButton = styled(Button)(() => ({
 }));
 
 function Managers() {
-  const [managers, setManagers] = useState([]);
   const [rows, setRows] = useState<Manager[]>([]);
-  const [rowCount, setRowCount] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
-  const [loading, setLoading] = useState(false);
-  const [isShowSkip, setIsShowSkip] = useState(false);
-  const [isShowDisable, setIsShowDisable] = useState(false);
-  const [complaint, setComplaint] = useState<any>();
 
   useEffect(() => {
     getAll();
@@ -44,6 +22,10 @@ function Managers() {
 
   const getAll = async () => {
     const res: any = await managerService.getAll();
+    res.data.forEach((item: any) => {
+      item.id = item._id;
+    })
+
     setRows(res.data);
   };
 

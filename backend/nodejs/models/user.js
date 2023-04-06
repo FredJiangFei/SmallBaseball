@@ -5,7 +5,13 @@ const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 50
+  },
+  lastName: {
     type: String,
     required: true,
     minlength: 2,
@@ -24,10 +30,7 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isAdmin: {
-    type: Boolean,
-    default: false
-  }
+  role: String
 });
 
 userSchema.statics.add = async function (res) {
@@ -35,10 +38,11 @@ userSchema.statics.add = async function (res) {
   const hashPassword = await bcrypt.hash(res.password, salt);
 
   let user = new this({
-      name: res.name,
+      firstName: res.firstName,
+      lastName: res.lastName,
       email: res.email,
       password: hashPassword,
-      isAdmin: res.isAdmin
+      role: res.role
   });
   user = await user.save();
   return user;
@@ -55,7 +59,7 @@ userSchema.methods.generateAuthToken = function() {
       _id: this._id,
       name: this.name,
       email: this.email,
-      isAdmin: this.isAdmin
+      role: this.role
     },
     config.get("jwtPrivateKey"),
     {

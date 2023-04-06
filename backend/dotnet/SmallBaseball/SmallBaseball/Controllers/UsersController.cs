@@ -6,11 +6,11 @@ using SmallBaseball.Api.Models;
 
 namespace SmallBaseball.Controllers
 {
-    public class UserController : BaseController
+    public class UsersController : BaseController
     {
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediator)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -22,15 +22,14 @@ namespace SmallBaseball.Controllers
             return result;
         }
 
-        [HttpPut("login")]
+        [HttpPost("login")]
         public async Task<ResponseResult<LoginResult>> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
             return ResponseResult.FromValue(result);
         }
 
-
-        [HttpPut("login/backend")]
+        [HttpPost("login/backend")]
         public async Task<ResponseResult<LoginResult>> LoginBackend([FromBody] LoginBackendCommand command)
         {
             var result = await _mediator.Send(command);

@@ -7,20 +7,11 @@ var path = require('path')
 const data = {
   users: [
     {
-      name: 'Admin',
-      email: 'admin@123.com',
-      password: '123123',
-      isAdmin: true,
-    },
-    {
-      name: 'Fred',
-      email: 'fred@123.com',
-      password: '123123',
-    },
-    {
-      name: 'Tom',
-      email: 'tom@123.com',
-      password: '123123',
+      firstName: 'Fred',
+      lastName: 'Jiang',
+      email: 'Admin@sbb.com',
+      password: 'sbb123456',
+      role: 'Admin',
     }
   ],
 }
@@ -43,6 +34,7 @@ async function seed() {
     }
     await Product.add(product)
   }
+  
   console.info('Done!')
 }
 

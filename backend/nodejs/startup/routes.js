@@ -2,7 +2,7 @@ const express = require('express');
 const products = require('../routes/products');
 const teams = require('../routes/teams');
 const users = require('../routes/users');
-const auth = require('../routes/auth');
+const managers = require('../routes/managers');
 const error = require('../middleware/error');
 
 module.exports = function(app) {
@@ -10,6 +10,6 @@ module.exports = function(app) {
   app.use('/api/products', products);
   app.use('/api/teams', teams);
   app.use('/api/users', users);
-  app.use('/api/auth', auth);
+  app.use('/api/managers', managers);
   app.use(error);
 }
