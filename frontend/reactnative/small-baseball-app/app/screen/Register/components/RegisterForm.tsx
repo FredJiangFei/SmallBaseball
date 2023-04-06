@@ -28,7 +28,7 @@ export default function RegisterForm({ onSubmit }) {
       <SbInput placeholder="First Name" onChangeText={handleChange('firstName')} defaultValue={values.firstName}/>
       <SbInput placeholder="Last Name" onChangeText={handleChange('lastName')} defaultValue={values.lastName} />
       <SbInput placeholder="Email" onChangeText={handleChange('email')} defaultValue={values.email} />
-      <SbInput placeholder="Password" onChangeText={handleChange('password')} defaultValue={values.password} />
+      <SbInput placeholder="Password" onChangeText={handleChange('password')} defaultValue={values.password} secureTextEntry/>
       <Button onPress={(e: any) => handleSubmit(e)} disabled={isSubmitting}>
         Sign Up
       </Button>

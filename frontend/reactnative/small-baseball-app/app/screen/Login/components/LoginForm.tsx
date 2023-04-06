@@ -23,8 +23,18 @@ export default function LoginForm({ onSubmit }) {
 
   return (
     <SbForm>
-      <SbInput placeholder="Email" onChangeText={handleChange('email')} defaultValue={values.email}/>
-      <SbInput placeholder="Password" onChangeText={handleChange('password')} defaultValue={values.password}/>
+      <SbInput
+        placeholder="Email"
+        onChangeText={handleChange('email')}
+        defaultValue={values.email}
+      />
+      <SbInput
+        placeholder="Password"
+        onChangeText={handleChange('password')}
+        defaultValue={values.password}
+        textContentType="password"
+        secureTextEntry
+      />
       <Button
         isDisabled={isSubmitting}
         onPress={(e: any) => handleSubmit(e)}
