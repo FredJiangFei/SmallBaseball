@@ -8,7 +8,8 @@ export default function LoginScreen() {
   const { login } = useAuth();
 
   const handleRegister = async (command) => {
-    await userService.register(command);
+    const res = await userService.register(command);
+    console.log(res);
   };
 
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Input } from 'native-base';
-import { SbForm } from '../../../components';
+import { Button } from 'native-base';
+import { SbForm, SbInput } from '../../../components';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().label('Email'),
@@ -10,29 +10,28 @@ const validationSchema = Yup.object().shape({
 });
 
 const initValue = {
-  email: '',
-  password: '',
+  firstName: 'Fred',
+  lastName: 'Jiang',
+  email: 'fred@qq.com',
+  password: 'aa123456',
 };
 
 export default function RegisterForm({ onSubmit }) {
+  const { handleSubmit, handleChange, isSubmitting, values } = useFormik({
+    initialValues: initValue,
+    validationSchema: validationSchema,
+    onSubmit: (values) => onSubmit(values),
+  });
+
   return (
-    <Formik
-      initialValues={initValue}
-      validationSchema={validationSchema}
-      onSubmit={(values) => onSubmit(values)}
-    >
-      {({ handleChange, handleSubmit, isSubmitting }) => (
-        <SbForm>
-          <Input placeholder="Email" onChangeText={handleChange('email')} />
-          <Input
-            placeholder="Password"
-            onChangeText={handleChange('password')}
-          />
-          <Button onPress={(e: any) => handleSubmit(e)} disabled={isSubmitting}>
-            Sign Up
-          </Button>
-        </SbForm>
-      )}
-    </Formik>
+    <SbForm>
+      <SbInput placeholder="First Name" onChangeText={handleChange('firstName')} defaultValue={values.firstName}/>
+      <SbInput placeholder="Last Name" onChangeText={handleChange('lastName')} defaultValue={values.lastName} />
+      <SbInput placeholder="Email" onChangeText={handleChange('email')} defaultValue={values.email} />
+      <SbInput placeholder="Password" onChangeText={handleChange('password')} defaultValue={values.password} />
+      <Button onPress={(e: any) => handleSubmit(e)} disabled={isSubmitting}>
+        Sign Up
+      </Button>
+    </SbForm>
   );
 }

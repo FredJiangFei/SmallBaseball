@@ -11,8 +11,8 @@ export default function LoginScreen({}) {
   const navigation: any = useNavigation();
 
   const handleLogin = async (command) => {
-    login('');
-    // await userService.login(command);
+    const res: any = await userService.login(command);
+    login(res?.value?.token);
   };
 
   return (

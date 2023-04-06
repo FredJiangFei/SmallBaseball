@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'native-base';
 
-export default function SbInput({ placeholder, onChangeText }) {
+export default function SbInput({ placeholder, onChangeText, ...rest }) {
   return (
     <Input
       autoCapitalize="none"
@@ -9,6 +9,7 @@ export default function SbInput({ placeholder, onChangeText }) {
       autoCorrect={false}
       placeholder={placeholder}
       onChangeText={onChangeText}
+      {...rest}
     />
   );
 }

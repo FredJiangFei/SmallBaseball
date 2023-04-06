@@ -1,6 +1,5 @@
 import { FlatList, View } from 'native-base';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import ListItem from '../../components/ListItem';
 import ListItemSeparator from '../../components/ListItemSeparator';
 import SbIcon from '../../components/SbIcon';
@@ -33,6 +32,10 @@ const menuItems = [
 
 export default function MineScreen({ navigation }) {
   const { logout } = useAuth();
+  
+  const handleLogout = () => {
+    logout();
+  }
 
   return (
     <>
@@ -63,7 +66,7 @@ export default function MineScreen({ navigation }) {
         />
       </View>
       <ListItem
-        onPress={logout}
+        onPress={handleLogout}
         title="Log Out"
         IconComponent={<SbIcon name="logout" backgroundColor="#ffe66d" />}
       />

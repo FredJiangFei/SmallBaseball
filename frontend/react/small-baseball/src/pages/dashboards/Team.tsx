@@ -41,8 +41,8 @@ function Team() {
       <form autoComplete="off" onSubmit={handleSubmit(handleCreate)}>
         <label htmlFor="name">Name</label>
         <input type="text" {...register('name')} />
-        <label htmlFor="description">Description</label>
-        <input type="text" {...register('description')} />
+        <label htmlFor="description">SportType</label>
+        <input type="text" {...register('sportType')} />
         <button>Create</button>
       </form>
     </>

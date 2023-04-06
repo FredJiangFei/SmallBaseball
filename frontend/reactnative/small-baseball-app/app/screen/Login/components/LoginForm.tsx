@@ -10,12 +10,12 @@ const validationSchema = Yup.object().shape({
 });
 
 const initValue = {
-  email: '',
-  password: '',
+  email: 'fred@qq.com',
+  password: 'aa123456',
 };
 
 export default function LoginForm({ onSubmit }) {
-  const { handleSubmit, handleChange, isSubmitting } = useFormik({
+  const { handleSubmit, handleChange, isSubmitting, values } = useFormik({
     initialValues: initValue,
     validationSchema: validationSchema,
     onSubmit: (values) => onSubmit(values),
@@ -23,8 +23,8 @@ export default function LoginForm({ onSubmit }) {
 
   return (
     <SbForm>
-      <SbInput placeholder="Email" onChangeText={handleChange('email')} />
-      <SbInput placeholder="Password" onChangeText={handleChange('password')} />
+      <SbInput placeholder="Email" onChangeText={handleChange('email')} defaultValue={values.email}/>
+      <SbInput placeholder="Password" onChangeText={handleChange('password')} defaultValue={values.password}/>
       <Button
         isDisabled={isSubmitting}
         onPress={(e: any) => handleSubmit(e)}

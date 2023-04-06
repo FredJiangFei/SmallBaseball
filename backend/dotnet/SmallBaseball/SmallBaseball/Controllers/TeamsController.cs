@@ -5,7 +5,6 @@ using SmallBaseball.Application.Commands.Teams;
 
 namespace SmallBaseball.Controllers
 {
-    [Route("api/teams")]
     public class TeamsController : BaseController
     {
         private readonly IMediator _mediator;

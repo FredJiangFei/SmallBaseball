@@ -1,11 +1,11 @@
 import http from './httpService';
 
-function register (user) {
-  return http.post(`User/register`, user);
+function register(user) {
+  return http.post(`users/register`, user);
 }
 
 function login(user) {
-  return http.put(`User/login`, user);
+  return http.post(`users/login`, user);
 }
 
 export default {
