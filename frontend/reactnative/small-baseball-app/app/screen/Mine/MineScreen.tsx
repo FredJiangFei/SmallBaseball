@@ -36,14 +36,14 @@ export default function MineScreen({ navigation }) {
 
   return (
     <>
-      <View style={styles.container}>
+      <View my={4}>
         <ListItem
           title="Super Mario"
           description="mario@gmail.com"
           image={require('../../../assets/mario.png')}
         />
       </View>
-      <View style={styles.container}>
+      <View my={4}>
         <FlatList
           data={menuItems}
           keyExtractor={(m) => m.title}
@@ -70,9 +70,3 @@ export default function MineScreen({ navigation }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 20,
-  },
-});
