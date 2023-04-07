@@ -1,8 +1,18 @@
-import { AddIcon, Divider, Fab, FlatList, View } from 'native-base';
+import {
+  AddIcon,
+  Divider,
+  Fab,
+  FlatList,
+  IconButton,
+  Input,
+  VStack,
+} from 'native-base';
 import React from 'react';
 import { Event } from '../../models/Event';
 import EventCard from './components/EventCard';
 import { SbContainer } from '../../components';
+import { AntDesign } from '@expo/vector-icons';
+import { CommonActions } from '@react-navigation/native';
 
 const events: Event[] = [
   {
@@ -35,6 +45,37 @@ const events: Event[] = [
 ];
 
 export default function EventsScreen({ navigation }) {
+  const handleSearchPress = () => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'SearchEvent',
+      })
+    );
+  };
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <VStack bgColor="white" h={12} px={2} justifyContent="center">
+          <Input
+            onFocus={handleSearchPress}
+            height={8}
+            placeholder="Search Events"
+            InputRightElement={
+              <IconButton
+                onPress={handleSearchPress}
+                colorScheme="indigo"
+                size="sm"
+                variant="solid"
+                _icon={{ as: AntDesign, name: 'search1' }}
+              />
+            }
+          />
+        </VStack>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <SbContainer>
       <FlatList
