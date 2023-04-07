@@ -1,8 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../hooks';
-import AuthNavigator from './AuthNavigator';
-import BottomTabNavigator from './BottomTabNavigator';
+import HomeTabsNavigator from './HomeTabsNavigator';
+import routes from './routes';
+import LoginScreen from '../screen/Login/LoginScreen';
+import RegisterScreen from '../screen/Register/RegisterScreen';
+import SettingScreen from '../screen/Serttings';
 
 const Stack = createStackNavigator();
 
@@ -11,12 +14,17 @@ const AppNavigator = () => {
 
   return (
     <>
-      {user && (
+      {user ? (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={BottomTabNavigator} />
+          <Stack.Screen name="Home" component={HomeTabsNavigator} />
+          <Stack.Screen name="Settings" component={SettingScreen} />
+        </Stack.Navigator>
+      ) : (
+        <Stack.Navigator initialRouteName={routes.Login}>
+          <Stack.Screen name={routes.Login} component={LoginScreen} />
+          <Stack.Screen name={routes.Register} component={RegisterScreen} />
         </Stack.Navigator>
       )}
-      {!user && <AuthNavigator />}
     </>
   );
 };

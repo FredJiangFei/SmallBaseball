@@ -6,7 +6,7 @@ import DrawerNavigator from './DrawerNavigator';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabNavigator() {
+export default function HomeTabsNavigator() {
   const tabIcon = (name, size, color) => {
     return <MaterialCommunityIcons name={name} size={size} color={color} />;
   };
