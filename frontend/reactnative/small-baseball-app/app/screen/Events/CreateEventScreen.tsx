@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Column, Heading, Input, TextArea, View } from 'native-base';
-import { SbForm, SbSelect } from '../../components';
+import { Button, Heading, Input, TextArea } from 'native-base';
+import { SbContainer, SbForm, SbSelect } from '../../components';
 import { Option } from '../../models/Option';
 
 const options: Option[] = [
@@ -20,14 +20,14 @@ const options: Option[] = [
 
 export default function CreateEventScreen() {
   return (
-    <View px={2}>
-      <Heading variant="title">Create Event</Heading>
+    <SbContainer>
+      <Heading>Create Event</Heading>
       <SbForm>
         <Input placeholder="Title" />
         <TextArea placeholder="Description" autoCompleteType="" />
         <SbSelect placeholder="Choose Event Type" options={options} />
         <Button>Create</Button>
       </SbForm>
-    </View>
+    </SbContainer>
   );
 }

@@ -2,6 +2,7 @@ import { AddIcon, Divider, Fab, FlatList, View } from 'native-base';
 import React from 'react';
 import { Event } from '../../models/Event';
 import EventCard from './components/EventCard';
+import { SbContainer } from '../../components';
 
 const events: Event[] = [
   {
@@ -26,7 +27,7 @@ const events: Event[] = [
 
 export default function EventsScreen({ navigation }) {
   return (
-    <View px={2}>
+    <SbContainer>
       <FlatList
         data={events}
         ItemSeparatorComponent={() => <Divider my={1} />}
@@ -39,6 +40,6 @@ export default function EventsScreen({ navigation }) {
         size="sm"
         icon={<AddIcon />}
       />
-    </View>
+    </SbContainer>
   );
 }

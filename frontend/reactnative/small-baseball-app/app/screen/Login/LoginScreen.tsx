@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { Heading, Text, View } from 'native-base';
+import { Heading, Text } from 'native-base';
 import React from 'react';
 import userService from '../../api/userService';
 import { useAuth } from '../../hooks';
 import routes from '../../navigator/routes';
 import LoginForm from './components/LoginForm';
+import { SbContainer } from '../../components';
 
 export default function LoginScreen({}) {
   const { login } = useAuth();
@@ -16,7 +17,7 @@ export default function LoginScreen({}) {
   };
 
   return (
-    <View px={2}>
+    <SbContainer>
       <Heading>Sign In</Heading>
       <LoginForm onSubmit={handleLogin} />
       <Text
@@ -27,6 +28,6 @@ export default function LoginScreen({}) {
       >
         Register
       </Text>
-    </View>
+    </SbContainer>
   );
 }

@@ -35,11 +35,7 @@ export default function LoginForm({ onSubmit }) {
         textContentType="password"
         secureTextEntry
       />
-      <Button
-        isDisabled={isSubmitting}
-        onPress={(e: any) => handleSubmit(e)}
-        disabled={isSubmitting}
-      >
+      <Button isDisabled={isSubmitting} onPress={(e: any) => handleSubmit(e)}>
         Sign In
       </Button>
     </SbForm>

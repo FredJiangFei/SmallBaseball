@@ -3,6 +3,7 @@ import React from 'react';
 import userService from '../../api/userService';
 import { useAuth } from '../../hooks';
 import RegisterForm from './components/RegisterForm';
+import { SbContainer } from '../../components';
 
 export default function LoginScreen() {
   const { login } = useAuth();
@@ -13,9 +14,9 @@ export default function LoginScreen() {
   };
 
   return (
-    <View px={2}>
+    <SbContainer>
       <Heading>Sign Up</Heading>
       <RegisterForm onSubmit={handleRegister} />
-    </View>
+    </SbContainer>
   );
 }

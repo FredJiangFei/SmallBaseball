@@ -8,7 +8,6 @@ import {
 } from 'native-base';
 import HistoryScreen from '../screen/Mine/HistoryScreen';
 import MineScreen from '../screen/Mine/MineScreen';
-import SettingScreen from '../screen/Serttings';
 
 const Stack = createStackNavigator();
 
@@ -42,7 +41,6 @@ export default function MineNavigator({ navigation }) {
         }}
         component={MineScreen}
       />
-      <Stack.Screen name="Settings" component={SettingScreen} />
       <Stack.Screen name="History" component={HistoryScreen} />
     </Stack.Navigator>
   );
