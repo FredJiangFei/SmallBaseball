@@ -21,7 +21,16 @@ const events: Event[] = [
     text: `Bengaluru (also called Bangalore) is the center of India's high-tech industry. The city is also known for its parks and nightlife.`,
     time: ' 6 mins ago',
     image:
-      'https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg',
+      'https://interactive-examples.mdn.mozilla.net/media/examples/plumeria.jpg',
+  },
+  {
+    id: 3,
+    title: 'The Garden City',
+    subTitle: 'The Silicon Valley of India.',
+    text: `Bengaluru (also called Bangalore) is the center of India's high-tech industry. The city is also known for its parks and nightlife.`,
+    time: ' 6 mins ago',
+    image:
+      'https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
   },
 ];
 
