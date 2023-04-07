@@ -28,27 +28,51 @@ export default function RegisterForm({ onSubmit }) {
 
   return (
     <SbForm>
-      <SbInput placeholder="First Name" onChangeText={handleChange('firstName')} defaultValue={values.firstName}/>
-      <SbInput placeholder="Last Name" onChangeText={handleChange('lastName')} defaultValue={values.lastName} />
-      <SbInput placeholder="Email" onChangeText={handleChange('email')} defaultValue={values.email} />
-      <SbInput placeholder="Password" onChangeText={handleChange('password')} defaultValue={values.password} secureTextEntry/>
-      
-      <Radio.Group name='sex' onChange={handleChange('sex')} defaultValue={values.sex}>
-        <Row space={4} alignItems='center'>
-          <Radio value="male" size="sm">
-            Male
-          </Radio>
-          <Radio value="female" size="md">
-            Female
-          </Radio>
+      <SbInput
+        placeholder="First Name"
+        onChangeText={handleChange('firstName')}
+        defaultValue={values.firstName}
+      />
+      <SbInput
+        placeholder="Last Name"
+        onChangeText={handleChange('lastName')}
+        defaultValue={values.lastName}
+      />
+      <SbInput
+        placeholder="Email"
+        onChangeText={handleChange('email')}
+        defaultValue={values.email}
+      />
+      <SbInput
+        placeholder="Password"
+        onChangeText={handleChange('password')}
+        defaultValue={values.password}
+        secureTextEntry
+      />
+
+      <Radio.Group
+        name="sex"
+        onChange={handleChange('sex')}
+        defaultValue={values.sex}
+      >
+        <Row space={4} alignItems="center">
+          <Radio value="male">Male</Radio>
+          <Radio value="female">Female</Radio>
         </Row>
       </Radio.Group>
 
-      <Checkbox value="agree" defaultIsChecked={isAgree} onChange={values=>setIsAgree(values)}>
+      <Checkbox
+        value="agree"
+        defaultIsChecked={isAgree}
+        onChange={(values) => setIsAgree(values)}
+      >
         I agree to the terms and conditions
       </Checkbox>
 
-      <Button onPress={(e: any) => handleSubmit(e)} isDisabled={isSubmitting || !isAgree}>
+      <Button
+        onPress={(e: any) => handleSubmit(e)}
+        isDisabled={isSubmitting || !isAgree}
+      >
         Sign Up
       </Button>
     </SbForm>
