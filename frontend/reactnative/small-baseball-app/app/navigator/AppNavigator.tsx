@@ -12,6 +12,7 @@ import {
   ParamListBase,
   useNavigation,
 } from '@react-navigation/native';
+import SearchEventScreen from '../screen/Events/SearchEventScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,13 +23,10 @@ const AppNavigator = () => {
   return (
     <>
       {user ? (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={HomeTabsNavigator} />
-          <Stack.Screen
-            name="Settings"
-            component={SettingScreen}
-            options={{ headerShown: true }}
-          />
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeTabsNavigator} options={{ headerShown: false }}/>
+          <Stack.Screen name="Settings" component={SettingScreen} />
+          <Stack.Screen name="SearchEvent" component={SearchEventScreen} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator
