@@ -66,9 +66,12 @@ const EventCard: React.FC<PropType> = ({ event }) => {
         }}
       >
         <Box>
-          <Pressable onPress={() => nav.navigate('EventDetails', { id: event.id })}>
+          <Pressable
+            onPress={() => nav.navigate('EventDetails', { id: event.id })}
+          >
             <AspectRatio w="100%" ratio={16 / 9}>
-              <Image resizeMode="contain" 
+              <Image
+                resizeMode="contain"
                 source={{
                   uri: event.image,
                 }}
