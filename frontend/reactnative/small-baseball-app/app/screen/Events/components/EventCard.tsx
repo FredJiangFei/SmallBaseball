@@ -6,6 +6,7 @@ import {
   Center,
   Heading,
   Image,
+  Pressable,
   Row,
   Stack,
   Text,
@@ -15,6 +16,11 @@ import { Event } from '../../../models/Event';
 import SbMenu from '../../../components/SbMenu';
 import { Action } from '../../../models/Action';
 import { SbConfirm } from '../../../components';
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from '@react-navigation/native';
 
 type PropType = {
   event: Event;
@@ -27,6 +33,7 @@ const EventCard: React.FC<PropType> = ({ event }) => {
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclose();
+  const nav: NavigationProp<ParamListBase> = useNavigation();
 
   const actions: Action[] = [
     {
@@ -59,14 +66,16 @@ const EventCard: React.FC<PropType> = ({ event }) => {
         }}
       >
         <Box>
-          <AspectRatio w="100%" ratio={16 / 9}>
-            <Image
-              source={{
-                uri: event.image,
-              }}
-              alt="image"
-            />
-          </AspectRatio>
+          <Pressable onPress={() => nav.navigate('EventDetails', { id: event.id })}>
+            <AspectRatio w="100%" ratio={16 / 9}>
+              <Image
+                source={{
+                  uri: event.image,
+                }}
+                alt="image"
+              />
+            </AspectRatio>
+          </Pressable>
           <Button onPress={onOpen} position="absolute" right={1} top={1}>
             Menu
           </Button>

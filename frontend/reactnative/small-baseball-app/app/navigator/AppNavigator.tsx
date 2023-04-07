@@ -17,7 +17,7 @@ const AppNavigator = () => {
       {user ? (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={HomeTabsNavigator} />
-          <Stack.Screen name="Settings" component={SettingScreen} />
+          <Stack.Screen name="Settings" component={SettingScreen} options={{ headerShown: true }}/>
         </Stack.Navigator>
       ) : (
         <Stack.Navigator initialRouteName={routes.Login}>

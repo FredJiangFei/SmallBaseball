@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { Heading, Text } from 'native-base';
 import React from 'react';
 import userService from '../../api/userService';
@@ -9,7 +9,7 @@ import { SbContainer } from '../../components';
 
 export default function LoginScreen({}) {
   const { login } = useAuth();
-  const navigation: any = useNavigation();
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const handleLogin = async (command) => {
     const res: any = await userService.login(command);
