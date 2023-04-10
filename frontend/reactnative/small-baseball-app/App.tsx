@@ -51,8 +51,7 @@ export default function App() {
   const colorModeManager: StorageManager = {
     get: async () => {
       let val = await AsyncStorage.getItem('@color-mode');
-      // return val === 'dark' ? 'dark' : 'light';
-      return 'light';
+      return val === 'dark' ? 'dark' : 'light';
     },
     set: async (value: ColorMode) => {
       await AsyncStorage.setItem('@color-mode', value ?? 'light');

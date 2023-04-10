@@ -5,7 +5,7 @@ import HomeTabsNavigator from './HomeTabsNavigator';
 import routes from './routes';
 import LoginScreen from '../screen/Login/LoginScreen';
 import RegisterScreen from '../screen/Register/RegisterScreen';
-import SettingScreen from '../screen/Serttings';
+import SettingScreen from '../screen/Serttings/SettingScreen';
 import {
   NavigationProp,
   ParamListBase,
@@ -41,7 +41,7 @@ const AppNavigator = () => {
             headerBackTitleVisible: false,
             headerTitle: '',
             headerStyle: {
-              backgroundColor: colorMode === 'dark' ? colors.dark : 'white'
+              backgroundColor: colorMode === 'dark' ? colors.dark : 'white',
             },
           }}
         >
