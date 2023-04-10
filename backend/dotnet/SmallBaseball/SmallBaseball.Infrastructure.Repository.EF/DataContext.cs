@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SmallBaseball.Infrastructure.Repository.EF.EntityConfigurations;
-using SmallBaseball.Infrastructure.Repository.EF.EntityConfigurations.TeamEntities;
 
 namespace SmallBaseball.Infrastructure.Repository.EF
 {
@@ -18,11 +16,14 @@ namespace SmallBaseball.Infrastructure.Repository.EF
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ApplyConfiguration(new RoleConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new UsersWithRolesConfig());
-            builder.ApplyConfiguration(new TeamEntityConfiguration());
-
+            builder.Entity<AppUser>().ToTable("Users");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+            builder.Entity<IdentityRole>().ToTable("Roles");
+            builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
     }
 }

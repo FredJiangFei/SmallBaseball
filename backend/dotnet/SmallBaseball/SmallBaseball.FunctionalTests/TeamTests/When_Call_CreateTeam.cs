@@ -8,7 +8,7 @@ namespace SmallBaseball.FunctionalTests.Scenarios.TeamTests
     public class When_Call_CreateTeam : ScenarioBase
     {
         [Test]
-        public async Task It_Should_ThrowException_If_EmailExist()
+        public async Task It_Should_CreateTeam()
         {
             //Action
             var command = new CreateTeamCommand

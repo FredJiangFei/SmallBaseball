@@ -11,8 +11,8 @@ using SmallBaseball.Infrastructure.Repository.EF;
 namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230309085023_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230410030336_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,27 +45,27 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "7D9B7113-A8F8-4035-99A7-A20DD400F6A3",
-                            ConcurrencyStamp = "f5b476bd-d301-4f39-9256-67d780c4801c",
+                            ConcurrencyStamp = "2c36a032-7dd8-4b8e-a5b2-b37177bf15a7",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "78A7570F-3CE5-48BA-9461-80283ED1D94D",
-                            ConcurrencyStamp = "2f80bacb-a9fa-4bf2-ad14-82ac7d35b705",
+                            ConcurrencyStamp = "4cc3508c-01fc-4427-81aa-65890f251291",
                             Name = "Manager",
                             NormalizedName = "Manager"
                         },
                         new
                         {
                             Id = "2301D884-221A-4E7D-B509-0113DCC043E1",
-                            ConcurrencyStamp = "c3d82a62-7c7f-4ba2-8136-7a27c7849112",
+                            ConcurrencyStamp = "e12b5056-3852-4bbc-81c8-dd53c68611aa",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -91,7 +91,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -114,7 +114,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -136,7 +136,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -151,7 +151,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("UserRoles", (string)null);
 
                     b.HasData(
                         new
@@ -177,7 +177,37 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("UserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("SmallBaseball.Domain.Models.Aggregates.TeamAggregate.Team", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("SportType")
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Teams", (string)null);
                 });
 
             modelBuilder.Entity("SmallBaseball.Infrastructure.Repository.EF.AppUser", b =>
@@ -249,14 +279,14 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "780012fc-1544-4d2f-9329-d78ad906d5d1",
+                            ConcurrencyStamp = "0cbd0ad2-06b1-45ce-bb18-cd5d5045e532",
                             Email = "Admin@sbb.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -264,7 +294,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SBB.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIzfdp56H4Y0FyYOL/licBS0d71FHy0ZOFRrkfdJhkRiM2RimUv3/IjcgCn4mkxXqA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAYzGYFn6M+ro9ofM7+ZVTs0NFas08AQWrU8576cpksomhnXPvJJbtWI3udJSDAwzg==",
                             PhoneNumber = "17792387996",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "00000000-0000-0000-0000-000000000000",
@@ -322,6 +352,18 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SmallBaseball.Domain.Models.Aggregates.TeamAggregate.Team", b =>
+                {
+                    b.HasOne("SmallBaseball.Infrastructure.Repository.EF.AppUser", null)
+                        .WithMany("Teams")
+                        .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("SmallBaseball.Infrastructure.Repository.EF.AppUser", b =>
+                {
+                    b.Navigation("Teams");
                 });
 #pragma warning restore 612, 618
         }
