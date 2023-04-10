@@ -38,12 +38,15 @@ const components = {
           bg: 'secondary.300',
         },
       },
+      linear: {
+        bgColor: 'green.300',
+      }
     },
   },
   Heading: {
     baseStyle: {
       textAlign: 'center',
-      my: 4,  
+      my: 4,
       _light: { color: 'red.300' },
       _dark: { color: 'blue.300' },
     },
@@ -52,6 +55,10 @@ const components = {
     },
   },
   Text: {
+    baseStyle: {
+      color: 'coolGray.600',
+      _dark: { color: 'warmGray.300' },
+    },
     defaultProps: {
       size: 'sm',
     },
@@ -72,6 +79,15 @@ const components = {
     variants: {
       link: {
         color: colors.secondary,
+      },
+      subTitle: {
+        fontWeight: 'bold',
+        _light: {
+          color: 'violet.500',
+        },
+        _dark: {
+          color: 'violet.400',
+        },
       },
     },
   },

@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using SmallBaseball.Infrastructure.Repository.EF;
+using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace SmallBaseball.FunctionalTests
 {
@@ -35,7 +36,8 @@ namespace SmallBaseball.FunctionalTests
 
         protected async Task<TOut> SendAsync<TOut>(Func<HttpClient, Task<TOut>> func)
         {
-            using (var client = Server.CreateClient())
+            var webAppFactory = new WebApplicationFactory<Program>();
+            using (var client = webAppFactory.CreateClient())
             {
                 var token = GetToken();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

@@ -110,31 +110,14 @@ const EventCard: React.FC<PropType> = ({ event }) => {
         <Stack p="4" space={3}>
           <Stack space={2}>
             <Heading ml="-1">{event.title}</Heading>
-            <Text
-              _light={{
-                color: 'violet.500',
-              }}
-              _dark={{
-                color: 'violet.400',
-              }}
-              fontWeight="500"
-              ml="-0.5"
-              mt="-1"
-            >
+            <Text variant="subTitle" ml="-0.5" mt="-1">
               {event.subTitle}
             </Text>
           </Stack>
           <Text>{event.text}</Text>
           <Row alignItems="center" space={4} justifyContent="space-between">
             <Row alignItems="center">
-              <Text
-                color="coolGray.600"
-                _dark={{
-                  color: 'warmGray.200',
-                }}
-              >
-                {event.time}
-              </Text>
+              <Text>{event.time}</Text>
             </Row>
           </Row>
         </Stack>

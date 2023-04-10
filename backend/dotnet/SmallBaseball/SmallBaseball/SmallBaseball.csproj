@@ -28,4 +28,8 @@
     <ProjectReference Include="..\SmallBaseball.Infrastructure.Repository.EF\SmallBaseball.Infrastructure.Repository.EF.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="$(AssemblyName).FunctionalTests" />	
+	</ItemGroup>
+
 </Project>
