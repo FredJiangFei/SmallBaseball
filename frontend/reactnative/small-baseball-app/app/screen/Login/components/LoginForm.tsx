@@ -41,7 +41,7 @@ export default function LoginForm({ onSubmit }) {
         type="password"
         error={errors['password']}
       />
-      <Button variant='linear' isDisabled={isSubmitting} onPress={(e: any) => handleSubmit(e)}>
+      <Button isDisabled={isSubmitting} onPress={(e: any) => handleSubmit(e)}>
         Sign In
       </Button>
     </SbForm>

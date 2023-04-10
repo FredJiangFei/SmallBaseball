@@ -22,8 +22,7 @@ export default function LoginScreen({}) {
   };
 
   const openAppStore = () => {
-    const link =
-      'itms-apps://apps.apple.com/app/elyte-sports/id1672184038';
+    const link = 'itms-apps://apps.apple.com/app/elyte-sports/id1672184038';
     Linking.canOpenURL(link).then(
       (supported) => supported && Linking.openURL(link),
       (err) => console.log(err)
@@ -48,7 +47,7 @@ export default function LoginScreen({}) {
   // );
 
   return (
-    <SbContainer>
+    <SbContainer flex={1}>
       <Heading>Sign In</Heading>
       <LoginForm onSubmit={handleLogin} />
       <Text

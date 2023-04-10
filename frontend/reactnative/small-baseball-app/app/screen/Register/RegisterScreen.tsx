@@ -14,7 +14,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SbContainer>
+    <SbContainer flex={1}>
       <Heading>Sign Up</Heading>
       <RegisterForm onSubmit={handleRegister} />
     </SbContainer>

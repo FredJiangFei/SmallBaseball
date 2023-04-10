@@ -12,12 +12,15 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import SearchEventScreen from '../screen/Events/SearchEventScreen';
+import colors from '../config/colors';
+import { useColorMode } from 'native-base';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   const { user } = useAuth();
   const nav: NavigationProp<ParamListBase> = useNavigation();
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -38,7 +41,7 @@ const AppNavigator = () => {
             headerBackTitleVisible: false,
             headerTitle: '',
             headerStyle: {
-              backgroundColor: 'purple'
+              backgroundColor: colorMode === 'dark' ? colors.dark : 'white'
             },
           }}
         >
