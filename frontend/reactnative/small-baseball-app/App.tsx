@@ -19,6 +19,7 @@ const config = {
 
 export default function App() {
   const [user, setUser] = useState();
+  const [colorMode, setColorMode] = useState('');
   const [fontsLoaded] = useFonts({
     'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
     'Inter-BlackItalic': require('./assets/fonts/Inter-BlackItalic.otf'),
@@ -51,6 +52,8 @@ export default function App() {
   const colorModeManager: StorageManager = {
     get: async () => {
       let val = await AsyncStorage.getItem('@color-mode');
+      setColorMode(val ?? '');
+
       return val === 'dark' ? 'dark' : 'light';
     },
     set: async (value: ColorMode) => {
@@ -59,20 +62,22 @@ export default function App() {
   };
 
   return (
-    <NativeBaseProvider
-      theme={theme}
-      config={config}
-      colorModeManager={colorModeManager}
-    >
-      <SbStatusBar />
-      <SafeAreaView style={styles.safeArea}>
-        <AuthContext.Provider value={{ user, setUser }}>
-          <NavigationContainer>
-            <AppNavigator></AppNavigator>
-          </NavigationContainer>
-        </AuthContext.Provider>
-      </SafeAreaView>
-    </NativeBaseProvider>
+    <>
+      <SbStatusBar colorMode={colorMode} />
+      <NativeBaseProvider
+        theme={theme}
+        config={config}
+        colorModeManager={colorModeManager}
+      >
+        <SafeAreaView style={styles.safeArea}>
+          <AuthContext.Provider value={{ user, setUser }}>
+            <NavigationContainer>
+              <AppNavigator></AppNavigator>
+            </NavigationContainer>
+          </AuthContext.Provider>
+        </SafeAreaView>
+      </NativeBaseProvider>
+    </>
   );
 }
 

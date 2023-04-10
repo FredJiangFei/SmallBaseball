@@ -1,10 +1,8 @@
-import { Platform, StatusBar } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import React from 'react';
-import { View, useColorMode } from 'native-base';
 import colors from '../config/colors';
 
-export default function SbStatusBar() {
-  const { colorMode } = useColorMode();
+export default function SbStatusBar({ colorMode }) {
   return (
     <View
       style={{
