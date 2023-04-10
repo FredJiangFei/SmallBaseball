@@ -6,7 +6,6 @@ import routes from './routes';
 import LoginScreen from '../screen/Login/LoginScreen';
 import RegisterScreen from '../screen/Register/RegisterScreen';
 import SettingScreen from '../screen/Serttings';
-import { ChevronLeftIcon, Pressable } from 'native-base';
 import {
   NavigationProp,
   ParamListBase,
@@ -24,7 +23,11 @@ const AppNavigator = () => {
     <>
       {user ? (
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeTabsNavigator} options={{ headerShown: false }}/>
+          <Stack.Screen
+            name="Home"
+            component={HomeTabsNavigator}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="Settings" component={SettingScreen} />
           <Stack.Screen name="SearchEvent" component={SearchEventScreen} />
         </Stack.Navigator>
@@ -33,6 +36,10 @@ const AppNavigator = () => {
           initialRouteName={routes.Login}
           screenOptions={{
             headerBackTitleVisible: false,
+            headerTitle: '',
+            headerStyle: {
+              backgroundColor: 'purple'
+            },
           }}
         >
           <Stack.Screen name={routes.Login} component={LoginScreen} />

@@ -10,8 +10,6 @@ using System.Text;
 using SmallBaseball.Extensions;
 using Microsoft.EntityFrameworkCore;
 using SmallBaseball.Infrastructure.Repository.EF;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-using Microsoft.AspNetCore.Hosting;
 
 namespace SmallBaseball.FunctionalTests
 {

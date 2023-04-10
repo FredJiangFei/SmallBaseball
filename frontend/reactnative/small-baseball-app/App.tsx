@@ -1,13 +1,20 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, StatusBar, ColorMode } from 'native-base';
 import { useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import {
+  NativeModules,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { AuthContext } from './app/auth/context';
 import AppNavigator from './app/navigator/AppNavigator';
 import theme from './app/theme/theme';
 import type { StorageManager } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const config = {
   dependencies: {
@@ -42,7 +49,6 @@ export default function App() {
     'Alkatra-SemiBold': require('./assets/fonts/Alkatra/Alkatra-SemiBold.ttf'),
   });
 
-
   if (!fontsLoaded) {
     return null;
   }
@@ -58,24 +64,33 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" />
-      <NativeBaseProvider
-        theme={theme}
-        config={config}
-        colorModeManager={colorModeManager}
-      >
-        <AuthContext.Provider value={{ user, setUser }}>
-          <NavigationContainer>
-            <AppNavigator></AppNavigator>
-          </NavigationContainer>
-        </AuthContext.Provider>
-      </NativeBaseProvider>
-    </SafeAreaView>
+    <>
+      <View style={styles.header}>
+        <StatusBar translucent={true} backgroundColor={'transparent'} />
+      </View>
+
+      <SafeAreaView style={styles.safeArea}>
+        <NativeBaseProvider
+          theme={theme}
+          config={config}
+          colorModeManager={colorModeManager}
+        >
+          <AuthContext.Provider value={{ user, setUser }}>
+            <NavigationContainer>
+              <AppNavigator></AppNavigator>
+            </NavigationContainer>
+          </AuthContext.Provider>
+        </NativeBaseProvider>
+      </SafeAreaView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  header: {
+    height: Platform.OS === 'ios' ? 20 : NativeModules.StatusBarManager.HEIGHT,
+    backgroundColor: 'purple',
+  },
   safeArea: {
     flex: 1,
     overflow: 'hidden',
