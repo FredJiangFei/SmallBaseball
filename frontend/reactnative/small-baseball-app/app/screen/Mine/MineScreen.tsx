@@ -31,10 +31,10 @@ const menuItems = [
 
 export default function MineScreen({ navigation }) {
   const { logout } = useAuth();
-  
+
   const handleLogout = () => {
     logout();
-  }
+  };
 
   return (
     <>
@@ -48,16 +48,13 @@ export default function MineScreen({ navigation }) {
       <View my={4}>
         <FlatList
           data={menuItems}
-          keyExtractor={(m) => m.title}
+          keyExtractor={m => m.title}
           ItemSeparatorComponent={Divider}
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
               IconComponent={
-                <SbIcon
-                  name={item.icon.name}
-                  backgroundColor={item.icon.backgroundColor}
-                />
+                <SbIcon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />
               }
               onPress={() => navigation.navigate(item.title)}
             />

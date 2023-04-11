@@ -15,12 +15,11 @@ const initValue = {
 };
 
 export default function LoginForm({ onSubmit }) {
-  const { handleSubmit, handleChange, isSubmitting, values, errors } =
-    useFormik({
-      initialValues: initValue,
-      validationSchema: validationSchema,
-      onSubmit: (values) => onSubmit(values),
-    });
+  const { handleSubmit, handleChange, isSubmitting, values, errors } = useFormik({
+    initialValues: initValue,
+    validationSchema: validationSchema,
+    onSubmit: values => onSubmit(values),
+  });
 
   return (
     <SbForm>
