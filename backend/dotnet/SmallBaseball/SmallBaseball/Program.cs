@@ -12,6 +12,7 @@ using SmallBaseball.Domain.Interfaces.Repository;
 using SmallBaseball.Extensions;
 using SmallBaseball.Infrastructure.Repository.EF;
 using System.Text;
+using SmallBaseball.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.UseCors();
 

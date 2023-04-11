@@ -10,7 +10,7 @@ import { useAuth } from '../../hooks';
 import routes from '../../navigator/routes';
 import LoginForm from './components/LoginForm';
 import { SbContainer } from '../../components';
-import { Alert, Linking } from 'react-native';
+import { Linking } from 'react-native';
 
 export default function LoginScreen({}) {
   const { login } = useAuth();

@@ -1,5 +1,7 @@
-﻿using SmallBaseball.Models;
-using System.Net;
+﻿using Elyte.Application.Exceptions;
+using SmallBaseball.Api.Models;
+using System.Text;
+using System.Text.Json;
 
 namespace SmallBaseball.Middlewares
 {
@@ -17,20 +19,44 @@ namespace SmallBaseball.Middlewares
             {
                 await _next(httpContext);
             }
+            catch (BusinessValidationException ex)
+            {
+                await HandleLogicCheckException(httpContext, ex);
+            }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(httpContext, ex);
+                await HandleGenericException(httpContext, ex);
             }
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+
+        private async Task HandleLogicCheckException(HttpContext context, BusinessValidationException exception)
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            await context.Response.WriteAsync(new ErrorDetails()
+            var result = new ResponseResult()
             {
-                StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error from the custom middleware."
-            }.ToString());
+                Code = StatusCodes.Status500InternalServerError,
+                Message = exception.Message,
+            };
+            await WriteResult(context, result);
+        }
+
+        private async Task HandleGenericException(HttpContext context, Exception ex)
+        {
+            var result = new ResponseResult()
+            {
+                Code = StatusCodes.Status500InternalServerError,
+                Message = "Oh Sorry! We seem to be having some issues. Please try again."
+            };
+
+            await WriteResult(context, result);
+        }
+
+        private async Task WriteResult(HttpContext context, ResponseResult result)
+        {
+            context.Response.StatusCode = result.Code;
+            context.Response.ContentType = "application/json";
+
+            var content = JsonSerializer.Serialize(result);
+            await context.Response.WriteAsync(content, Encoding.UTF8);
         }
     }
 }

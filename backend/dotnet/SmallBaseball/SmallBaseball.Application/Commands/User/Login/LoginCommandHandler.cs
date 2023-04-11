@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Elyte.Application.Exceptions;
+using Microsoft.AspNetCore.Identity;
 using SmallBaseball.Application.Helpers;
 using SmallBaseball.Application.Models;
 using SmallBaseball.Infrastructure.Repository.EF;
@@ -19,10 +20,10 @@ namespace SmallBaseball.Application.Commands.UpdateUser
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
-                throw new Exception("No user");
+                throw new BusinessValidationException("No user");
 
             if (!await _userManager.CheckPasswordAsync(user, request.Password))
-                throw new Exception("Password invalid");
+                throw new BusinessValidationException("Password invalid");
 
             var claims = new List<Claim>
             {
