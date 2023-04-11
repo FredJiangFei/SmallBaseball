@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SmallBaseball.Application.Models;
 using SmallBaseball.Infrastructure.Repository.EF;
 
 namespace SmallBaseball.Application.Commands
 {
-    public class RegisterCommandHandler : ICommandHandler<RegisterCommand, bool>
+    public class RegisterCommandHandler : ICommandHandler<RegisterCommand, LoginResult>
     {
         private readonly UserManager<AppUser> _userManager;
 
@@ -12,7 +13,7 @@ namespace SmallBaseball.Application.Commands
             _userManager = userManager;
         }
 
-        public async Task<bool> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<LoginResult> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user != null)
@@ -27,7 +28,11 @@ namespace SmallBaseball.Application.Commands
             };
           
             await _userManager.CreateAsync(user, request.Password);
-            return true;
+
+            return new LoginResult
+            {
+                Email = request.Email,
+            };
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace SmallBaseball.Application.Commands
+﻿using SmallBaseball.Application.Models;
+
+namespace SmallBaseball.Application.Commands
 {
-    public class RegisterCommand : ICommand<bool>
+    public class RegisterCommand : ICommand<LoginResult>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

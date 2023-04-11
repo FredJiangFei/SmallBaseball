@@ -16,10 +16,10 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<bool> Register([FromBody] RegisterCommand command)
+        public async Task<ResponseResult<LoginResult>> Register([FromBody] RegisterCommand command)
         {
             var result = await _mediator.Send(command);
-            return result;
+            return ResponseResult.FromValue(result);
         }
 
         [HttpPost("login")]
