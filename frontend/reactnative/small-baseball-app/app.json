@@ -28,6 +28,16 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location 123.",
+          "locationAlwaysPermission": "Allow $(PRODUCT_NAME) to use your location 456.",
+          "isIosBackgroundLocationEnabled": "Allow $(PRODUCT_NAME) to use your location 789"
+        }
+      ]
+    ]
   }
 }

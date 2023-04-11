@@ -1,6 +1,6 @@
 import { useColorMode } from 'native-base';
 import React from 'react';
-import { SbContainer, SbSwitch } from '../../components';
+import { SbContainer, SbSwitch } from '@sb/components';
 
 export default function SettingScreen() {
   const { colorMode, toggleColorMode } = useColorMode();

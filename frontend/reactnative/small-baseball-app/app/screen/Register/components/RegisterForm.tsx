@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Checkbox, Radio, Row } from 'native-base';
-import { SbForm, SbInput } from '../../../components';
+import { SbForm, SbInput } from '@sb/components';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().label('Email'),

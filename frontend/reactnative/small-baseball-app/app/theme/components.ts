@@ -114,6 +114,12 @@ const components = {
       },
     },
   },
+  TextArea: {
+    defaultProps: {
+      focusBorderColor: 'primary.500',
+      size: 'md',
+    },
+  },
   Divider: {
     baseStyle: {
       bg: colors.light
