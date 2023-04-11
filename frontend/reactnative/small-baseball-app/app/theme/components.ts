@@ -1,3 +1,4 @@
+import { Divider } from 'native-base';
 import colors from '../config/colors';
 
 const components = {
@@ -114,6 +115,11 @@ const components = {
       },
     },
   },
+  Divider: {
+    baseStyle: {
+      bg: colors.light
+    }
+  }
 };
 
 export default components;

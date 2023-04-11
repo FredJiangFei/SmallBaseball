@@ -1,7 +1,6 @@
-import { FlatList, View } from 'native-base';
+import { Divider, FlatList, View } from 'native-base';
 import React from 'react';
 import ListItem from '../../components/ListItem';
-import ListItemSeparator from '../../components/ListItemSeparator';
 import SbIcon from '../../components/SbIcon';
 import colors from '../../config/colors';
 import { useAuth } from '../../hooks';
@@ -50,7 +49,7 @@ export default function MineScreen({ navigation }) {
         <FlatList
           data={menuItems}
           keyExtractor={(m) => m.title}
-          ItemSeparatorComponent={ListItemSeparator}
+          ItemSeparatorComponent={Divider}
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
