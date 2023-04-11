@@ -11,13 +11,17 @@ import routes from '../../navigator/routes';
 import LoginForm from './components/LoginForm';
 import { SbContainer } from '../../components';
 import { Linking } from 'react-native';
+import { useLoading } from '../../providers/loading.provider';
 
 export default function LoginScreen({}) {
   const { login } = useAuth();
+  const { setLoading } = useLoading();
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const handleLogin = async (command) => {
+    setLoading(true);
     const res: any = await userService.login(command);
+    setLoading(false);
     login(res?.value?.token);
   };
 

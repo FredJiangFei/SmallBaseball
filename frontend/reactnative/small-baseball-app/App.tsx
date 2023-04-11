@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SbStatusBar } from './app/components';
+import SbLoader from './app/components/SbLoader';
+import { LoadingProvider, useLoading } from './app/providers/loading.provider';
 
 const config = {
   dependencies: {
@@ -20,6 +22,7 @@ const config = {
 export default function App() {
   const [user, setUser] = useState();
   const [colorMode, setColorMode] = useState('');
+
   const [fontsLoaded] = useFonts({
     'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
     'Inter-BlackItalic': require('./assets/fonts/Inter-BlackItalic.otf'),
@@ -71,15 +74,26 @@ export default function App() {
       >
         <SafeAreaView style={styles.safeArea}>
           <AuthContext.Provider value={{ user, setUser }}>
-            <NavigationContainer>
-              <AppNavigator></AppNavigator>
-            </NavigationContainer>
+            <LoadingProvider>
+              <Content />
+            </LoadingProvider>
           </AuthContext.Provider>
         </SafeAreaView>
       </NativeBaseProvider>
     </>
   );
 }
+
+const Content = () => {
+  const { loading } = useLoading();
+
+  return (
+    <NavigationContainer>
+      {loading && <SbLoader />}
+      <AppNavigator></AppNavigator>
+    </NavigationContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   safeArea: {
