@@ -2,7 +2,7 @@
 
 namespace SmallBaseball.Application.Commands
 {
-    public sealed class RegisterCommandValidator : AbstractValidator<RegisterCommand>
+    public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
         public RegisterCommandValidator()
         {

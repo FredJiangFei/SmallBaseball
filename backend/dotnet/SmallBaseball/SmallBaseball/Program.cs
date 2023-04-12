@@ -13,6 +13,8 @@ using SmallBaseball.Extensions;
 using SmallBaseball.Infrastructure.Repository.EF;
 using System.Text;
 using SmallBaseball.Middlewares;
+using FluentValidation;
+using SmallBaseball.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterMediatR(typeof(GetManagersQuery).Assembly);
     builder.RegisterGeneric(typeof(ValidationBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency();
 });
+builder.Services.AddValidatorsFromAssembly(typeof(RegisterCommandValidator).Assembly);
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
