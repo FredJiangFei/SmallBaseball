@@ -24,6 +24,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterMediatR(typeof(GetManagersQuery).Assembly);
     builder.RegisterGeneric(typeof(ValidationBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency();
+    builder.RegisterGeneric(typeof(LoggingBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency();
 });
 builder.Services.AddValidatorsFromAssembly(typeof(RegisterCommandValidator).Assembly);
 
