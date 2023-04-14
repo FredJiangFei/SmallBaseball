@@ -27,6 +27,7 @@
     "expo-secure-store": "^12.1.1",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
+    "firebase": "^9.19.1",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "native-base": "^3.4.25",
