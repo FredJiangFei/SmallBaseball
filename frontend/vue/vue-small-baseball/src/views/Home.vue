@@ -8,7 +8,7 @@
 
     <h3>Count is: {{ count }}</h3>
     <Counter
-      @increment-count="count += 1"
+      @increment-count="(n) => (count += n)"
       :count="count"
       count-title="hello fred"
     >

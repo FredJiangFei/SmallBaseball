@@ -5,4 +5,4 @@ import ComponentA from './components/ComponentA.vue';
 
 import './assets/main.css';
 
-createApp(App).component('ComponentA', ComponentA).use(router).mount('#app');
+createApp(App).component('ComponentA', ComponentA).provide(/* 注入名 */ 'message', /* 值 */ 'hello inject').use(router).mount('#app');
