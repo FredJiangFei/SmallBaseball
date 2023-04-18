@@ -7,7 +7,13 @@
     <h1>Home</h1>
 
     <h3>Count is: {{ count }}</h3>
-    <Counter @increment-count="count += 1" :count="count" />
+    <Counter
+      @increment-count="count += 1"
+      :count="count"
+      count-title="hello fred"
+    >
+      A Slot
+    </Counter>
 
     <p>Has published books: {{ publishedBooksMessage }}</p>
     <p>{{ fullName }}</p>
