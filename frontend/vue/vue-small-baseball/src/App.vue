@@ -1,5 +1,5 @@
 <template>
-  <HeaderBar />
+  <HeaderBar title="My journey with Vue" />
   <router-view />
 </template>
 
