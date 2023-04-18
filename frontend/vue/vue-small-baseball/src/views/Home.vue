@@ -5,8 +5,9 @@
     :style="{ backgroundColor: 'red' }"
   >
     <h1>Home</h1>
-    <button @click="increment">{{ count }}</button>
-    Count is: {{ count }}
+
+    <h3>Count is: {{ count }}</h3>
+    <Counter @increment-count="count += 1" :count="count" />
 
     <p>Has published books: {{ publishedBooksMessage }}</p>
     <p>{{ fullName }}</p>
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import Counter from '../components/Counter.vue';
+
 export default {
   data() {
     return {
@@ -45,12 +48,6 @@ export default {
     };
   },
   methods: {
-    increment() {
-      this.count++;
-      nextTick(() => {
-        // 访问更新后的 DOM
-      });
-    },
     calculateBooksMessage() {
       return this.author.books.length > 0 ? 'Yes' : 'No';
     },
@@ -84,6 +81,9 @@ export default {
       },
       immediate: true,
     },
+  },
+  components: {
+    Counter,
   },
 };
 </script>
