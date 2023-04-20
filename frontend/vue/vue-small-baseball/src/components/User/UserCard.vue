@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <img class="avatar" :src="user.avatar" />
     <h4>{{ user.first_name }} {{ user.last_name }}</h4>
     <button @click="onRemoveUser(user.id)">X</button>
@@ -24,6 +24,16 @@ const onRemoveUser = (id) => emit('remove-user', id);
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
 .avatar {
   width: 50px;
   height: 50px;
