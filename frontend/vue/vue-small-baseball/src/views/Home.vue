@@ -21,10 +21,6 @@
     <input v-model="text" ref="input" />
 
     <button @click="fullName = text">Change Name</button>
-
-    <li v-for="(item, index) in items" :key="item.id">
-      {{ parentMessage }} - {{ index }} - {{ item.message }}
-    </li>
   </div>
 </template>
 
@@ -47,10 +43,6 @@ export default {
           'Vue 4 - The Mystery',
         ],
       },
-      items: [
-        { id: 1, message: 'Foo' },
-        { id: 2, message: 'Bar' },
-      ],
     };
   },
   methods: {

@@ -3,7 +3,12 @@
   <h1>User({{ userCount }})</h1>
   <ul>
     <li v-for="user in users" :key="user.id">
-      <UserCard :user="user" @remove-user="onRemoveUser" />
+      <UserCard :user="user" @remove-user="onRemoveUser">
+        <template #icon>
+          <ToolingIcon />
+        </template>
+        <template #heading>Heading</template>
+      </UserCard>
     </li>
   </ul>
 </template>
@@ -11,6 +16,7 @@
 <script lang="ts">
 import { defineComponent, shallowRef, ref, watch, watchEffect } from 'vue';
 import UserCard from '../components/User/UserCard.vue';
+import ToolingIcon from '../components/icons/IconTooling.vue';
 import axios from 'axios';
 
 export default defineComponent({
@@ -39,6 +45,7 @@ export default defineComponent({
   },
   components: {
     UserCard,
+    ToolingIcon,
   },
   async created() {
     const { data } = await axios.get(`https://reqres.in/api/users?page=2`);
