@@ -2,11 +2,13 @@
   <div>
     <img class="avatar" :src="user.avatar" />
     <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+    <button>X</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
+
 const props = defineProps({
   user: {
     type: Object as PropType<any | null>,

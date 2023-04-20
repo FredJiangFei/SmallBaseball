@@ -1,10 +1,10 @@
 <template>
   <h1>User</h1>
-  <div v-if="users">
-    <div v-for="user in users" :key="user.id">
+  <ul>
+    <li v-for="user in users" :key="user.id">
       <UserCard :user="user" />
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">
@@ -14,22 +14,17 @@ import axios from 'axios';
 
 export default defineComponent({
   name: 'User',
+  data() {
+    return {
+      users: [],
+    };
+  },
   components: {
     UserCard,
   },
-  setup() {
-    const users = shallowRef<null | any[]>(null);
-  },
   async created() {
-    try {
-      const { data } = await axios.get(`https://reqres.in/api/users?page=2`);
-      console.log(data);
-      this.users = data.data;
-    } catch (err) {
-      console.error(err);
-    } finally {
-      this.loading = false;
-    }
+    const { data } = await axios.get(`https://reqres.in/api/users?page=2`);
+    this.users = data.data;
   },
 });
 </script>
