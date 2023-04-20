@@ -2,12 +2,13 @@
   <div>
     <img class="avatar" :src="user.avatar" />
     <h4>{{ user.first_name }} {{ user.last_name }}</h4>
-    <button>X</button>
+    <button @click="onRemoveUser(user.id)">X</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
+import { defineEmits } from 'vue';
 
 const props = defineProps({
   user: {
@@ -16,6 +17,10 @@ const props = defineProps({
     default: null,
   },
 });
+
+const emit = defineEmits(['remove-user']);
+
+const onRemoveUser = (id) => emit('remove-user', id);
 </script>
 
 <style scoped>
