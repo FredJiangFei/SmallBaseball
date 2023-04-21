@@ -8,8 +8,8 @@
 
     <h3>Count is: {{ count }}</h3>
     <Counter
-      @increment-count="(n) => (count += n)"
-      :count="count"
+      @increment-count="(n) => this.$store.commit('increment')"
+      :count="this.$store.state.count"
       count-title="hello fred"
     >
       A Slot
