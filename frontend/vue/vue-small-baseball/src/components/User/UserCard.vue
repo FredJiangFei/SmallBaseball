@@ -7,7 +7,7 @@
       <slot name="heading"></slot>
     </h3>
 
-    <img class="avatar" :src="user.avatar" />
+    <img class="avatar" :src="user.avatar" @click="goToDetails()" />
     <h4>{{ user.first_name }} {{ user.last_name }}</h4>
     <button @click="onRemoveUser(user.id)">X</button>
   </div>
@@ -16,7 +16,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue';
 import { defineEmits } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const props = defineProps({
   user: {
     type: Object as PropType<any | null>,
@@ -27,7 +29,14 @@ const props = defineProps({
 
 const emit = defineEmits(['remove-user']);
 
-const onRemoveUser = (id) => emit('remove-user', id);
+const onRemoveUser = (id: any) => emit('remove-user', id);
+
+const goToDetails = () => {
+  router.push({
+    path: `/userDetails/${props.user.id}`,
+    query: { name: props.user.first_name },
+  });
+};
 </script>
 
 <style scoped>
