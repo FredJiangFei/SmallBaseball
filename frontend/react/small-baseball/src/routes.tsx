@@ -7,6 +7,8 @@ import Page404 from './pages/auth/Page404';
 import SignIn from './pages/auth/SignIn';
 import AuthGuard from './components/guards/AuthGuard';
 import Todo from './pages/dashboards/Todo';
+import SignUp from './pages/auth/SignUp';
+import ForgotPassword from './pages/auth/ForgotPassword';
 
 const routes = [
   {
@@ -34,6 +36,14 @@ const routes = [
       {
         path: 'sign-in',
         element: <SignIn />,
+      },
+      {
+        path: 'sign-up',
+        element: <SignUp />,
+      },
+      {
+        path: 'forget-password',
+        element: <ForgotPassword />,
       },
     ],
   },

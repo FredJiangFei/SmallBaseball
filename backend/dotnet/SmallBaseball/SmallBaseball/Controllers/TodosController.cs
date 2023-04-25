@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmallBaseball.Api.Models;
 using SmallBaseball.Application.Commands.Todos;
@@ -7,6 +8,7 @@ using SmallBaseball.Application.Queries.User;
 
 namespace SmallBaseball.Controllers
 {
+    [Authorize]
     public class TodosController : BaseController
     {
         private readonly IMediator _mediator;
