@@ -12,9 +12,20 @@ namespace SmallBaseball.Infrastructure.Repository.EF
             _dbContext = dbContext;
         }
 
+        public virtual TEntity Get(Guid id)
+        {
+            return _dbContext.Set<TEntity>().SingleOrDefault(x => x.Id == id);
+        }
+
         public async Task CreateAsync(TEntity aggregateRoot)
         {
             await _dbContext.Set<TEntity>().AddAsync(aggregateRoot);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(TEntity aggregateRoot)
+        {
+            _dbContext.Set<TEntity>().Remove(aggregateRoot);
             await _dbContext.SaveChangesAsync();
         }
     }

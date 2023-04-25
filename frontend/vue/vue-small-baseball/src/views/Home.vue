@@ -11,9 +11,11 @@
       @increment-count="(n) => this.$store.commit('increment')"
       :count="this.$store.state.count"
       count-title="hello fred"
+      ref="child"
     >
       A Slot
     </Counter>
+    <button @click="onChildClick">Click child</button>
 
     <p>Has published books: {{ publishedBooksMessage }}</p>
     <p>{{ fullName }}</p>
@@ -48,6 +50,9 @@ export default {
   methods: {
     calculateBooksMessage() {
       return this.author.books.length > 0 ? 'Yes' : 'No';
+    },
+    onChildClick() {
+      this.$refs.child.childMethod();
     },
   },
   mounted() {

@@ -4,7 +4,7 @@ using SmallBaseball.Application.Commands;
 using SmallBaseball.Infrastructure.Repository.EF;
 using SmallBaseball.Application.Models;
 
-namespace SmallBaseball.FunctionalTests.Scenarios.TeamTests
+namespace SmallBaseball.FunctionalTests.Scenarios.TodoTests
 {
     public class When_Call_UserTest : ScenarioBase
     {

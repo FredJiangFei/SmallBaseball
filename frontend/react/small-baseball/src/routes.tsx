@@ -6,7 +6,7 @@ import Page404 from './pages/auth/Page404';
 
 import SignIn from './pages/auth/SignIn';
 import AuthGuard from './components/guards/AuthGuard';
-import Team from './pages/dashboards/Team';
+import Todo from './pages/dashboards/Todo';
 
 const routes = [
   {
@@ -22,8 +22,8 @@ const routes = [
         element: <Default />,
       },
       {
-        path: 'teams',
-        element: <Team />,
+        path: 'todos',
+        element: <Todo />,
       },
     ],
   },

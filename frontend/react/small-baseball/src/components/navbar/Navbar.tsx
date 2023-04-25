@@ -6,7 +6,7 @@ type NavbarProps = {};
 const Navbar: React.FC<NavbarProps> = () => {
   return (
     <>
-      <NavLink to="/">Home</NavLink> | <NavLink to="/teams">Teams</NavLink>
+      <NavLink to="/">Home</NavLink> | <NavLink to="/todos">Todos</NavLink>
     </>
   );
 };
