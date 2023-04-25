@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 export const getStaticPaths = async () => {
@@ -27,9 +28,12 @@ export const getStaticProps = async (context: any) => {
 };
 
 function TodoDetails({ todo }: any) {
+  const router = useRouter();
   return (
     <div>
-      <h1>Todo Details</h1>
+      <h1>
+        Todo Details ({router.pathname}, {router.query.id})
+      </h1>
       <div>
         <h3>{todo.title}</h3>
       </div>

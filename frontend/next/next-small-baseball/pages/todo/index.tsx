@@ -15,7 +15,16 @@ function TodoList({ todos }: any) {
     <div>
       <h1>TodoList</h1>
       {todos.map((todo: any) => (
-        <Link href={'/todo/' + todo.id} key={todo.id}>
+        // <Link href={'/todo/' + todo.id} key={todo.id}>
+        //   <h3>{todo.title}</h3>
+        // </Link>
+        <Link
+          href={{
+            pathname: '/todo/[id]',
+            query: { id: todo.id },
+          }}
+          key={todo.id}
+        >
           <h3>{todo.title}</h3>
         </Link>
       ))}
