@@ -8,7 +8,7 @@ using SmallBaseball.Application.Queries.User;
 
 namespace SmallBaseball.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class TodosController : BaseController
     {
         private readonly IMediator _mediator;
