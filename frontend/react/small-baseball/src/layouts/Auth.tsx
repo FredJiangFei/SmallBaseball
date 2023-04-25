@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 const Auth: React.FC = () => {
   return (
     <Container component="main" maxWidth="xs">
-      <Box
+      <Box flex={1}
         sx={{
           marginTop: 8,
           display: 'flex',
