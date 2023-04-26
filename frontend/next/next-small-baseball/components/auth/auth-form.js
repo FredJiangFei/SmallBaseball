@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import classes from './auth-form.module.css';
 
@@ -7,18 +7,21 @@ function AuthForm() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const router = useRouter();
-  const { data: session, status, update } = useSession();
-
-  function switchAuthModeHandler() {
-    router.push('/signup');
-  }
 
   async function submitHandler(event) {
     event.preventDefault();
-    signIn();
-
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: enteredEmail,
+      password: enteredPassword,
+    });
+
+    if (!result.error) {
+      router.replace('/todo');
+    }
   }
 
   return (
@@ -38,7 +41,7 @@ function AuthForm() {
           <button
             type="button"
             className={classes.toggle}
-            onClick={switchAuthModeHandler}
+            onClick={() => router.push('/signup')}
           >
             Create new account
           </button>

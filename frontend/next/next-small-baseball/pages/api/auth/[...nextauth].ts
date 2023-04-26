@@ -1,37 +1,53 @@
+import { connectDatabase } from '@/lib/db';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { verifyPassword } from '@/lib/auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
-        const res = await fetch('/your/endpoint', {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { 'Content-Type': 'application/json' },
+      async authorize(credentials: any, req) {
+        const client = await connectDatabase();
+        const usersCollection = client.db().collection('users');
+
+        const user = await usersCollection.findOne({
+          email: credentials.email,
         });
-        const user = await res.json();
-        if (res.ok && user) {
-          return user;
+
+        if (!user) {
+          client.close();
+          throw new Error('No user found!');
         }
-        return null;
+
+        const isValid = await verifyPassword(
+          credentials.password,
+          user.password
+        );
+
+        if (!isValid) {
+          client.close();
+          throw new Error('Could not log you in!');
+        }
+
+        client.close();
+        return { email: user.email };
+      },
+      theme: {
+        colorScheme: 'dark',
+      },
+      callbacks: {
+        async jwt({ token }: any) {
+          token.userRole = 'admin';
+          return token;
+        },
       },
     }),
   ],
-  theme: {
-    colorScheme: 'light',
-  },
-  callbacks: {
-    async jwt({ token }) {
-      token.userRole = 'admin';
-      return token;
-    },
-  },
 };
 
 export default NextAuth(authOptions);

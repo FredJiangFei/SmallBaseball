@@ -3,13 +3,14 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import NotificationContext from '../../store/notification-context';
 import { useSession } from 'next-auth/react';
 import AuthForm from '@/components/auth/auth-form';
+import AccessDenied from '@/components/access-denied';
 
 function TodoList() {
   const [todos, setTodos] = useState<any[]>([]);
   const notificationCtx = useContext(NotificationContext);
   const { data: session } = useSession();
   if (!session) {
-    return <AuthForm />;
+    return <AccessDenied />;
   }
 
   useEffect(() => {
