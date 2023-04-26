@@ -28,7 +28,7 @@ function EventDetailPage() {
         date={event.date}
         address={event.location}
         image={event.image}
-        imageAlt={event.title}
+        imageAlt={event.title} 
       />
       <EventContent>
         <p>{event.description}</p>
