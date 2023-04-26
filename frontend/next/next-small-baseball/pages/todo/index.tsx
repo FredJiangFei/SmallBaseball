@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import NotificationContext from '../../store/notification-context';
 
 function TodoList() {
   const [todos, setTodos] = useState<any[]>([]);
+  const notificationCtx = useContext(NotificationContext);
 
   useEffect(() => {
     fetchTodos();
@@ -31,7 +33,14 @@ function TodoList() {
       },
     })
       .then((response) => response.json())
-      .then(() => fetchTodos());
+      .then(() => {
+        notificationCtx.showNotification({
+          title: 'Success!',
+          message: 'Add todo success.',
+          status: 'success',
+        });
+        fetchTodos();
+      });
   }
 
   return (
@@ -50,9 +59,9 @@ function TodoList() {
         <Link
           href={{
             pathname: '/todo/[id]',
-            query: { id: todo.id },
+            query: { id: todo._id },
           }}
-          key={todo.id}
+          key={todo._id}
         >
           <h3>{todo.title}</h3>
         </Link>
