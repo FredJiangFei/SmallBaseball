@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import {
   connectDatabase,
   insertDocument,
@@ -6,6 +7,12 @@ import {
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const session = await getSession({ req: req });
+  if (!session) {
+    res.status(401).json({ message: 'Not authenticated!' });
+    return;
+  }
+
   let client = await connectDatabase();
 
   if (req.method === 'POST') {

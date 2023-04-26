@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Button from '../ui/button';
+import { signOut } from 'next-auth/react';
 
 const Navbar = () => {
   return (
@@ -13,6 +15,8 @@ const Navbar = () => {
       <Link href="/events/">Events | </Link>
       <Link href="/products/">Products | </Link>
       <Link href="/feedback/">Feedback</Link>
+      <span style={{ flex: 1 }}></span>
+      <Button onClick={signOut}>Logout</Button>
     </nav>
   );
 };
