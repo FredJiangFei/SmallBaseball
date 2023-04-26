@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
 import { getEventById } from '../../dummy-data';
