@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import NotificationContext from '../../store/notification-context';
+import { useSession } from 'next-auth/react';
+import AuthForm from '@/components/auth/auth-form';
 
 function TodoList() {
   const [todos, setTodos] = useState<any[]>([]);
   const notificationCtx = useContext(NotificationContext);
+  const { data: session } = useSession();
+  if (!session) {
+    return <AuthForm />;
+  }
 
   useEffect(() => {
     fetchTodos();

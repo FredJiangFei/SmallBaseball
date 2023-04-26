@@ -2,7 +2,7 @@ import {
   connectDatabase,
   insertDocument,
   getAllDocuments,
-} from '../../../helpers/db-util';
+} from '../../../lib/db';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
