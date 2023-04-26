@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
+import { buildFeedbackPath, extractFeedback } from '../api/feedback/index';
 
-function FeedbackPage() {
-  const [items, setItems] = useState([]);
+function FeedbackPage(props: any) {
+  const [items, setItems] = useState(props.data);
+  const [feedback, setFeedback] = useState<any>();
 
   const emailRef = useRef<any>();
   const feedbackRef = useRef<any>();
@@ -30,6 +32,12 @@ function FeedbackPage() {
       .then((res) => setItems(res.data));
   }
 
+  function loadFeedbackDetailsHandler(id: any) {
+    fetch(`/api/feedback/${id}`)
+      .then((res) => res.json())
+      .then((res) => setFeedback(res.data));
+  }
+
   return (
     <div>
       <h1>The Feedback Page</h1>
@@ -46,13 +54,29 @@ function FeedbackPage() {
       </form>
       <hr />
       <button onClick={loadFeedbackHandler}>Load Feedback</button>
+      {feedback && <p>{feedback.email}</p>}
       <ul>
         {items.map((item: any) => (
-          <li key={item.id}>{item.text}</li>
+          <li key={item.id}>
+            {item.text}{' '}
+            <button onClick={loadFeedbackDetailsHandler.bind(null, item.id)}>
+              Show Details
+            </button>
+          </li>
         ))}
       </ul>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const filePath = buildFeedbackPath();
+  const data = extractFeedback(filePath);
+  return {
+    props: {
+      data,
+    },
+  };
 }
 
 export default FeedbackPage;
