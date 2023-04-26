@@ -1,10 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 export async function connectDatabase() {
-  const client = await MongoClient.connect(
-    'mongodb://localhost/small_baseball'
-  );
-
+  const client = await MongoClient.connect(process.env.db);
   return client;
 }
 
