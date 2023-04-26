@@ -1,64 +1,7 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-function LastSalesPage(props) {
-  const [sales, setSales] = useState(props.sales);
-  const { data, error } = useSWR(
-    'https://jsonplaceholder.typicode.com/posts',
-    (url) => fetch(url).then((res) => res.json())
-  );
-
-  useEffect(() => {
-    if (data) {
-      const todos = [];
-      for (const key in data) {
-        todos.push({
-          id: key,
-          title: data[key].title,
-        });
-      }
-      setSales(todos);
-    }
-  }, [data]);
-
-  // useEffect(() => {
-  //   fetch('https://jsonplaceholder.typicode.com/posts')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const todos = [];
-
-  //       for (const key in data) {
-  //         todos.push({
-  //           id: key,
-  //           title: data[key].title,
-  //         });
-  //       }
-
-  //       setSales(todos);
-  //     });
-  // }, []);
-
-  if (error) {
-    return <p>Failed to load.</p>;
-  }
-
-  if (!data && !sales) {
-    return <p>Loading...</p>;
-  }
-
-  return (
-    <ul>
-      {sales.map((sale) => (
-        <li key={sale.id}>{sale.title}</li>
-      ))}
-    </ul>
-  );
-}
-
-export async function getStaticProps() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const data = await response.json();
-
+const getData = (data) => {
   const todos = [];
   for (const key in data) {
     todos.push({
@@ -66,8 +9,55 @@ export async function getStaticProps() {
       title: data[key].title,
     });
   }
+  return todos;
+};
 
-  return { props: { sales: todos } };
+const todoUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+function LastSalesPage(props) {
+  const [todos, setTodos] = useState(props.todos);
+  const { data, error } = useSWR(todoUrl, (url) =>
+    fetch(url).then((res) => res.json())
+  );
+
+  useEffect(() => {
+    if (data) {
+      const todos = getData(data);
+      setTodos(todos);
+    }
+  }, [data]);
+
+  // useEffect(() => {
+  //   fetch(todoUrl)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const todos = getData(data);
+  //       setTodos(todos);
+  //     });
+  // }, []);
+
+  if (error) {
+    return <p>Failed to load.</p>;
+  }
+
+  if (!data && !todos) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.title}</li>
+      ))}
+    </ul>
+  );
+}
+
+export async function getStaticProps() {
+  const response = await fetch(todoUrl);
+  const data = await response.json();
+  const todos = getData(data);
+  return { props: { todos: todos } };
 }
 
 export default LastSalesPage;
