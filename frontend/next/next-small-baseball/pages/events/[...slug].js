@@ -7,11 +7,9 @@ import ErrorAlert from '../../components/ui/error-alert';
 
 function FilteredEventsPage() {
   const router = useRouter();
-
   const filterData = router.query.slug;
-
   if (!filterData) {
-    return <p className='center'>Loading...</p>;
+    return <p className="center">Loading...</p>;
   }
 
   const filteredYear = filterData[0];
@@ -20,14 +18,14 @@ function FilteredEventsPage() {
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
 
-  if (isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth < 1 || numMonth > 12) {
+  if (isNaN(numYear) || isNaN(numMonth)) {
     return (
       <>
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
-        <div className='center'>
-          <Button link='/events'>Show All Events</Button>
+        <div className="center">
+          <Button link="/events">Show All Events</Button>
         </div>
       </>
     );
@@ -44,8 +42,8 @@ function FilteredEventsPage() {
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
-        <div className='center'>
-          <Button link='/events'>Show All Events</Button>
+        <div className="center">
+          <Button link="/events">Show All Events</Button>
         </div>
       </>
     );

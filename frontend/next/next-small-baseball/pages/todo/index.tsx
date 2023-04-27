@@ -52,7 +52,7 @@ function TodoList() {
         <button>Submit</button>
       </form>
 
-      {todos.map((todo: any) => (
+      {todos?.map((todo: any) => (
         // <Link href={'/todo/' + todo.id} key={todo.id}>
         //   <h3>{todo.title}</h3>
         // </Link>
