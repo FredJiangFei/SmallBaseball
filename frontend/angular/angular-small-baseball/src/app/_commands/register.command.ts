@@ -1,6 +1,7 @@
 export interface RegisterCommand {
-    username: string;
-    password: string;
-    birthday: Date;
-    avatar: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
 }

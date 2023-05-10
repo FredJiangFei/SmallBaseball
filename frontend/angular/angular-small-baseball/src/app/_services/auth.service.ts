@@ -8,15 +8,15 @@ import { RegisterCommand } from '../_commands/register.command';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   jwtService = new JwtHelperService();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   LoggedIn() {
     const token = localStorage.getItem('token');
-    return true; //!this.jwtService.isTokenExpired(token);
+    return !this.jwtService.isTokenExpired(token);
   }
 
   LoggedUser(): User {
@@ -25,11 +25,12 @@ export class AuthService {
   }
 
   login(user: LoginCommand) {
-    return this.http.post<User>(`${environment.baseUrl}/users/login`, user)
+    return this.http
+      .post<User>(`${environment.baseUrl}/users/login`, user)
       .pipe(
-        tap((response: any) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('loginUser', JSON.stringify(response.user));
+        tap((res: any) => {
+          localStorage.setItem('token', res.value.token);
+          // localStorage.setItem('loginUser', JSON.stringify(response.user));
         })
       );
   }

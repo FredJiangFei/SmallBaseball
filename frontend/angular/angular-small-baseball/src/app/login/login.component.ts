@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs';
+import { AuthService } from '../_services/auth.service';
+import { LoginCommand } from '../_commands/login.command';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +10,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor() {}
+  user: LoginCommand = {
+    email: 'fred@qq.com',
+    password: 'aa123456',
+  };
+  logining: boolean = false;
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activedRoute: ActivatedRoute
+  ) {}
+
+  login() {
+    this.logining = true;
+    this.authService
+      .login(this.user)
+      .pipe(finalize(() => (this.logining = false)))
+      .subscribe((_) => {
+        if (this.authService.LoggedIn()) {
+          const returnUrl =
+            this.activedRoute.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate([returnUrl || '/']);
+        }
+      });
+  }
 }
