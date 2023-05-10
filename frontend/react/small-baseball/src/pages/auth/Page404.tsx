@@ -1,5 +1,11 @@
+import { Typography } from '@mui/material';
+
 function Page404() {
-  return <h1>404 Error</h1>
+  return (
+    <Typography component="h1" variant="h5">
+      404 Error
+    </Typography>
+  );
 }
 
-export default Page404
+export default Page404;

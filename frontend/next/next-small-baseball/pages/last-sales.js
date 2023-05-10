@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { fetcher } from '../lib/utils';
 
 const getData = (data) => {
   const todos = [];
@@ -16,9 +17,7 @@ const todoUrl = 'https://jsonplaceholder.typicode.com/posts';
 
 function LastSalesPage(props) {
   const [todos, setTodos] = useState(props.todos);
-  const { data, error } = useSWR(todoUrl, (url) =>
-    fetch(url).then((res) => res.json())
-  );
+  const { data, error } = useSWR(todoUrl, fetcher);
 
   useEffect(() => {
     if (data) {

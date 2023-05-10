@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/Navbar';
+import { CssBaseline, Box } from '@mui/material';
+import Footer from '../components/Footer';
 
-const Dashboard: React.FC = ({ children }: any) => {
+const Dashboard: React.FC = () => {
   return (
-    <>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <CssBaseline />
       <Navbar />
-      {children}
-      <Outlet />
-      <p>Dashboard Footer</p>
-    </>
+      <Box sx={{ flex: 1 }}>
+        <Outlet />
+      </Box>
+      <Footer />
+    </Box>
   );
 };
 

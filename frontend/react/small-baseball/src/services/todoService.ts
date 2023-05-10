@@ -12,8 +12,10 @@ const deleteTodo = (id: any) => {
   return axios.delete(`todos/${id}`);
 };
 
-export default {
+const exportedObject = {
   getAll,
   create,
   deleteTodo,
 };
+
+export default exportedObject;

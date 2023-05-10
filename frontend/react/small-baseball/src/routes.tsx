@@ -1,14 +1,15 @@
 import DashboardLayout from './layouts/Dashboard';
 import AuthLayout from './layouts/Auth';
 
-import Default from './pages/dashboards';
+import Home from './pages/Home';
 import Page404 from './pages/auth/Page404';
 
 import SignIn from './pages/auth/SignIn';
 import AuthGuard from './components/guards/AuthGuard';
-import Todo from './pages/dashboards/Todo';
 import SignUp from './pages/auth/SignUp';
-import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import Profile from './pages/Profile';
+import Todo from './pages/Todo';
 
 const routes = [
   {
@@ -21,11 +22,19 @@ const routes = [
     children: [
       {
         path: '',
-        element: <Default />,
+        element: <Home />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
       {
         path: 'todos',
         element: <Todo />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPassword />,
       },
     ],
   },
@@ -40,11 +49,7 @@ const routes = [
       {
         path: 'sign-up',
         element: <SignUp />,
-      },
-      {
-        path: 'forget-password',
-        element: <ForgotPassword />,
-      },
+      }
     ],
   },
   {
