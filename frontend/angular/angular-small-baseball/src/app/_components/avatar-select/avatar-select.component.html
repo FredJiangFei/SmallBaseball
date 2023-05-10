@@ -1,0 +1,5 @@
+<mat-grid-list>
+  <mat-grid-tile class="hand" *ngFor ="let avatar of avatars" [class.choosedAvatar]="choosedAavtar == avatar">
+    <mat-icon [svgIcon]="avatar" class="avatar" (click)="selectAvatar(avatar)"></mat-icon>
+  </mat-grid-tile>
+</mat-grid-list>

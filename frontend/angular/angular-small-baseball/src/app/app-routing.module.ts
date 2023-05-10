@@ -6,16 +6,17 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { TodoComponent } from './todo/todo.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: DashboardComponent,
     canActivate: [AuthGuard],
-  },
-  {
-    path: '',
-    canActivate: [AuthGuard],
-    children: [{ path: 'todos', component: TodoComponent }],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'todos', component: TodoComponent },
+    ],
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

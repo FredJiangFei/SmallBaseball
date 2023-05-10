@@ -2,36 +2,17 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~spin.js/spin.css";
 
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.fill-remaining-space{
-    flex: 1 1 auto;
-}
-
-.hand{
-    cursor: pointer;
-}
-
-.mat-tab-body-wrapper {
-    padding: 0 24px;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .mat-form-field {
-    width: 100%;
+  width: 100%;
 }
 
-.dot{
-    width: 5px;
-    height: 5px;
-    background-color: red;
-    display: inline-block;
-    position: absolute;
+.hand {
+  cursor: pointer;
 }

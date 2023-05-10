@@ -30,6 +30,7 @@ import {
 } from '@angular/material';
 import { PasswordDirective } from '../_directives/password.directive';
 import { SpinnerDirective } from '../_directives/spinner.directive';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [PasswordDirective, SpinnerDirective],
@@ -39,6 +40,7 @@ import { SpinnerDirective } from '../_directives/spinner.directive';
     FormsModule,
     RouterModule,
     HttpClientModule,
+    NoopAnimationsModule,
 
     MatToolbarModule,
     MatIconModule,
