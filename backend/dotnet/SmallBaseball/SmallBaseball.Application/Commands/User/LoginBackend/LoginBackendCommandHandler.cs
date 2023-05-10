@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SmallBaseball.Application.Helpers;
+using SmallBaseball.Application.Identity;
 using SmallBaseball.Application.Models;
 using SmallBaseball.Infrastructure.Repository.EF;
 using System.Security.Claims;
@@ -9,10 +9,12 @@ namespace SmallBaseball.Application.Commands.UpdateUser
     public class LoginBackendCommandHandler : ICommandHandler<LoginBackendCommand, LoginResult>
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IJwtTokenService _jwtTokenService;
 
-        public LoginBackendCommandHandler(UserManager<AppUser> userManager)
+        public LoginBackendCommandHandler(UserManager<AppUser> userManager, IJwtTokenService jwtTokenService)
         {
             _userManager = userManager;
+            _jwtTokenService = jwtTokenService;
         }
 
         public async Task<LoginResult> Handle(LoginBackendCommand request, CancellationToken cancellationToken)
@@ -39,11 +41,10 @@ namespace SmallBaseball.Application.Commands.UpdateUser
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var tokenString = JwtHelper.GenerateJSONWebToken(claims);
             return new LoginResult
             {
                 Email = user.Email,
-                Token = tokenString
+                Token = _jwtTokenService.GenerateToken(claims.ToArray())
             };
         }
 

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmallBaseball.Api.Models;
 using SmallBaseball.Application.Commands.Todos;
@@ -8,7 +7,6 @@ using SmallBaseball.Application.Queries.User;
 
 namespace SmallBaseball.Controllers
 {
-    //[Authorize]
     public class TodosController : BaseController
     {
         private readonly IMediator _mediator;
@@ -21,7 +19,10 @@ namespace SmallBaseball.Controllers
         [HttpGet]
         public async Task<ResponseResult<IEnumerable<TodoModel>>> GetAll()
         {
-            var query = new GetTodosQuery { };
+            var query = new GetTodosQuery
+            {
+                UserId = UserId
+            };
             var result = await _mediator.Send(query, HttpContext.RequestAborted);
             return ResponseResult.FromValue(result);
         }
@@ -29,16 +30,21 @@ namespace SmallBaseball.Controllers
         [HttpPost]
         public async Task<ResponseResult<bool>> Create([FromBody] CreateTodoCommand command)
         {
+            command.UserId = UserId;
             var result = await _mediator.Send(command);
             return ResponseResult.FromValue(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ResponseResult<bool>> Delete([FromRoute] Guid id)
+        public async Task<ResponseResult> Delete([FromRoute] Guid id)
         {
-            var command = new DeleteTodoCommand { Id = id };
-            var result = await _mediator.Send(command);
-            return ResponseResult.FromValue(result);
+            var command = new DeleteTodoCommand
+            {
+                Id = id,
+                UserId = UserId
+            };
+            await _mediator.Send(command);
+            return ResponseResult.Ok();
         }
     }
 }

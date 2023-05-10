@@ -1,8 +1,8 @@
 ﻿namespace SmallBaseball.Application.Models
 {
-    public class TodoModel
+    public class UserModel
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

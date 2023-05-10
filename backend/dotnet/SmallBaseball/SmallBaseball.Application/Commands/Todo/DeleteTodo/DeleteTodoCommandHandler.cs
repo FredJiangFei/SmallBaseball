@@ -5,17 +5,19 @@ namespace SmallBaseball.Application.Commands.Todos
 {
     public class DeleteTodoCommandHandler : ICommandHandler<DeleteTodoCommand, bool>
     {
-        private readonly IRepository<Todo> _todoRepository;
+        private readonly IRepository<Athlete> _athleteRepository;
 
-        public DeleteTodoCommandHandler(IRepository<Todo> todoRepository)
+        public DeleteTodoCommandHandler(IRepository<Athlete> athleteRepository)
         {
-            _todoRepository = todoRepository;
+            _athleteRepository = athleteRepository;
         }
 
         public async Task<bool> Handle(DeleteTodoCommand request, CancellationToken cancellationToken)
         {
-            var todo = _todoRepository.Get(request.Id);
-            await _todoRepository.DeleteAsync(todo);
+            var athlete = _athleteRepository.Get(request.UserId);
+            athlete.DeleteTodo(request.Id);
+            await _athleteRepository.UpdateAsync(athlete);
+
             return true;
         }
     }

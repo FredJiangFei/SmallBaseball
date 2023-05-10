@@ -1,112 +1,88 @@
-﻿using Microsoft.AspNetCore.TestHost;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using NUnit.Framework.Internal;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SmallBaseball.Application.Identity;
+using SmallBaseball.Domain.Models.Aggregates.TodoAggregate;
 using SmallBaseball.Infrastructure.Repository.EF;
-using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Security.Claims;
 
 namespace SmallBaseball.FunctionalTests
 {
     public class ScenarioBase
     {
-        protected TestServer Server => TestHost.Server;
-
-        protected TestData<DataContext> Data { get; set; }
+        protected Athlete Athlete { get; set; }
+        protected TestDatabase<DataContext> Database { get; set; }
 
         protected ScenarioBase()
         {
-            Data = new TestData<DataContext>(Server.Host.Services);
-        }
-
-        ~ScenarioBase()
-        {
-            Data?.Dispose();
-            Data = null;
+            using (var scope = TestHost.Server.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                Database = new TestDatabase<DataContext>(services);
+            }
         }
 
         [SetUp]
         public void SetUp()
         {
-          
+            Athlete = new Athlete
+            {
+                FirstName = "Fred",
+                LastName = "Jiang"
+            };
         }
 
-        protected async Task<TOut> SendAsync<TOut>(Func<HttpClient, Task<TOut>> func)
+        private async Task<TOut> SendAsync<TOut>(Func<HttpClient, Task<TOut>> func)
         {
-            var webAppFactory = new WebApplicationFactory<Program>();
-            using (var client = webAppFactory.CreateClient())
+            using (var client = TestHost.Server.CreateClient())
             {
-                var token = GetToken();
+                var token = GenerateToken();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                TestHost.TestContext = TestExecutionContext.CurrentContext;
                 return await func.Invoke(client);
             }
         }
 
-        protected async Task<T> RetrieveResult<T>(HttpResponseMessage message)
+        protected async Task<TReponse> GetAsync<TReponse>(string uri)
         {
-            var content = await message.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(content);
+            var response = await this.SendAsync(client => client.GetFromJsonAsync<TReponse>(uri));
+            return response;
         }
 
-        protected async Task<TOut> PostAsync<TOut>(string uri, object param)
+        protected async Task<TReponse> PostAsync<TReponse>(string uri, object param)
         {
-            var response = await SendAsync(client =>
-            {
-                return client.PostAsync(uri, BuildContent(param));
-            });
-            var result = await RetrieveResult<TOut>(response);
+            var response = await this.SendAsync(client => client.PostAsJsonAsync(uri, param));
+            var result = await response.Content.ReadFromJsonAsync<TReponse>();
             return result;
         }
 
-        protected async Task<TOut> PutAsync<TOut>(string uri, object param)
+        protected async Task<TReponse> PutAsync<TReponse>(string uri, object param)
         {
-            var response = await SendAsync(client =>
-            {
-                return client.PutAsync(uri, BuildContent(param));
-            });
-            var result = await RetrieveResult<TOut>(response);
+            var response = await this.SendAsync(client => client.PutAsJsonAsync(uri, param));
+            var result = await response.Content.ReadFromJsonAsync<TReponse>();
             return result;
         }
 
-        protected async Task<TOut> GetAsync<TOut>(string uri)
+        protected async Task<TReponse> DeleteAsync<TReponse>(string uri)
         {
-            var response = await SendAsync(client =>
-            {
-                return client.GetAsync(uri);
-            });
-            var result = await RetrieveResult<TOut>(response);
+            var response = await this.SendAsync(client => client.DeleteAsync(uri));
+            var result = await response.Content.ReadFromJsonAsync<TReponse>();
             return result;
         }
-        protected StringContent BuildContent(object value)
-        {
-            var content = JsonConvert.SerializeObject(value);
-            return new StringContent(content, Encoding.UTF8, "application/json");
-        }
 
-        private string GetToken()
+        private string GenerateToken()
         {
-            var claims = new[]
+            using (var scope = TestHost.Server.Services.CreateScope())
             {
-                new Claim(ClaimTypes.Sid, "1"),
-                new Claim(ClaimTypes.Hash, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, UserRoles.Admin),
-                new Claim(ClaimTypes.Email, "admin@sbb.com")
-            };
+                var services = scope.ServiceProvider;
+                var tokenService = services.GetRequiredService<IJwtTokenService>();
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5B33FFD3-BE79-4549-9A64-7EBA439E68BC"));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken("sbb.com",
-                "sbb.com",
-                claims,
-                expires: DateTime.UtcNow.AddDays(1),
-                signingCredentials: credentials,
-                notBefore: DateTime.UtcNow);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                var claims = new[]
+                {
+                    new Claim(ClaimTypes.Hash, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.Sid, Athlete.Id.ToString())
+                };
+                return tokenService.GenerateToken(claims);
+            }
         }
     }
 }

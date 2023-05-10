@@ -1,28 +1,63 @@
-﻿using SmallBaseball.FunctionalTests;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework.Internal;
+using SmallBaseball.Infrastructure.Repository.EF;
+using SmallBaseball.Middlewares;
 using System.Reflection;
 
 namespace SmallBaseball.FunctionalTests
 {
-    public static class TestHost
+    [SetUpFixture]
+    public class TestHost
     {
         public static TestServer Server = CreateServer();
         public static TestExecutionContext TestContext { get; set; }
         private static TestServer CreateServer()
         {
-            var path = Assembly.GetAssembly(typeof(TestHost)).Location;
-            var hostBuilder = new WebHostBuilder()
-                .UseContentRoot(Path.GetDirectoryName(path))
-                .ConfigureAppConfiguration((a, b) =>
+            var application = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
+            {
+                var path = Assembly.GetAssembly(typeof(TestHost)).Location;
+                builder.UseContentRoot(Path.GetDirectoryName(path));
+                builder.ConfigureAppConfiguration(config => config.AddJsonFile("appsettings.json").AddEnvironmentVariables());
+                
+                builder.ConfigureServices(services =>
                 {
-                    b.AddJsonFile($"appsettings.json");
-                })
-                .UseStartup<TestStartup>();
-            var testServer = new TestServer(hostBuilder);
-            return testServer;
+                    services.AddControllers().AddApplicationPart(typeof(Program).Assembly);
+                });
+
+                builder.Configure(app =>
+                {
+                    app.UseRouting();
+
+                    app.UseMiddleware<CustomExceptionMiddleware>();
+
+                    app.UseHttpsRedirection();
+
+                    app.UseAuthentication();
+
+                    app.UseAuthorization();
+
+                    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+                });
+            });
+
+            return application.Server;
+        }
+
+        [OneTimeSetUp]
+        public void GlobalSetup()
+        {
+            TestDatabase<DataContext>.SetUpDatabase();
+        }
+
+        [OneTimeTearDown]
+        public void GlobalTeardown()
+        {
+            TestDatabase<DataContext>.TeardownDatabase();
         }
     }
 }

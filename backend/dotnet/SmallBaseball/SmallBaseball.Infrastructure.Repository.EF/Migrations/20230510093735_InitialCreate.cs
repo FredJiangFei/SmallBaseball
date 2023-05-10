@@ -18,6 +18,24 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Athletes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
+                    FirstName = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "varchar(50)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Athletes", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -42,10 +60,7 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FirstName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AthleteId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -76,6 +91,29 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Todos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "varchar(200)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AthleteId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Todos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Todos_Athletes_AthleteId",
+                        column: x => x.AthleteId,
+                        principalTable: "Athletes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 columns: table => new
                 {
@@ -97,29 +135,6 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Todos",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
-                    Title = table.Column<string>(type: "varchar(200)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AppUserId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Todos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Todos_Users_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -230,15 +245,15 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "78ca66de-9e8d-47b1-a1b7-75f4e8de8fc8", "Admin", "Admin" },
-                    { "78A7570F-3CE5-48BA-9461-80283ED1D94D", "4ac925ca-d4fe-4903-a3a3-0c9575652ea7", "Manager", "Manager" },
-                    { "7D9B7113-A8F8-4035-99A7-A20DD400F6A3", "fe275a19-dbff-42b2-8283-e0470ddd4afc", "User", "User" }
+                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "842311ca-1aca-4b4c-86f9-8eabf2ecb011", "Admin", "Admin" },
+                    { "78A7570F-3CE5-48BA-9461-80283ED1D94D", "7944d780-fae2-45e6-ade0-53610673a925", "Manager", "Manager" },
+                    { "7D9B7113-A8F8-4035-99A7-A20DD400F6A3", "b5c46f9a-e3d9-46a1-879c-8be59fadff33", "User", "User" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 0, "322c8f2b-7a84-4c99-bb79-a98223fcccb6", "Admin@sbb.com", true, "Admin", "Admin", false, null, "ADMIN@SBB.COM", "ADMIN", "AQAAAAEAACcQAAAAEOWR0dtfL6iLunUt5/T+NWl4KgmlOuKDTTrOhPVSNRG8SXsyJSaD4W3YPXDmHYy+Gw==", "17792387996", true, "00000000-0000-0000-0000-000000000000", false, "admin" });
+                columns: new[] { "Id", "AccessFailedCount", "AthleteId", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 0, new Guid("00000000-0000-0000-0000-000000000000"), "c569945d-fb10-4626-99ce-984176d82874", "Admin@sbb.com", true, false, null, "ADMIN@SBB.COM", "ADMIN", "AQAAAAEAACcQAAAAEB14fX6OKigUbQkcw1rvM3tUpLa7/jhr22bYoHVp+inNlp9fB+fmV2doyVuipLOrmA==", "17792387996", true, "00000000-0000-0000-0000-000000000000", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
@@ -257,9 +272,9 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Todos_AppUserId",
+                name: "IX_Todos_AthleteId",
                 table: "Todos",
-                column: "AppUserId");
+                column: "AthleteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -308,6 +323,9 @@ namespace SmallBaseball.Infrastructure.Repository.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Athletes");
 
             migrationBuilder.DropTable(
                 name: "Roles");

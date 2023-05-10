@@ -5,17 +5,18 @@ namespace SmallBaseball.Application.Commands.Todos
 {
     public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, bool>
     {
-        private readonly IRepository<Todo> _todoRepository;
+        private readonly IRepository<Athlete> _athleteRepository;
 
-        public CreateTodoCommandHandler(IRepository<Todo> todoRepository)
+        public CreateTodoCommandHandler(IRepository<Athlete> athleteRepository)
         {
-            _todoRepository = todoRepository;
+            _athleteRepository = athleteRepository;
         }
 
         public async Task<bool> Handle(CreateTodoCommand request, CancellationToken cancellationToken)
         {
-            var todo = Todo.Create(request.Title);
-            await _todoRepository.CreateAsync(todo);
+            var athlete = _athleteRepository.Get(request.UserId);
+            athlete.AddTodo(request.Title);
+            await _athleteRepository.UpdateAsync(athlete);
             return true;
         }
     }

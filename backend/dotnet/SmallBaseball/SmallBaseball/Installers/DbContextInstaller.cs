@@ -12,7 +12,10 @@ public class DbContextInstaller : IInstaller
         // Add services to the container.
         services.AddDbContext<DataContext>(options =>
         {
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            options.UseMySql(
+                connectionString, 
+                ServerVersion.AutoDetect(connectionString)
+            ).UseLazyLoadingProxies();
         });
     }
 }

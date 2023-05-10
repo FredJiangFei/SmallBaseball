@@ -13,8 +13,6 @@ namespace SmallBaseball.Infrastructure.Repository.EF.EntityConfigurations
             var admin = new AppUser
             {
                 Id = adminId,
-                FirstName = "Admin",
-                LastName = "Admin",
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
                 Email = "Admin@sbb.com",

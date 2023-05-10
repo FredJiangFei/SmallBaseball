@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmallBaseball.Application.Models;
 using SmallBaseball.Application.Commands;
 using SmallBaseball.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SmallBaseball.Controllers
 {
@@ -16,6 +17,7 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<ResponseResult<LoginResult>> Register([FromBody] RegisterCommand command)
         {
             var result = await _mediator.Send(command);
@@ -23,6 +25,7 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ResponseResult<LoginResult>> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
@@ -30,6 +33,7 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPost("login/backend")]
+        [AllowAnonymous]
         public async Task<ResponseResult<LoginResult>> LoginBackend([FromBody] LoginBackendCommand command)
         {
             var result = await _mediator.Send(command);

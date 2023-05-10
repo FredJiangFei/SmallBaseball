@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Elyte.Application.Exceptions
+namespace SmallBaseball.Application.Exceptions
 {
     public class BusinessValidationException : Exception
     {

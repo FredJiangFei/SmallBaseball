@@ -23,6 +23,12 @@ namespace SmallBaseball.Infrastructure.Repository.EF
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateAsync(TEntity aggregateRoot)
+        {
+            _dbContext.Set<TEntity>().Update(aggregateRoot);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(TEntity aggregateRoot)
         {
             _dbContext.Set<TEntity>().Remove(aggregateRoot);

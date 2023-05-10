@@ -1,5 +1,6 @@
-﻿using SmallBaseball.Application.Models;
-using Dapper;
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
+using SmallBaseball.Application.Models;
 
 namespace SmallBaseball.Application.Queries.User
 {
@@ -14,8 +15,9 @@ namespace SmallBaseball.Application.Queries.User
             var sql = @"SELECT 
                             Todos.Id,
                             Todos.Title
-                        FROM Todos;";
-            var todos = await ExecuteAsync(conn => conn.QueryAsync<TodoModel>(sql));
+                        FROM Todos
+                        WHERE Todos.AthleteId = @UserId;";
+            var todos = await ExecuteAsync(conn => conn.QueryAsync<TodoModel>(sql, request));
             return todos;
         }
     }

@@ -6,10 +6,11 @@ namespace SmallBaseball.Application.Commands
     {
         public RegisterCommandValidator()
         {
-            RuleFor(x => x.FirstName).NotEmpty();
-            RuleFor(x => x.LastName).NotEmpty();
-            RuleFor(x => x.Email).NotEmpty();
-            RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name is required.");
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name is required.");
+            RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required.");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required.");
+            RuleFor(x => x.PasswordConfirmation).NotEmpty().WithMessage("PasswordConfirmation is required.");
         }
     }
 }

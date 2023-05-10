@@ -20,8 +20,6 @@ namespace SmallBaseball.Application.Commands.Users
 
             user = new AppUser
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.Email
             };
