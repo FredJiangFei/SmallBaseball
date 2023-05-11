@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterCommand } from '../_commands/register.command';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,11 @@ export class RegisterComponent implements OnInit {
     passwordConfirmation: 'aa123456',
   };
   logining: boolean = false;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private alertify: AlertifyService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -28,6 +33,7 @@ export class RegisterComponent implements OnInit {
       .register(this.user)
       .pipe(finalize(() => (this.logining = false)))
       .subscribe((_) => {
+        this.alertify.success('Register success');
         this.router.navigate(['/']);
       });
   }

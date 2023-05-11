@@ -11,8 +11,8 @@ import { LoginCommand } from '../_commands/login.command';
 })
 export class LoginComponent {
   user: LoginCommand = {
-    email: 'fred@qq.com',
-    password: 'aa123456',
+    email: '',
+    password: '',
   };
   logining: boolean = false;
   constructor(
