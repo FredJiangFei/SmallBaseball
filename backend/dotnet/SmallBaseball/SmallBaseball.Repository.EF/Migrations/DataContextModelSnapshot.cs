@@ -17,6 +17,9 @@ namespace SmallBaseball.Repository.EF.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -43,6 +46,29 @@ namespace SmallBaseball.Repository.EF.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "7D9B7113-A8F8-4035-99A7-A20DD400F6A3",
+                            ConcurrencyStamp = "4629ed14-0205-4a8d-bb71-cd46b09115f9",
+                            Name = "User",
+                            NormalizedName = "User"
+                        },
+                        new
+                        {
+                            Id = "78A7570F-3CE5-48BA-9461-80283ED1D94D",
+                            ConcurrencyStamp = "c351dec4-2754-465e-8dae-94dd093c8a37",
+                            Name = "Manager",
+                            NormalizedName = "Manager"
+                        },
+                        new
+                        {
+                            Id = "2301D884-221A-4E7D-B509-0113DCC043E1",
+                            ConcurrencyStamp = "11142d5c-651e-428b-bea3-65cb1d548793",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -126,6 +152,13 @@ namespace SmallBaseball.Repository.EF.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
+                            RoleId = "2301D884-221A-4E7D-B509-0113DCC043E1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -263,6 +296,26 @@ namespace SmallBaseball.Repository.EF.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
+                            AccessFailedCount = 0,
+                            AthleteId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            ConcurrencyStamp = "a9388daa-0667-459f-b2cf-32be49c3efc8",
+                            Email = "Admin@sbb.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@SBB.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHzR/R9lT14vsI+x+wsP0+8mohk7otPQanLqGhekjxI/tUhUkwNQHUau3xOdSvPB2A==",
+                            PhoneNumber = "17792387996",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "00000000-0000-0000-0000-000000000000",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

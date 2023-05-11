@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SmallBaseball.Repository.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -237,6 +239,26 @@ namespace SmallBaseball.Repository.EF.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "11142d5c-651e-428b-bea3-65cb1d548793", "Admin", "Admin" },
+                    { "78A7570F-3CE5-48BA-9461-80283ED1D94D", "c351dec4-2754-465e-8dae-94dd093c8a37", "Manager", "Manager" },
+                    { "7D9B7113-A8F8-4035-99A7-A20DD400F6A3", "4629ed14-0205-4a8d-bb71-cd46b09115f9", "User", "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "AthleteId", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", 0, new Guid("00000000-0000-0000-0000-000000000000"), "a9388daa-0667-459f-b2cf-32be49c3efc8", "Admin@sbb.com", true, false, null, "ADMIN@SBB.COM", "ADMIN", "AQAAAAEAACcQAAAAEHzR/R9lT14vsI+x+wsP0+8mohk7otPQanLqGhekjxI/tUhUkwNQHUau3xOdSvPB2A==", "17792387996", true, "00000000-0000-0000-0000-000000000000", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2301D884-221A-4E7D-B509-0113DCC043E1", "B22698B8-42A2-4115-9631-1C2D1E2AC5F7" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
