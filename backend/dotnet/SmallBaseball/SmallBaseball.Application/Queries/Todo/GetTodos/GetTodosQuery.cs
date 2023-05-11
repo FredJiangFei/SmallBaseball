@@ -1,6 +1,4 @@
-﻿
-using SmallBaseball.Application.Models;
-using SmallBaseball.Application.Queries;
+﻿using SmallBaseball.Application.Models;
 
 namespace SmallBaseball.Application.Queries.User
 {

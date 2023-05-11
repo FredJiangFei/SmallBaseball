@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Shouldly;
-using SmallBaseball.Api.Models;
+﻿using SmallBaseball.API.Models;
 using SmallBaseball.Application.Commands.Todos;
 using SmallBaseball.Domain.Models.Aggregates.TodoAggregate;
 

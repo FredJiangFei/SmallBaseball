@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework.Internal;
+using SmallBaseball.API.Middlewares;
 using SmallBaseball.Infrastructure.Repository.EF;
-using SmallBaseball.Middlewares;
 using System.Reflection;
 
 namespace SmallBaseball.FunctionalTests

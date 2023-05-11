@@ -1,5 +1,5 @@
-﻿using SmallBaseball.Application.Exceptions;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using SmallBaseball.Application.Exceptions;
 using SmallBaseball.Application.Identity;
 using SmallBaseball.Application.Models;
 using SmallBaseball.Domain.Interfaces.Repository;

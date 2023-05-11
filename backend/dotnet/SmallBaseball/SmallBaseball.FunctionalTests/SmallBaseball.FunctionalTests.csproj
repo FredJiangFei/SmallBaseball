@@ -3,30 +3,43 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Autofac" Version="6.5.0" />
-	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
-	<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.8" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="NUnit" Version="3.13.3" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-    <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
-	<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.8" />
-	<PackageReference Include="Dapper" Version="2.0.123" />
-	<PackageReference Include="Shouldly" Version="4.1.0" />
-	<PackageReference Include="System.Text.Json" Version="7.0.2" />
+	  <PackageReference Include="Dapper" Version="2.0.123" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.8" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
+	  <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.8" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+	  <PackageReference Include="NUnit" Version="3.13.3" />
+	  <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
+	  <PackageReference Include="NUnit.Analyzers" Version="3.6.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="coverlet.collector" Version="3.2.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="Shouldly" Version="4.2.1" />
+	  <PackageReference Include="System.Text.Json" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SmallBaseball.Infrastructure.Repository.EF\SmallBaseball.Infrastructure.Repository.EF.csproj" />
-    <ProjectReference Include="..\SmallBaseball\SmallBaseball.csproj" />
+    <Folder Include="UserTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmallBaseball.API\SmallBaseball.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

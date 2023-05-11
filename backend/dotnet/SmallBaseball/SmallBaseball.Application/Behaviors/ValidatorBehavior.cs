@@ -4,8 +4,7 @@ using SmallBaseball.Application.Commands;
 
 namespace SmallBaseball.Application.Behaviors
 {
-    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : class, ICommand<TResponse>
+    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : class, ICommand<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 

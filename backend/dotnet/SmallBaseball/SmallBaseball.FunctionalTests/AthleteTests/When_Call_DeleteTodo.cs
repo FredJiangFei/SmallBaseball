@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Shouldly;
-using SmallBaseball.Api.Models;
+﻿using SmallBaseball.API.Models;
 using SmallBaseball.Domain.Models.Aggregates.TodoAggregate;
 
 namespace SmallBaseball.FunctionalTests.AthleteTests

@@ -27,11 +27,11 @@ namespace SmallBaseball.Application.Commands.UpdateUser
                 throw new Exception("Password invalid");
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            if(userRoles.IndexOf(UserRoles.Admin) == -1 && userRoles.IndexOf(UserRoles.Manager) == -1)
+            if (userRoles.IndexOf(UserRoles.Admin) == -1 && userRoles.IndexOf(UserRoles.Manager) == -1)
                 throw new Exception("No permission");
 
             var claims = new List<Claim>
-            {    
+            {
                 new Claim(ClaimTypes.Hash, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
@@ -48,6 +48,6 @@ namespace SmallBaseball.Application.Commands.UpdateUser
             };
         }
 
-       
+
     }
 }
