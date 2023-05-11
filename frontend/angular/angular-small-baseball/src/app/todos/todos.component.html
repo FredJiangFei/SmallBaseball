@@ -1,0 +1,9 @@
+<div>
+  <mat-card *ngFor="let todo of todos$ | async">
+    <div>{{ todo.title }}</div>
+  </mat-card>
+</div>
+
+<button class="fab-button" mat-fab type="button" (click)="showAddModal()">
+  <mat-icon fontIcon="add">add</mat-icon>
+</button>

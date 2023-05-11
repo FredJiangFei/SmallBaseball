@@ -1,50 +1,60 @@
-import { Injectable} from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpErrorResponse,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AlertifyService } from './alertify.service';
+import { AlertifyService } from '../_utils/alertify.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private alertify: AlertifyService) {
+  constructor(private alertify: AlertifyService) {}
 
-    }
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401) {
+            this.alertify.error(error.statusText);
+            return throwError(error.statusText);
+          }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(req).pipe(
-            catchError(error => {
-                if (error instanceof HttpErrorResponse) {
-                    if (error.status === 401) {
-                        this.alertify.error(error.statusText);
-                        return throwError(error.statusText);
-                    }
+          const applicationError = error.headers.get('Application-Error');
+          if (applicationError) {
+            this.alertify.error(applicationError);
+            return throwError(applicationError);
+          }
 
-                    const applicationError = error.headers.get('Application-Error');
-                    if (applicationError) {
-                        this.alertify.error(applicationError);
-                        return throwError(applicationError);
-                    }
+          const serverError = error.error;
+          let modalStateErrors = '';
+          if (serverError && typeof serverError === 'object') {
+            for (const key in serverError) {
+              if (serverError[key]) {
+                modalStateErrors += serverError[key] + '\n';
+              }
+            }
+          }
 
-                    const serverError = error.error;
-                    let modalStateErrors = '';
-                    if (serverError && typeof serverError === 'object') {
-                        for (const key in serverError) {
-                            if (serverError[key]) {
-                                modalStateErrors += serverError[key] + '\n';
-                            }
-                        }
-                    }
-
-                    this.alertify.error(modalStateErrors || serverError || 'Server Error');
-                    return throwError(modalStateErrors || serverError || 'Server Error');
-                }
-            })
-        );
-    }
+          this.alertify.error(
+            modalStateErrors || serverError || 'Server Error'
+          );
+          return throwError(modalStateErrors || serverError || 'Server Error');
+        }
+      })
+    );
+  }
 }
 
 export const ErrorInterceptorProvider = {
-    provide: HTTP_INTERCEPTORS,
-    useClass: ErrorInterceptor,
-    multi: true
+  provide: HTTP_INTERCEPTORS,
+  useClass: ErrorInterceptor,
+  multi: true,
 };

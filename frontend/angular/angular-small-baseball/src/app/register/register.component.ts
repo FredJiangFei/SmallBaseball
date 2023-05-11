@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterCommand } from '../_commands/register.command';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
-import { AlertifyService } from '../_services/alertify.service';
+import { AlertifyService } from '../_utils/alertify.service';
 
 @Component({
   selector: 'app-register',

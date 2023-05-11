@@ -5,8 +5,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { TodoComponent } from './todo/todo.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TodosComponent } from './todos/todos.component';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
-      { path: 'todos', component: TodoComponent },
+      { path: 'todos', component: TodosComponent },
     ],
   },
   { path: 'login', component: LoginComponent },
