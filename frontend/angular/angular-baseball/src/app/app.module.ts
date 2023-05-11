@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TodosComponent } from './todos/todos.component';
 import { NewTodoComponent } from './todos/new-todo/new-todo.component';
 import { DelModalComponent } from './todos/del-modal/del-modal.component';
+import { HttpInterceptorProvider } from './_services/http.interceptor';
+import { TodoComponent } from './todos/todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,12 @@ import { DelModalComponent } from './todos/del-modal/del-modal.component';
     DashboardComponent,
 
     TodosComponent,
+    TodoComponent,
     NewTodoComponent,
     DelModalComponent,
   ],
   imports: [BrowserModule, ShareModule, AppRoutingModule],
-  providers: [],
+  providers: [HttpInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

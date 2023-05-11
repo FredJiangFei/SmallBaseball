@@ -4,7 +4,8 @@
       <h1>Login</h1>
     </mat-card-header>
     <mat-card-content>
-      <mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
         <input
           matInput
           [(ngModel)]="user.email"
@@ -13,7 +14,8 @@
         />
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
         <input
           matInput
           type="password"
@@ -30,6 +32,7 @@
         mat-flat-button
         [disabled]="loginForm.invalid"
         [appSpinner]="logining"
+        color="primary"
       >
         Login
       </button>

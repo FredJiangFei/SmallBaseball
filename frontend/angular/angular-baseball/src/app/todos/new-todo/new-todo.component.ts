@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { finalize } from 'rxjs/operators';
-import { Todo } from 'src/app/_models/todo';
+import { TodoCommand } from 'src/app/_commands/todo.command';
 import { TodoService } from 'src/app/_services/todo.service';
 
 @Component({
@@ -10,20 +10,26 @@ import { TodoService } from 'src/app/_services/todo.service';
   styleUrls: ['./new-todo.component.css'],
 })
 export class NewTodoComponent {
-  todo: any;
+  todo: TodoCommand = {
+    title: '',
+  };
+
   saving: boolean = false;
 
   constructor(
     private dialogRef: MatDialogRef<NewTodoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Todo,
+    @Inject(MAT_DIALOG_DATA) public data: TodoCommand,
     private todoService: TodoService
   ) {}
 
   save() {
     this.saving = true;
-    const save$ = this.todoService.create(this.todo);
-    save$
+    this.todoService
+      .create(this.todo)
       .pipe(finalize(() => (this.saving = false)))
-      .subscribe((_) => this.dialogRef.close());
+      .subscribe((_) => {
+        this.todoService.getAll().subscribe();
+        this.dialogRef.close();
+      });
   }
 }

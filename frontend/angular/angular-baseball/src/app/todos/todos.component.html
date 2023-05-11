@@ -1,7 +1,7 @@
 <div>
-  <mat-card *ngFor="let todo of todos$ | async">
-    <div>{{ todo.title }}</div>
-  </mat-card>
+  <mat-list role="list">
+    <app-todo [todo]="todo" *ngFor="let todo of todos$ | async" />
+  </mat-list>
 </div>
 
 <button class="fab-button" mat-fab type="button" (click)="showAddModal()">

@@ -1,7 +1,6 @@
-<mat-list-item [ngClass]="{'todo-completed': todo.completed}">
-  <button mat-icon-button  (click)="showDeleteModal($event)" [disabled]="todo.completed">
-      <mat-icon>delete</mat-icon>
+<mat-list-item role="listitem">
+  <span>{{ todo.title }}</span>
+  <button mat-icon-button (click)="showDeleteModal($event)">
+    <mat-icon>delete</mat-icon>
   </button>
-  <mat-checkbox [(ngModel)]="todo.completed" (click)="toggleComplete($event)"></mat-checkbox>
-  <p matLine>{{todo.title}}</p>
 </mat-list-item>
