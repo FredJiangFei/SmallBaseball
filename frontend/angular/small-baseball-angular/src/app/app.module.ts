@@ -21,6 +21,7 @@ import { SpinnerDirective } from './_directives/spinner.directive';
 import { AvatarPipe } from './_pipes/avatar.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodoFilterPipe } from './_pipes/todo-filter.pipe';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { TodoFilterPipe } from './_pipes/todo-filter.pipe';
     SpinnerDirective,
 
     AvatarPipe,
-    TodoFilterPipe
+    TodoFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,7 @@ import { TodoFilterPipe } from './_pipes/todo-filter.pipe';
     ShareModule,
     AppRoutingModule,
   ],
-  providers: [HttpInterceptorProvider],
+  providers: [HttpInterceptorProvider, ErrorInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {
