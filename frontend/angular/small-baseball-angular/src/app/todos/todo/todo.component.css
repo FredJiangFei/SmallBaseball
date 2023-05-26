@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid lightgray;
+  margin-bottom: 5px;
+}
+
+.checked {
+  text-decoration: line-through;
+}

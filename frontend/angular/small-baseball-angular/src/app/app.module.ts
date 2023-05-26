@@ -19,6 +19,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { PasswordValidatorDirective } from './_directives/password.directive';
 import { SpinnerDirective } from './_directives/spinner.directive';
 import { AvatarPipe } from './_pipes/avatar.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,12 @@ import { AvatarPipe } from './_pipes/avatar.pipe';
 
     AvatarPipe,
   ],
-  imports: [BrowserModule, ShareModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ShareModule,
+    AppRoutingModule,
+  ],
   providers: [HttpInterceptorProvider],
   bootstrap: [AppComponent],
 })

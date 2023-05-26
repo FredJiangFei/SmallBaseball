@@ -1,6 +1,6 @@
 <mat-list-item role="listitem">
   <mat-checkbox (click)="handleToggle($event)" [checked]="todo.completed"></mat-checkbox>
-  <span>{{ todo.title }}</span>
+  <span [ngClass]="{'checked': todo.completed}">{{ todo.title }}</span>
   <button mat-icon-button (click)="handleDelete($event)">
     <mat-icon>delete</mat-icon>
   </button>
