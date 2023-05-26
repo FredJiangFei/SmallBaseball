@@ -17,6 +17,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PasswordValidatorDirective } from './_directives/password.directive';
+import { SpinnerDirective } from './_directives/spinner.directive';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PasswordValidatorDirective } from './_directives/password.directive';
     ChangePasswordComponent,
 
     PasswordValidatorDirective,
+    SpinnerDirective
   ],
   imports: [BrowserModule, ShareModule, AppRoutingModule],
   providers: [HttpInterceptorProvider],
