@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <div class="container">
+    <span [routerLink]="['/']" class="hand"
+      >Hello {{ user?.FirstName }} {{ user?.LastName }}</span
+    >
+    <button mat-button [routerLink]="['/todos']">Todos</button>
+    <span style="flex: 1"></span>
+    <mat-icon [routerLink]="['/profile']" [svgIcon]="'boy'" class="avatar hand"></mat-icon>
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,46 @@
+<div style="width: 30%">
+  <form #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+    <h1 class="text-center">Login</h1>
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="user.email"
+        name="email"
+        #email="ngModel"
+        required
+      />
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+        <span *ngIf="email.errors?.['required']">Email is required</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Password</mat-label>
+      <input
+        required
+        matInput
+        type="password"
+        [(ngModel)]="user.password"
+        name="password"
+        #password="ngModel"
+      />
+      <mat-error
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+      >
+        <span *ngIf="password.errors?.['required']">Password is required</span>
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-flat-button
+      [disabled]="loginForm.invalid"
+      color="primary"
+      class="full-width"
+    >
+      Login
+    </button>
+    <div class="text-center">
+      <a [routerLink]="['/register']">Register</a>
+    </div>
+  </form>
+</div>
