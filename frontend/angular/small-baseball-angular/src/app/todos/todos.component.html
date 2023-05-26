@@ -1,11 +1,19 @@
 <h1>Todos</h1>
-<div style="padding:0 16px">
+<div style="padding: 0 16px">
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(value)]="filterStatus">
+      <mat-option *ngFor="let s of status" [value]="s">
+        {{ s }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <button mat-raised-button color="primary" (click)="handleAdd()">Add</button>
   <div>
     <mat-list role="list">
       <app-todo
         [todo]="todo"
-        *ngFor="let todo of todos$ | async"
+        *ngFor="let todo of todos$ | async | todoFilter : filterStatus"
         (onDelete)="handleDelete($event)"
         (onToggle)="handleToggle($event)"
       />

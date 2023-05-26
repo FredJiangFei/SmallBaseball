@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatListModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatSelectModule,
   ],
 })
 export class ShareModule {}

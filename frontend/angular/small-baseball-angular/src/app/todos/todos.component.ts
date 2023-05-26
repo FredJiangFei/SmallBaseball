@@ -13,6 +13,9 @@ import { TodoCommand } from '../_commands/todo.command';
 })
 export class TodosComponent implements OnInit {
   todos$ = this.todoService.todos$;
+  status: string[] = ['All', 'Completed', 'Uncompleted'];
+  filterStatus: string = 'All';
+
   constructor(
     private todoService: TodoService,
     private dialog: MatDialog,

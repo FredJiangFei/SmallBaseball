@@ -20,6 +20,7 @@ import { PasswordValidatorDirective } from './_directives/password.directive';
 import { SpinnerDirective } from './_directives/spinner.directive';
 import { AvatarPipe } from './_pipes/avatar.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TodoFilterPipe } from './_pipes/todo-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SpinnerDirective,
 
     AvatarPipe,
+    TodoFilterPipe
   ],
   imports: [
     BrowserModule,
