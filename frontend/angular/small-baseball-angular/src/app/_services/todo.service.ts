@@ -20,7 +20,6 @@ export class TodoService {
   }
 
   create(data: any) {
-    console.log(data);
     return this.http.post<Todo>(`${environment.baseUrl}/todos`, data);
   }
 
@@ -30,6 +29,14 @@ export class TodoService {
         let todos = this.todosSubject.value;
         todos = todos.filter((todo) => todo.id !== id);
         this.todosSubject.next(todos);
+      })
+    );
+  }
+
+  toggleTodo(id: string) {
+    return this.http.put(`${environment.baseUrl}/todos/${id}/toggle`, null).pipe(
+      tap((_) => {
+        this.getAll().subscribe();
       })
     );
   }

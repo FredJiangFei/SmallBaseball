@@ -35,6 +35,18 @@ namespace SmallBaseball.Controllers
             return ResponseResult.FromValue(result);
         }
 
+        [HttpPut("{id}/toggle")]
+        public async Task<ResponseResult> ToggleTodo([FromRoute] Guid id)
+        {
+            var command = new ToggleTodoCommand
+            {
+                Id = id,
+                UserId = UserId
+            };
+            await _mediator.Send(command);
+            return ResponseResult.Ok();
+        }
+
         [HttpDelete("{id}")]
         public async Task<ResponseResult> Delete([FromRoute] Guid id)
         {

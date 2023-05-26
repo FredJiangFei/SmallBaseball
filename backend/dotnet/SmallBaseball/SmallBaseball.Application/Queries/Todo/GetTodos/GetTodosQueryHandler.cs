@@ -14,7 +14,8 @@ namespace SmallBaseball.Application.Queries.User
         {
             var sql = @"SELECT 
                             Todos.Id,
-                            Todos.Title
+                            Todos.Title,
+                            Todos.Completed
                         FROM Todos
                         WHERE Todos.AthleteId = @UserId;";
             var todos = await ExecuteAsync(conn => conn.QueryAsync<TodoModel>(sql, request));

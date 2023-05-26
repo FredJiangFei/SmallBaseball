@@ -29,5 +29,11 @@ namespace SmallBaseball.Domain.Models.Aggregates.TodoAggregate
             var todo = Todos.Find(x => x.Id == id);
             Todos.Remove(todo);
         }
+
+        public void ToggleTodo(Guid id)
+        {
+            var todo = Todos.Find(x => x.Id == id);
+            todo.Toggle();
+        }
     }
 }

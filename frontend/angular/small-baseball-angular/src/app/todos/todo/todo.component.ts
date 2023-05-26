@@ -9,9 +9,15 @@ import { Todo } from 'src/app/_models/todo';
 export class TodoComponent {
   @Input() todo: Todo;
   @Output() onDelete = new EventEmitter<string>();
+  @Output() onToggle = new EventEmitter<string>();
 
   handleDelete(e: Event) {
     e.stopPropagation();
     this.onDelete.emit(this.todo.id);
+  }
+
+  handleToggle(e: Event) {
+    e.stopPropagation();
+    this.onToggle.emit(this.todo.id);
   }
 }

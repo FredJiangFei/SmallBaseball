@@ -7,6 +7,7 @@ namespace SmallBaseball.Domain.Models.Aggregates.TodoAggregate
     {
         public string Title { get; set; }
         public Guid AthleteId { get; set; }
+        public bool Completed { get; set; }
 
         public static Todo Create(string title)
         {
@@ -19,6 +20,11 @@ namespace SmallBaseball.Domain.Models.Aggregates.TodoAggregate
             {
                 Title = title,
             };
+        }
+
+        internal void Toggle()
+        {
+            this.Completed = !this.Completed;
         }
     }
 }

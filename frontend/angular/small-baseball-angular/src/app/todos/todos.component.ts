@@ -42,6 +42,12 @@ export class TodosComponent implements OnInit {
     });
   }
 
+  handleToggle(id: string) {
+    this.todoService.toggleTodo(id).subscribe(() => {
+      this.alertify.success('Todo toggle successfully');
+    });
+  }
+
   ngOnInit() {
     this.todoService.getAll().subscribe();
   }
