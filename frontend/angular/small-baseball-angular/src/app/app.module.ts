@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PasswordValidatorDirective } from './_directives/password.directive';
 import { SpinnerDirective } from './_directives/spinner.directive';
+import { AvatarPipe } from './_pipes/avatar.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { SpinnerDirective } from './_directives/spinner.directive';
     ChangePasswordComponent,
 
     PasswordValidatorDirective,
-    SpinnerDirective
+    SpinnerDirective,
+
+    AvatarPipe,
   ],
   imports: [BrowserModule, ShareModule, AppRoutingModule],
   providers: [HttpInterceptorProvider],
