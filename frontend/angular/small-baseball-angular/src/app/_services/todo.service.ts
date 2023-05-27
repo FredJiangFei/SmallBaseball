@@ -34,10 +34,12 @@ export class TodoService {
   }
 
   toggleTodo(id: string) {
-    return this.http.put(`${environment.baseUrl}/todos/${id}/toggle`, null).pipe(
-      tap((_) => {
-        this.getAll().subscribe();
-      })
-    );
+    return this.http
+      .put(`${environment.baseUrl}/todos/${id}/toggle`, null)
+      .pipe(
+        tap((_) => {
+          this.getAll().subscribe();
+        })
+      );
   }
 }
