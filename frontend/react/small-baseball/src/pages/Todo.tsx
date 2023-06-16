@@ -31,15 +31,22 @@ function Todo() {
     getTodos();
   };
 
+  const handleEdit = async (todo: any) => {
+    todo.title = todo.title + ' edited';
+    await todoService.update(todo, todo.id);
+    getTodos();
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <h1>Todos</h1>
       {todos &&
         todos.map((todo: any) => (
-          <div key={todo.id}>
+          <Box key={todo.id} my={1}>
             <span>{todo.title}</span>
             <Button onClick={() => handleDelete(todo.id)}>X</Button>
-          </div>
+            <Button variant="contained" onClick={() => handleEdit(todo)}>Edit</Button>
+          </Box>
         ))}
       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
         <TextField

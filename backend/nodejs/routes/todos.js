@@ -8,7 +8,7 @@ const validateObjectId = require('../middleware/validateObjectId');
 const Joi = require('joi');
 
 router.get('/', [auth], async (req, res) => {
-  const todos = await Todo.find({});
+  const todos = await Todo.find().select('-__v -_id');
   res.send({
     value: todos,
   });
@@ -16,6 +16,17 @@ router.get('/', [auth], async (req, res) => {
 
 router.post('/', [auth, validate(validateTodo)], async (req, res) => {
   let todo = await Todo.add(req.body);
+  res.send(todo);
+});
+
+router.put('/:id', [auth], async (req, res) => {
+  const todo = await Todo.findByIdAndUpdate(
+    req.params.id,
+    {
+      title: req.body.title,
+    },
+    { new: true }
+  ).select('-__v -_id');
   res.send(todo);
 });
 
