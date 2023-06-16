@@ -10,6 +10,7 @@ import SignUp from './pages/auth/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
 import Todo from './pages/Todo';
+import Chat from './pages/Chat';
 
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
         element: <Todo />,
       },
       {
+        path: 'chat',
+        element: <Chat />,
+      },
+      {
         path: 'reset-password',
         element: <ResetPassword />,
       },
@@ -49,7 +54,7 @@ const routes = [
       {
         path: 'sign-up',
         element: <SignUp />,
-      }
+      },
     ],
   },
   {
