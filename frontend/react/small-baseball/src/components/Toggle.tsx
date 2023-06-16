@@ -1,22 +1,22 @@
-import React from 'react';
 import { Switch } from './switch/switch';
+import { ToggleProvider } from '../contexts/ToggleContext';
+import useToggle from '../hooks/useToggle';
 
 export function Toggle({ children }: any) {
-  const [on, setOn] = React.useState(false);
-  const toggle = () => setOn(!on);
-  return React.Children.map(children, child => {
-    return typeof child.type === 'string' ? child : React.cloneElement(child, { on, toggle });
-  });
+  return <ToggleProvider>{children}</ToggleProvider>;
 }
 
-export function ToggleOn({ on, children }: any) {
+export function ToggleOn({ children }: any) {
+  const { on } = useToggle();
   return on ? children : null;
 }
 
-export function ToggleOff({ on, children }: any) {
+export function ToggleOff({ children }: any) {
+  const { on } = useToggle();
   return on ? null : children;
 }
 
-export function ToggleButton({ on, toggle, ...props }: any) {
+export function ToggleButton({ ...props }: any) {
+  const { on, toggle } = useToggle();
   return <Switch on={on} onClick={toggle} {...props} />;
 }
