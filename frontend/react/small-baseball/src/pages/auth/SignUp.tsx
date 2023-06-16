@@ -4,6 +4,7 @@ import userService from '../../services/userService';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SfLink from '../../components/SfLink';
+import { Toggle, ToggleButton, ToggleOff, ToggleOn } from '../../components/Toggle';
 
 const schema = Yup.object().shape({
   email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -104,11 +105,17 @@ function SignUp() {
           error={Boolean(touched.passwordConfirmation && errors.passwordConfirmation)}
           helperText={touched.passwordConfirmation && errors.passwordConfirmation}
         />
+        <Toggle>
+          <span>Open to join team: </span>
+          <ToggleOn></ToggleOn>
+          <ToggleOff></ToggleOff>
+          <ToggleButton />
+        </Toggle>
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
           Sign Up
         </Button>
         <Grid container>
-          <Grid item display='flex' flex={1} justifyContent='center'>
+          <Grid item display="flex" flex={1} justifyContent="center">
             <SfLink to="/auth/sign-in"> Sign In</SfLink>
           </Grid>
         </Grid>
