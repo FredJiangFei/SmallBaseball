@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import { THEMES } from '../constants';
 
-const initialState = {
+interface IThemeContext {
+  theme: string;
+  setTheme: (theme: string) => void;
+}
+
+const initialState: IThemeContext = {
   theme: THEMES.DEFAULT,
-  setTheme: (theme: string) => {},
+  setTheme: () => {},
 };
-const ThemeContext = React.createContext(initialState);
+
+const ThemeContext = React.createContext<IThemeContext>(initialState);
 
 type Props = {
   children: React.ReactNode;
 };
 
 function ThemeProvider({ children }: Props) {
-  const initialState = () => {
-    const storedTheme = localStorage.getItem('theme');
-    return storedTheme ? JSON.parse(storedTheme) : THEMES.DEFAULT;
-  };
-
-  const [theme, _setTheme] = useState<string>(initialState());
-
-  const setTheme = (theme: string) => {
-    localStorage.setItem('theme', JSON.stringify(theme));
-    _setTheme(theme);
-  };
-
+  const [theme, setTheme] = useState<string>(THEMES.DEFAULT);
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
 }
 

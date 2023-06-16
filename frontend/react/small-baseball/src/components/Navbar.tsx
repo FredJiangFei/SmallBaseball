@@ -2,9 +2,12 @@ import * as React from 'react';
 import useAuth from '../hooks/useAuth';
 import { AppBar, Avatar, Box, Button, Toolbar, Typography } from '@mui/material';
 import SfLink from './SfLink';
+import useTheme from '../hooks/useTheme';
+import { THEMES } from '../constants';
 
 const Navbar: React.FC = () => {
   const { signOut } = useAuth();
+  const { theme, setTheme } = useTheme();
 
   return (
     <AppBar position="sticky">
@@ -27,6 +30,11 @@ const Navbar: React.FC = () => {
         </SfLink>
         <Button onClick={signOut} color="inherit">
           Logout
+        </Button>
+        <Button
+          onClick={() => setTheme(theme === THEMES.DEFAULT ? THEMES.DARK : THEMES.DEFAULT)}
+          color="inherit">
+          {theme === THEMES.DEFAULT ? '🌞' : '🌙'}
         </Button>
       </Toolbar>
     </AppBar>
