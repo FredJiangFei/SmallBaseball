@@ -3,6 +3,7 @@ import React from 'react';
 interface IToggleContext {
   on: boolean;
   toggle: () => void;
+  togglerProps: any;
 }
 
 // @ts-ignore
@@ -15,7 +16,15 @@ type Props = {
 function ToggleProvider({ children }: Props) {
   const [on, setOn] = React.useState(false);
   const toggle = () => setOn(!on);
-  return <ToggleContext.Provider value={{ on, toggle }}>{children}</ToggleContext.Provider>;
+
+  const togglerProps = {
+    'aria-pressed': on,
+    onClick: toggle,
+  };
+
+  return (
+    <ToggleContext.Provider value={{ on, toggle, togglerProps }}>{children}</ToggleContext.Provider>
+  );
 }
 
 export { ToggleProvider, ToggleContext };

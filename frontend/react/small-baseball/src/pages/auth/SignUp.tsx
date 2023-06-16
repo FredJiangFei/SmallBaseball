@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SfLink from '../../components/SfLink';
 import { Toggle, ToggleButton, ToggleOff, ToggleOn } from '../../components/Toggle';
+import { Switch } from '../../components/switch/switch';
+import useToggleProps from '../../hooks/useToggleProps';
 
 const schema = Yup.object().shape({
   email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -18,6 +20,7 @@ const schema = Yup.object().shape({
 
 function SignUp() {
   const navigate = useNavigate();
+  const { on, togglerProps } = useToggleProps();
 
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
     initialValues: {
@@ -105,12 +108,21 @@ function SignUp() {
           error={Boolean(touched.passwordConfirmation && errors.passwordConfirmation)}
           helperText={touched.passwordConfirmation && errors.passwordConfirmation}
         />
-        <Toggle>
+        {/* <Toggle>
           <span>Open to join team: </span>
           <ToggleOn></ToggleOn>
           <ToggleOff></ToggleOff>
-          <ToggleButton />
-        </Toggle>
+          <div>
+            <ToggleButton />
+          </div>
+        </Toggle> */}
+
+        <Switch on={on} {...togglerProps} />
+        <hr />
+        <Button type="button" variant="contained" aria-label="custom-button" {...togglerProps}>
+          {on ? 'on' : 'off'}
+        </Button>
+
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
           Sign Up
         </Button>
