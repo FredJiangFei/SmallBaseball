@@ -8,6 +8,10 @@ import { Toggle, ToggleButton, ToggleOff, ToggleOn } from '../../components/Togg
 import { Switch } from '../../components/switch/switch';
 import useToggleProps from '../../hooks/useToggleProps';
 import React from 'react';
+import { useForceRerender } from '../../utils/utils';
+import { getItems } from '../../utils/filter-cities';
+import { useCombobox } from '../../hooks/useCombobox';
+import { SfMenu } from '../../components/SfMenu';
 
 const loadGlobe = () => import('../../components/globe');
 const Globe = React.lazy(loadGlobe);
@@ -43,6 +47,27 @@ function SignUp() {
     await userService.register(values);
     navigate('/auth/sign-in');
   };
+
+  const forceRerender = useForceRerender();
+  const [inputValue, setInputValue] = React.useState('');
+
+  const allItems = React.useMemo(() => getItems(inputValue), [inputValue]);
+  const items = allItems.slice(0, 100);
+
+  const {
+    selectedItem,
+    highlightedIndex,
+    getInputProps,
+    getItemProps,
+    getLabelProps,
+    getMenuProps,
+    selectItem,
+  }: any = useCombobox({
+    items,
+    inputValue,
+    onInputValueChange: ({ inputValue: newValue }: any) => setInputValue(newValue),
+    itemToString: (item: any) => (item ? item.name : ''),
+  });
 
   return (
     <>
@@ -140,6 +165,25 @@ function SignUp() {
           <React.Suspense fallback={<div>loading globe...</div>}>
             {showGlobe ? <Globe /> : null}
           </React.Suspense>
+        </div>
+        <div className="city-app">
+          <button onClick={forceRerender}>force rerender</button>
+          <div>
+            <label {...getLabelProps()}>Find a city</label>
+            <div>
+              <input {...getInputProps({ type: 'text' })} />
+              <button type='button' onClick={() => selectItem(null)} aria-label="toggle menu">
+                &#10005;
+              </button>
+            </div>
+            <SfMenu
+              items={items}
+              getMenuProps={getMenuProps}
+              getItemProps={getItemProps}
+              highlightedIndex={highlightedIndex}
+              selectedItem={selectedItem}
+            />
+          </div>
         </div>
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
           Sign Up
