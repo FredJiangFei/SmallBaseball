@@ -7,6 +7,10 @@ import SfLink from '../../components/SfLink';
 import { Toggle, ToggleButton, ToggleOff, ToggleOn } from '../../components/Toggle';
 import { Switch } from '../../components/switch/switch';
 import useToggleProps from '../../hooks/useToggleProps';
+import React from 'react';
+
+const loadGlobe = () => import('../../components/globe');
+const Globe = React.lazy(loadGlobe);
 
 const schema = Yup.object().shape({
   email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -21,6 +25,7 @@ const schema = Yup.object().shape({
 function SignUp() {
   const navigate = useNavigate();
   const { on, togglerProps } = useToggleProps();
+  const [showGlobe, setShowGlobe] = React.useState(false);
 
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
     initialValues: {
@@ -123,6 +128,19 @@ function SignUp() {
           {on ? 'on' : 'off'}
         </Button>
 
+        <div>
+          <label style={{ marginBottom: '1rem' }}>
+            <input
+              type="checkbox"
+              checked={showGlobe}
+              onChange={e => setShowGlobe(e.target.checked)}
+            />
+            {' Choose my location'}
+          </label>
+          <React.Suspense fallback={<div>loading globe...</div>}>
+            {showGlobe ? <Globe /> : null}
+          </React.Suspense>
+        </div>
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
           Sign Up
         </Button>
