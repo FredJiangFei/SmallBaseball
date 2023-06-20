@@ -4,13 +4,6 @@ import userService from '../../services/userService';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import SfLink from '../../components/SfLink';
-import { Toggle, ToggleButton, ToggleOff, ToggleOn } from '../../components/Toggle';
-import { Switch } from '../../components/switch/switch';
-import useToggleProps from '../../hooks/useToggleProps';
-import React from 'react';
-
-const loadGlobe = () => import('../../components/globe');
-const Globe = React.lazy(loadGlobe);
 
 const schema = Yup.object().shape({
   email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -24,9 +17,6 @@ const schema = Yup.object().shape({
 
 function SignUp() {
   const navigate = useNavigate();
-  const { on, togglerProps } = useToggleProps();
-  const [showGlobe, setShowGlobe] = React.useState(false);
-
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
     initialValues: {
       email: '',
@@ -113,34 +103,6 @@ function SignUp() {
           error={Boolean(touched.passwordConfirmation && errors.passwordConfirmation)}
           helperText={touched.passwordConfirmation && errors.passwordConfirmation}
         />
-        {/* <Toggle>
-          <span>Open to join team: </span>
-          <ToggleOn></ToggleOn>
-          <ToggleOff></ToggleOff>
-          <div>
-            <ToggleButton />
-          </div>
-        </Toggle> */}
-
-        <Switch on={on} {...togglerProps} />
-        <hr />
-        <Button type="button" variant="contained" aria-label="custom-button" {...togglerProps}>
-          {on ? 'on' : 'off'}
-        </Button>
-
-        <div>
-          <label style={{ marginBottom: '1rem' }}>
-            <input
-              type="checkbox"
-              checked={showGlobe}
-              onChange={e => setShowGlobe(e.target.checked)}
-            />
-            {' Choose my location'}
-          </label>
-          <React.Suspense fallback={<div>loading globe...</div>}>
-            {showGlobe ? <Globe /> : null}
-          </React.Suspense>
-        </div>
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
           Sign Up
         </Button>

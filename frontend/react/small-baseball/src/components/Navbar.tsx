@@ -20,12 +20,7 @@ const Navbar: React.FC = () => {
           </Typography>
           <Typography variant="h6" component="div" mr={1}>
             <SfLink to="/todos" color="white">
-              Todos |
-            </SfLink>
-          </Typography>
-          <Typography variant="h6" component="div" mr={1}>
-            <SfLink to="/chat" color="white">
-              Chat
+              Todos
             </SfLink>
           </Typography>
         </Box>
