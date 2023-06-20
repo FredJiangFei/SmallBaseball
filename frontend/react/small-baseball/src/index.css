@@ -10,3 +10,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.city-app ul {
+  height: 150px;
+  width: 300px;
+  overflow-y: scroll;
+  background-color: #eee;
+  padding: 0;
+  list-style: none;
+  position: relative;
+}
+
+.city-app ul li {
+  height: 20px;
+}

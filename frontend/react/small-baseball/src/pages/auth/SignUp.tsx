@@ -11,6 +11,7 @@ import React from 'react';
 import { getItems } from '../../utils/filter-cities';
 import { useCombobox } from '../../hooks/useCombobox';
 import SfMenu from '../../components/SfMenu';
+import SfAge from '../../components/SfAge';
 
 const loadGlobe = () => import('../../components/globe');
 const Globe = React.lazy(loadGlobe);
@@ -135,6 +136,8 @@ function SignUp() {
           error={Boolean(touched.passwordConfirmation && errors.passwordConfirmation)}
           helperText={touched.passwordConfirmation && errors.passwordConfirmation}
         />
+
+        <SfAge />
         {/* <Toggle>
           <span>Open to join team: </span>
           <ToggleOn></ToggleOn>
