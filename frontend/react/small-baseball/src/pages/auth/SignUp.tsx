@@ -8,10 +8,9 @@ import { Toggle, ToggleButton, ToggleOff, ToggleOn } from '../../components/Togg
 import { Switch } from '../../components/switch/switch';
 import useToggleProps from '../../hooks/useToggleProps';
 import React from 'react';
-import { useForceRerender } from '../../utils/utils';
 import { getItems } from '../../utils/filter-cities';
 import { useCombobox } from '../../hooks/useCombobox';
-import { SfMenu } from '../../components/SfMenu';
+import SfMenu from '../../components/SfMenu';
 
 const loadGlobe = () => import('../../components/globe');
 const Globe = React.lazy(loadGlobe);
@@ -48,7 +47,6 @@ function SignUp() {
     navigate('/auth/sign-in');
   };
 
-  const forceRerender = useForceRerender();
   const [inputValue, setInputValue] = React.useState('');
 
   const allItems = React.useMemo(() => getItems(inputValue), [inputValue]);
@@ -59,7 +57,6 @@ function SignUp() {
     highlightedIndex,
     getInputProps,
     getItemProps,
-    getLabelProps,
     getMenuProps,
     selectItem,
   }: any = useCombobox({
@@ -167,15 +164,12 @@ function SignUp() {
           </React.Suspense>
         </div>
         <div className="city-app">
-          <button onClick={forceRerender}>force rerender</button>
           <div>
-            <label {...getLabelProps()}>Find a city</label>
-            <div>
-              <input {...getInputProps({ type: 'text' })} />
-              <button type='button' onClick={() => selectItem(null)} aria-label="toggle menu">
-                &#10005;
-              </button>
-            </div>
+            <label>Find a city: </label>
+            <input {...getInputProps({ type: 'text' })} />
+            <button type="button" onClick={() => selectItem(null)} aria-label="toggle menu">
+              &#10005;
+            </button>
             <SfMenu
               items={items}
               getMenuProps={getMenuProps}
