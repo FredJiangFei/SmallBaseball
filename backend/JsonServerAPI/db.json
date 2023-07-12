@@ -1,0 +1,35 @@
+{
+  "leagues": [
+    {
+      "rank": 1,
+      "leagueId": 1,
+      "id": 1,
+      "leagueNo": "123",
+      "name": "X1",
+      "qq": "326126515",
+      "chargeManId": 1,
+      "membersNumber": 6,
+      "description": "A big league",
+      "members": [
+        {
+          "leagueUserId": 1,
+          "userId": 2,
+          "nickName": "fred",
+          "createTime": "2015-01-01 00:00:00"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "leagueId": 2,
+      "id": 2,
+      "leagueNo": "456",
+      "name": "X2",
+      "qq": "4564564564",
+      "chargeManId": 2,
+      "membersNumber": 16,
+      "description": "A small league"
+    }
+  ],
+  "users": []
+}
