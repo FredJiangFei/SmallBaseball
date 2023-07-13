@@ -2,6 +2,7 @@ using FluentValidation;
 using Serilog;
 using SmallBaseball.API.Extensions;
 using SmallBaseball.API.Middlewares;
+using SmallBaseball.Application;
 using SmallBaseball.Application.Commands;
 
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 builder.Host.UseSerilog();
 
+builder.Services.AddSignalR();
 builder.Services.AddCorsEx();
 builder.Services.AddMediatREx();
 builder.Services.AddValidatorsFromAssembly(typeof(ICommand<>).Assembly);
@@ -38,6 +40,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseMigration();
+app.MapHub<ChartRoomHub>("/Hubs/ChatRoomHub");
 app.Run();
 
 public partial class Program { }
