@@ -23,4 +23,9 @@ const getUser = () => {
   return user;
 };
 
-export { isValidToken, setSession, removeSession, getUser };
+const getJwt = () => {
+  const token = window.localStorage.getItem(tokenKey);
+  return token;
+};
+
+export { isValidToken, setSession, removeSession, getUser, getJwt };

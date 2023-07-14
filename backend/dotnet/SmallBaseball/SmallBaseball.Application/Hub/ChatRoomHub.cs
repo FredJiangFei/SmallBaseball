@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using SmallBaseball.Application.Models;
+using System.Security.Claims;
 
 namespace SmallBaseball.Application
 {
-    public class ChartRoomHub : Hub
+    [Authorize]
+    public class ChatRoomHub : Hub
     {
         public override Task OnConnectedAsync()
         {
@@ -17,11 +20,12 @@ namespace SmallBaseball.Application
 
         public Task SendMessage(string message)
         {
-            string connId = this.Context.ConnectionId;
+            string firstName = this.Context.User.FindFirstValue("FirstName");
+            string lastName = this.Context.User.FindFirstValue("LastName");
             var msg = new MessageModel
             {
                 Id = Guid.NewGuid(),
-                Message = message,
+                Message = $"{firstName} {lastName} {DateTime.Now}:{message}",
             };
 
             return Clients.All.SendAsync("ReceiveMessage", msg);

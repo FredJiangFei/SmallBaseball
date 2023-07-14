@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
 import * as signalR from '@microsoft/signalr';
+import { getJwt } from '../utils/jwt';
 
 export default function useSignalR(onReceiveMessage: Function) {
   const [hubConnection, setHubConnection] = useState<signalR.HubConnection | null>(null);
+  const jwt: any = getJwt();
 
   useEffect(() => {
-    const options = { skipNegotiation: true, transport: signalR.HttpTransportType.WebSockets };
+    const options = {
+      skipNegotiation: true,
+      transport: signalR.HttpTransportType.WebSockets,
+      accessTokenFactory: () => jwt,
+    };
     const newConnection = new signalR.HubConnectionBuilder()
       .withUrl(`http://localhost:52384/Hubs/ChatRoomHub`, options)
       .withAutomaticReconnect()

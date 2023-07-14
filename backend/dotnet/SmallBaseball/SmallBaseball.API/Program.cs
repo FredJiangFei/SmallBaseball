@@ -38,7 +38,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseMigration();
-app.MapHub<ChartRoomHub>("/Hubs/ChatRoomHub");
+app.MapHub<ChatRoomHub>("/Hubs/ChatRoomHub");
 app.Run();
 
 public partial class Program { }
