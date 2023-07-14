@@ -1,44 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as signalR from '@microsoft/signalr';
-import { Button } from '@mui/material';
+import { useState } from 'react';
+import { Button, TextField } from '@mui/material';
+import useSignalR from '../hooks/useSignalR';
 
-function Chat() {
+const Chat = () => {
   const [messages, setMessages] = useState<any[]>([]);
-  const connect = useRef<any>(null);
-
-  useEffect(() => {
-    initHub();
-  }, []);
-
-  const initHub = async () => {
-    connect.current = new signalR.HubConnectionBuilder()
-      .withUrl(`http://localhost:52384/Hubs/ChatRoomHub`)
-      .withAutomaticReconnect()
-      .build();
-
-    await connect.current.start();
-  };
-
-  connect.current?.on('ReceiveMessage', (message: any) => {
-    console.log(message);
-    const newMessage = [...messages, message];
-    setMessages(newMessage);
-  });
+  const [text, setText] = useState('');
+  const hubConnection = useSignalR((res: any) => setMessages(pre => [...pre, res]));
 
   const sendMessage = async () => {
-    await connect.current?.invoke('SendMessage', 'test 123');
+    await hubConnection?.invoke('SendMessage', text);
   };
 
   return (
     <>
       <h1>Chat</h1>
-      {messages.map((message: any) => () => <p>{message}</p>)}
+      {messages.map((m: any) => (
+        <p key={m.id}>{m.message}</p>
+      ))}
 
+      <TextField onChange={e => setText(e.target.value)} />
       <Button variant="contained" onClick={sendMessage}>
         Send
       </Button>
     </>
   );
-}
+};
 
 export default Chat;
