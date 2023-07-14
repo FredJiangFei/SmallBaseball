@@ -10,6 +10,12 @@ const Chat = () => {
 
   const sendMessage = async () => {
     await hubConnection?.invoke('SendMessage', text);
+    setText('');
+  };
+
+  const sendPrivateMessage = async () => {
+    await hubConnection?.invoke('SendPrivateMessage', '43482b9e-e84a-44ef-b639-d9b65e082333', text);
+    setText('');
   };
 
   return (
@@ -22,6 +28,9 @@ const Chat = () => {
       <TextField onChange={e => setText(e.target.value)} />
       <Button variant="contained" onClick={sendMessage}>
         Send
+      </Button>
+      <Button variant="contained" onClick={sendPrivateMessage}>
+        Send Private Message
       </Button>
     </>
   );

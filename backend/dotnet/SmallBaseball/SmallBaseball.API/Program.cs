@@ -1,5 +1,6 @@
 using FluentValidation;
 using Serilog;
+using SmallBase.Cache;
 using SmallBaseball.API.Extensions;
 using SmallBaseball.API.Middlewares;
 using SmallBaseball.Application;
@@ -11,6 +12,9 @@ Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configurat
 builder.Host.UseSerilog();
 
 builder.Services.AddSignalR();
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
+
 builder.Services.AddCorsEx();
 builder.Services.AddMediatREx();
 builder.Services.AddValidatorsFromAssembly(typeof(ICommand<>).Assembly);

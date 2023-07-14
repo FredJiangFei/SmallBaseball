@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\SmallBase.Cache\SmallBase.Cache.csproj" />
 		<ProjectReference Include="..\SmallBaseball.Interfaces\SmallBaseball.Interfaces.csproj" />
 		<ProjectReference Include="..\SmallBaseball.Models\SmallBaseball.Models.csproj" />
 		<ProjectReference Include="..\SmallBaseball.Repository.EF\SmallBaseball.Repository.EF.csproj" />

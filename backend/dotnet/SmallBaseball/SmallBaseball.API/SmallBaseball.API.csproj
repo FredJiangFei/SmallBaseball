@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\SmallBase.Cache\SmallBase.Cache.csproj" />
 		<ProjectReference Include="..\SmallBaseball.Application\SmallBaseball.Application.csproj" />
 		<ProjectReference Include="..\SmallBaseball.Repository.EF\SmallBaseball.Repository.EF.csproj" />
 	</ItemGroup>
