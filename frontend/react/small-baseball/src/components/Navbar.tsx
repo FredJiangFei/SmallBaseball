@@ -24,8 +24,8 @@ const Navbar: React.FC = () => {
             </SfLink>
           </Typography>
           <Typography variant="h6" component="div" mr={1}>
-            <SfLink to="/chat" color="white">
-              Chat
+            <SfLink to="/user" color="white">
+              User |
             </SfLink>
           </Typography>
         </Box>

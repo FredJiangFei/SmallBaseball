@@ -15,10 +15,15 @@ const resetPassword = (command: ResetPassowrdCommand) => {
   return axios.put(`users/reset-password`, command);
 };
 
+const getAll = () => {
+  return axios.get(`users`);
+};
+
 const exportedObject = {
   login,
   register,
-  resetPassword
+  resetPassword,
+  getAll
 };
 
 export default exportedObject;

@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
 import { Button, TextField } from '@mui/material';
 import useSignalR from '../hooks/useSignalR';
+import { useParams } from 'react-router-dom';
 
 const Chat = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const [text, setText] = useState('');
   const hubConnection = useSignalR((res: any) => setMessages(pre => [...pre, res]));
+  const params = useParams<{ id: string }>();
 
   const sendMessage = async () => {
     await hubConnection?.invoke('SendMessage', text);
@@ -14,7 +16,7 @@ const Chat = () => {
   };
 
   const sendPrivateMessage = async () => {
-    await hubConnection?.invoke('SendPrivateMessage', '43482b9e-e84a-44ef-b639-d9b65e082333', text);
+    await hubConnection?.invoke('SendPrivateMessage', params.id, text);
     setText('');
   };
 
@@ -25,7 +27,7 @@ const Chat = () => {
         <p key={m.id}>{m.message}</p>
       ))}
 
-      <TextField onChange={e => setText(e.target.value)} />
+      <TextField onChange={e => setText(e.target.value)} value={text} />
       <Button variant="contained" onClick={sendMessage}>
         Send
       </Button>

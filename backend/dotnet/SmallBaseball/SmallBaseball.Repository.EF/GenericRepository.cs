@@ -17,6 +17,11 @@ namespace SmallBaseball.Infrastructure.Repository.EF
             return _dbContext.Set<TEntity>().SingleOrDefault(x => x.Id == id);
         }
 
+        public virtual IQueryable<TEntity> Query()
+        {
+            return _dbContext.Set<TEntity>();
+        }
+
         public async Task CreateAsync(TEntity aggregateRoot)
         {
             await _dbContext.Set<TEntity>().AddAsync(aggregateRoot);

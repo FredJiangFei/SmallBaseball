@@ -11,6 +11,7 @@ import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
 import Todo from './pages/Todo';
 import Chat from './pages/Chat';
+import User from './pages/User';
 
 const routes = [
   {
@@ -34,7 +35,11 @@ const routes = [
         element: <Todo />,
       },
       {
-        path: 'chat',
+        path: 'user',
+        element: <User />,
+      },
+      {
+        path: 'chat/:id',
         element: <Chat />,
       },
       {
