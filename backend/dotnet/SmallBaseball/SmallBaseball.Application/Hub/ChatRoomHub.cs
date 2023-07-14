@@ -61,7 +61,7 @@ namespace SmallBaseball.Application
                     Id = Guid.NewGuid(),
                     Message = $"{firstName} {lastName} {DateTime.Now}:{message}",
                 };
-                await base.Clients.Client(connectionId).SendAsync("ReceivePrivateMessage", msg);
+                await base.Clients.Client(connectionId).SendAsync("ReceivePrivateMessage", userId, msg);
             }
         }
     }

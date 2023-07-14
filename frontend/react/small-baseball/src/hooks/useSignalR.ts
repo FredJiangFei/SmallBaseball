@@ -26,7 +26,7 @@ export default function useSignalR(onReceiveMessage: Function) {
         .start()
         .then(() => {
           console.log('SignalR Connected!');
-          hubConnection?.on('ReceiveMessage', (res: any) => onReceiveMessage(res));
+          // hubConnection?.on('ReceiveMessage', (res: any) => onReceiveMessage(res));
           hubConnection?.on('ReceivePrivateMessage', (res: any) => onReceiveMessage(res));
         })
         .catch(err => {
@@ -41,7 +41,7 @@ export default function useSignalR(onReceiveMessage: Function) {
           .then(() => {
             console.log('SignalR Disconnected!');
           })
-          .catch(err => {
+          .catch((err: any) => {
             console.log('SignalR Disconnection Error: ', err);
           });
       }

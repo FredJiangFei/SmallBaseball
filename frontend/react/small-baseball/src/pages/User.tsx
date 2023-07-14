@@ -3,6 +3,8 @@ import userService from '../services/userService';
 import SfLink from '../components/SfLink';
 
 function User() {
+  
+
   const [users, setUsers] = useState<any[]>([]);
 
   useEffect(() => {
@@ -13,7 +15,7 @@ function User() {
     const res: any = await userService.getAll();
     setUsers(res.value);
   };
-
+  
   return (
     <div>
       {users.map((u: any) => (
