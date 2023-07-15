@@ -21,7 +21,7 @@ const Chat = () => {
     });
 
     return () => {
-      hubConnection?.on('ReceivePrivateMessage');
+      hubConnection?.off('ReceivePrivateMessage');
     };
   }, [hubConnection]);
 
