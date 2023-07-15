@@ -10,6 +10,6 @@ namespace SmallBaseball.Domain.Interfaces.Repository
         Task CreateAsync(TEntity aggregateRoot);
         Task UpdateAsync(TEntity aggregateRoot);
         Task DeleteAsync(TEntity aggregateRoot);
-
+        Task UpdateRangeAsync(params TEntity[] aggregateRoots);
     }
 }

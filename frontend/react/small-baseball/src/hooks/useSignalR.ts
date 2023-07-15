@@ -26,8 +26,7 @@ export default function useSignalR(onReceiveMessage: Function) {
         .start()
         .then(() => {
           console.log('SignalR Connected!');
-          // hubConnection?.on('ReceiveMessage', (res: any) => onReceiveMessage(res));
-          hubConnection?.on('ReceivePrivateMessage', (res: any) => onReceiveMessage(res));
+          hubConnection?.on('ReceivePrivateMessage', (userId: AnalyserNode, res: any) => onReceiveMessage(res));
         })
         .catch(err => {
           console.log('SignalR Connection Error: ', err);

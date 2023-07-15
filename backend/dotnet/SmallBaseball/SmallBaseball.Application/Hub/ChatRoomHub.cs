@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using SmallBase.Cache;
+using SmallBaseball.Application.Commands.Users;
 using SmallBaseball.Application.Models;
+using SmallBaseball.Application.Models.Users;
+using System.Reflection;
 using System.Security.Claims;
 
 namespace SmallBaseball.Application
@@ -11,10 +15,12 @@ namespace SmallBaseball.Application
     public class ChatRoomHub : Hub
     {
         private readonly ICacheService _cacheService;
+        private readonly IMediator _mediator;
 
-        public ChatRoomHub(ICacheService cacheService)
+        public ChatRoomHub(ICacheService cacheService, IMediator mediator)
         {
             _cacheService = cacheService;
+            _mediator = mediator;
         }
 
         public override Task OnConnectedAsync()
@@ -32,19 +38,7 @@ namespace SmallBaseball.Application
             return base.OnDisconnectedAsync(exception);
         }
 
-        public Task SendMessage(string message)
-        {
-            string firstName = this.Context.User.FindFirstValue("FirstName");
-            string lastName = this.Context.User.FindFirstValue("LastName");
-            var msg = new MessageModel
-            {
-                Id = Guid.NewGuid(),
-                Message = $"{firstName} {lastName} {DateTime.Now}:{message}",
-            };
-
-            return Clients.All.SendAsync("ReceiveMessage", msg);
-        }
-
+       
         public async Task SendPrivateMessage(string destUserId, string message)
         {
             string firstName = this.Context.User.FindFirstValue("FirstName");
@@ -54,12 +48,20 @@ namespace SmallBaseball.Application
             var allConnectIds = this._cacheService.Get(destUserId);
             var myConnectIds = this._cacheService.Get(userId);
 
+            await _mediator.Send(new SendMessageToUserCommand
+            {
+                Content = message,
+                ReceiverId = Guid.Parse(destUserId),
+                SenderId = Guid.Parse(userId)
+            });
+
             foreach (var connectionId in allConnectIds.Concat(myConnectIds))
             {
-                var msg = new MessageModel
+                var msg = new ChatHistoryModel
                 {
                     Id = Guid.NewGuid(),
-                    Message = $"{firstName} {lastName} {DateTime.Now}:{message}",
+                    SenderName = $"{firstName} {lastName}",
+                    Content = message,
                 };
                 await base.Clients.Client(connectionId).SendAsync("ReceivePrivateMessage", userId, msg);
             }
