@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { CssBaseline, Box } from '@mui/material';
 import Footer from '../components/Footer';
+import { SignalRProvider } from '../contexts/SignalRContext';
 
 const Dashboard: React.FC = () => {
   return (
@@ -10,7 +11,9 @@ const Dashboard: React.FC = () => {
       <CssBaseline />
       <Navbar />
       <Box sx={{ flex: 1 }}>
-        <Outlet />
+        <SignalRProvider>
+          <Outlet />
+        </SignalRProvider>
       </Box>
       <Footer />
     </Box>

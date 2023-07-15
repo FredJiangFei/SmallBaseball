@@ -1,51 +1,13 @@
-import { useState, useEffect } from 'react';
-import * as signalR from '@microsoft/signalr';
-import { getJwt } from '../utils/jwt';
+import { useContext } from "react";
+import { SignalRContext } from '../contexts/SignalRContext';
 
-export default function useSignalR(onReceiveMessage: Function) {
-  const [hubConnection, setHubConnection] = useState<signalR.HubConnection | null>(null);
-  const jwt: any = getJwt();
+const useSignalR = () => {
+  const context = useContext(SignalRContext);
 
-  useEffect(() => {
-    const options = {
-      skipNegotiation: true,
-      transport: signalR.HttpTransportType.WebSockets,
-      accessTokenFactory: () => jwt,
-    };
-    const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`http://localhost:52384/Hubs/ChatRoomHub`, options)
-      .withAutomaticReconnect()
-      .build();
+  if (!context)
+    throw new Error("SignalRContext must be placed within SignalRProvider");
 
-    setHubConnection(newConnection);
-  }, []);
+  return context;
+};
 
-  useEffect(() => {
-    if (hubConnection) {
-      hubConnection
-        .start()
-        .then(() => {
-          console.log('SignalR Connected!');
-          hubConnection?.on('ReceivePrivateMessage', (userId: AnalyserNode, res: any) => onReceiveMessage(res));
-        })
-        .catch(err => {
-          console.log('SignalR Connection Error: ', err);
-        });
-    }
-
-    return () => {
-      if (hubConnection) {
-        hubConnection
-          .stop()
-          .then(() => {
-            console.log('SignalR Disconnected!');
-          })
-          .catch((err: any) => {
-            console.log('SignalR Disconnection Error: ', err);
-          });
-      }
-    };
-  }, [hubConnection]);
-
-  return hubConnection;
-}
+export default useSignalR;

@@ -7,12 +7,23 @@ import chatService from '../services/chatService';
 const Chat = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const [text, setText] = useState('');
-  const hubConnection = useSignalR((res: any) => setMessages(pre => [...pre, res]));
+  const { hubConnection } = useSignalR();
   const params = useParams<{ id: string }>();
 
   useEffect(() => {
     getChatHistory();
   }, []);
+
+  useEffect(() => {
+    hubConnection?.on('ReceivePrivateMessage', (userId: AnalyserNode, res: any) => {
+      console.log(res);
+      setMessages(pre => [...pre, res]);
+    });
+
+    return () => {
+      hubConnection?.on('ReceivePrivateMessage');
+    };
+  }, [hubConnection]);
 
   const getChatHistory = async () => {
     const res: any = await chatService.getChatHistory(params.id);
