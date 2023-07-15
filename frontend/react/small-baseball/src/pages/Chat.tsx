@@ -16,7 +16,6 @@ const Chat = () => {
 
   useEffect(() => {
     hubConnection?.on('ReceivePrivateMessage', (userId: AnalyserNode, res: any) => {
-      console.log(res);
       setMessages(pre => [...pre, res]);
     });
 

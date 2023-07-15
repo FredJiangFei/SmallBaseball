@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./frontend/react/small-baseball
+    ports:
+      - 4000:3000
+  api:
+    build:
+      context: ./backend/dotnet/SmallBaseball
+      dockerfile: ./SmallBaseball.API/Dockerfile
+    ports:
+      - 52384:80
