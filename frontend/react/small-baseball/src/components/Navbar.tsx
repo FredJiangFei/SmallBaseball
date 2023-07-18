@@ -4,10 +4,24 @@ import { AppBar, Avatar, Box, Button, Toolbar, Typography } from '@mui/material'
 import SfLink from './SfLink';
 import useTheme from '../hooks/useTheme';
 import { THEMES } from '../constants';
+import useSignalR from '../hooks/useSignalR';
+import { useEffect, useState } from 'react';
+import { getUser } from '../utils/jwt';
 
 const Navbar: React.FC = () => {
   const { signOut } = useAuth();
   const { theme, setTheme } = useTheme();
+  const [isNewMessage, setIsNewMessage] = useState(false);
+  const { hubConnection } = useSignalR();
+  useEffect(() => {
+    hubConnection?.on('NotifyMessage', () => {
+      setIsNewMessage(true);
+    });
+
+    return () => {
+      hubConnection?.off('NotifyMessage');
+    };
+  }, [hubConnection]);
 
   return (
     <AppBar position="sticky">
@@ -29,6 +43,8 @@ const Navbar: React.FC = () => {
             </SfLink>
           </Typography>
         </Box>
+
+        {isNewMessage && <Box>New Message</Box>}
 
         <SfLink to="profile">
           <Avatar>S</Avatar>

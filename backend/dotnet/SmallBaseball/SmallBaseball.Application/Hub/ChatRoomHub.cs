@@ -55,6 +55,8 @@ namespace SmallBaseball.Application
                 SenderId = Guid.Parse(userId)
             });
 
+            await NotifyMessage(destUserId);
+
             foreach (var connectionId in allConnectIds.Concat(myConnectIds))
             {
                 var msg = new ChatHistoryModel
@@ -64,6 +66,15 @@ namespace SmallBaseball.Application
                     Content = message,
                 };
                 await base.Clients.Client(connectionId).SendAsync("ReceivePrivateMessage", userId, msg);
+            }
+        }
+
+        public async Task NotifyMessage(string destUserId)
+        {
+            var allConnectIds = this._cacheService.Get(destUserId);
+            foreach (var connectionId in allConnectIds)
+            {
+                await base.Clients.Client(connectionId).SendAsync("NotifyMessage");
             }
         }
     }
