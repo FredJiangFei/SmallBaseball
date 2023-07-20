@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  db:
+    image: mysql:8.0.28
+    restart: always
+    environment:
+      MYSQL_DATABASE: smallbaseball_data
+      MYSQL_ROOT_PASSWORD: 1qaz2wsx3edc4rfv
+    ports:
+      - 3307:3306
   web:
     build: ./frontend/react/small-baseball
     ports:
@@ -11,3 +19,6 @@ services:
       dockerfile: ./SmallBaseball.API/Dockerfile
     ports:
       - 52384:80
+    restart: always
+    depends_on:
+      - db
