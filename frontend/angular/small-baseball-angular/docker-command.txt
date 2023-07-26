@@ -1,0 +1,2 @@
+docker build -t av-app-image .
+docker run --name av-app-container -d -p 8081:80 av-app-image
