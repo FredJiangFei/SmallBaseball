@@ -10,7 +10,7 @@ namespace SmallBaseball.Controllers
         [AllowAnonymous]
         public ResponseResult Get()
         {
-            return ResponseResult.FromValue("Hi");
+            return ResponseResult.FromValue("Hi Fred");
         }
     }
 }
