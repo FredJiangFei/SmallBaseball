@@ -1,6 +1,5 @@
 ﻿using SmallBaseball.Domain.Models.Aggregates.AthleteAggregate;
 using SmallBaseball.Domain.Models.Core;
-using SmallBaseball.Domain.Models.Exceptions;
 
 namespace SmallBaseball.Domain.Models.Aggregates.TodoAggregate
 {
@@ -22,9 +21,9 @@ namespace SmallBaseball.Domain.Models.Aggregates.TodoAggregate
             };
         }
 
-        public void AddTodo(string title)
+        public void AddTodo(string title, string url)
         {
-            var todo = Todo.Create(title);
+            var todo = Todo.Create(title, url);
             Todos.Add(todo);
         }
 

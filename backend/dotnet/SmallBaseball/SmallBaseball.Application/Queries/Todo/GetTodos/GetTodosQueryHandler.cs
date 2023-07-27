@@ -15,6 +15,7 @@ namespace SmallBaseball.Application.Queries.User
             var sql = @"SELECT 
                             Todos.Id,
                             Todos.Title,
+                            Todos.Image,
                             Todos.Completed
                         FROM Todos
                         WHERE Todos.AthleteId = @UserId;";

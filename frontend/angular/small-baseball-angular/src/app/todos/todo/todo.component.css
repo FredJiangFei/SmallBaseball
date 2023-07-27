@@ -1,6 +1,7 @@
 :host {
   display: flex;
   flex-direction: row;
+  align-items: center;
   flex-wrap: wrap;
   border: 1px solid lightgray;
   margin-bottom: 5px;

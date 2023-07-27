@@ -10,6 +10,7 @@ import { TodoCommand } from 'src/app/_commands/todo.command';
 export class NewTodoComponent {
   todo: TodoCommand = {
     title: '',
+    image: undefined 
   };
 
   constructor(
@@ -19,5 +20,9 @@ export class NewTodoComponent {
 
   handleSubmit() {
     this.dialogRef.close(this.todo);
+  }
+
+  uploadImage(event) {
+    this.todo.image = event.target.files[0];
   }
 }

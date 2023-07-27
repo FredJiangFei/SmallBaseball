@@ -5,6 +5,13 @@
       <mat-label>Title</mat-label>
       <input matInput type="text" [(ngModel)]="todo.title" name="title" />
     </mat-form-field>
+
+    <input
+      type="file"
+      accept=".jpg,.png"
+      class="button"
+      (change)="uploadImage($event)"
+    />
   </mat-dialog-content>
 
   <mat-dialog-actions>

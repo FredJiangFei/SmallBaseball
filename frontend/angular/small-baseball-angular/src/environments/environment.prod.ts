@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:5000/api',
+  baseUrl: 'http://smallbaseballapi-dev.us-east-2.elasticbeanstalk.com/api',
 };

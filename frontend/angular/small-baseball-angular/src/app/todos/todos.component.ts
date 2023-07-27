@@ -26,7 +26,12 @@ export class TodosComponent implements OnInit {
     const dialog = this.dialog.open(NewTodoComponent);
     dialog.afterClosed().subscribe((command: TodoCommand) => {
       if (command) {
-        this.todoService.create(command).subscribe((_) => {
+        const formData = new FormData();
+        formData.append('title', command.title);
+        if (command.image) {
+          formData.append('image', command.image);
+        }
+        this.todoService.create(formData).subscribe((_) => {
           this.alertify.success('Todo created successfully');
           this.todoService.getAll().subscribe();
         });

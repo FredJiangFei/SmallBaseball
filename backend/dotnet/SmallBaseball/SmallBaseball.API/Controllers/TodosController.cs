@@ -28,7 +28,7 @@ namespace SmallBaseball.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseResult<bool>> Create([FromBody] CreateTodoCommand command)
+        public async Task<ResponseResult<bool>> Create([FromForm] CreateTodoCommand command)
         {
             command.UserId = UserId;
             var result = await _mediator.Send(command);

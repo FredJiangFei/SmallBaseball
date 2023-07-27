@@ -1,6 +1,7 @@
-<mat-list-item role="listitem">
+<mat-list-item role="listitem" style="height: 80px;">
   <mat-checkbox (click)="handleToggle($event)" [checked]="todo.completed"></mat-checkbox>
   <span [ngClass]="{'checked': todo.completed}" data-testid="todo-title">{{ todo.title }}</span>
+  <img [src]="todo.image" style="width: 70px; height: 70px;"/>
   <button mat-icon-button (click)="handleDelete($event)" data-testid="todo-delete">
     <mat-icon>delete</mat-icon>
   </button>

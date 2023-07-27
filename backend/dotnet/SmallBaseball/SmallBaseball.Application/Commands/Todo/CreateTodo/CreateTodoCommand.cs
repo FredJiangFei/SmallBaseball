@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace SmallBaseball.Application.Commands.Todos
 {
@@ -6,5 +7,6 @@ namespace SmallBaseball.Application.Commands.Todos
     {
         public Guid UserId { get; set; }
         public string Title { get; set; }
+        public IFormFile Image { get; set; }
     }
 }
