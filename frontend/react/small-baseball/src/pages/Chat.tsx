@@ -3,6 +3,8 @@ import { Button, TextField } from '@mui/material';
 import useSignalR from '../hooks/useSignalR';
 import { useParams } from 'react-router-dom';
 import chatService from '../services/chatService';
+import React from 'react';
+import reportProfile from '../report-profile';
 
 const Chat = () => {
   const [messages, setMessages] = useState<any[]>([]);
@@ -35,7 +37,7 @@ const Chat = () => {
   };
 
   return (
-    <>
+    <React.Profiler id="chat" onRender={reportProfile}>
       <h1>Chat</h1>
       {messages.map((m: any) => (
         <p key={m.id}>
@@ -47,7 +49,7 @@ const Chat = () => {
       <Button variant="contained" onClick={sendPrivateMessage}>
         Send Private Message
       </Button>
-    </>
+    </React.Profiler>
   );
 };
 export default Chat;
